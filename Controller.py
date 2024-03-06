@@ -180,6 +180,7 @@ class Controller:
         else:
             if self.if_user_not_found(user): return user
         return {"display_name" : user.display_name,
+                "username" : user.username,
                 "introduction" : user.introduction,
                 "writing_count" : writing_count,
                 "book_on_shelf_count" : len(user.get_book_shelf_list()),
@@ -193,7 +194,8 @@ class Controller:
     def show_my_profile(self, username):
         user = self.get_user_by_username(username)
         if self.if_user_not_found(user): return user
-        return {"username" : user.username,
+        return {"display_name" : user.display_name,
+                "username" : user.username,
                 "password" : "******",
                 "menu" : ["change password",
                             "go to page",
@@ -225,6 +227,11 @@ class Controller:
             return "Password must be at least 8 letters"
         else:
             return "Please try again"
+        
+    def change_display_name(self, username, new_display_name):
+        user = self.get_user_by_username(username)
+        user.display_name = new_display_name
+        return "display name has been changed"
     
     def add_pseudonym(self, username, pseudonym):
         user = self.get_user_by_username(username)

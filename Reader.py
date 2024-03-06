@@ -9,6 +9,7 @@ from CoinTransaction import CoinTransaction
 
 class Reader:
     def __init__(self,username,password,birth_date):
+        self.__display_name = username
         self.__username = username
         self.__display_name = username
         self.__password = password

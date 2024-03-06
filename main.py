@@ -104,21 +104,21 @@ def ShowSilverCoins(username:str):
      user = WriteARead.get_user_by_username(username)
      return {"Silver_Coin" :user.show_silver_coin_list()}
 
-@app.post("/signup", tags=['sign up/sign in'])
+@app.post("/sign_up", tags=['sign up/sign in'])
 def SignUp(username:str, password:str, birth_date: str):
      return WriteARead.sign_up(username, password, birth_date)
 
-@app.get("/My Page", tags=['user'])
+@app.get("/my_page", tags=['user'])
 def ShowMyPage(username:str):
      return {"My Page" : WriteARead.show_my_page(username)}
 
-@app.put("/My Page/Edit introduction", tags=["user"])
+@app.put("/my_page/Edit introduction", tags=["user"])
 def EditIntroduction(username:str, text:str):
      user = WriteARead.get_user_by_username(username)
      return {"Edit Introduction" : user.edit_introduction(text)}
 
 
-@app.get("/My Profile", tags=['user'])
+@app.get("/my_profile", tags=['user'])
 def ShowMyProfile(username:str):
      return {"My Profile" : WriteARead.show_my_profile(username)}
 
@@ -133,9 +133,11 @@ def ShowChapterTransaction(username:str):
      if WriteARead.if_user_not_found(user): return user
      return {"Chapter Transaction" : user.show_chapter_transaction()}
 
-@app.put("/My Profile/change_password", tags=['user'])
+@app.put("/my_profile/change_password", tags=['user'])
 def ChangePassword(username:str,old_password:str, new_password:str):
      return {"Change Password" : WriteARead.change_password(username, old_password, new_password)}
+
+# @app.put("/my_page")
 
 class dto_add_pseudonym(BaseModel):
      username : str
@@ -145,7 +147,7 @@ class dto_add_pseudonym(BaseModel):
 def AddPseudonym(dto : dto_add_pseudonym):
      return {"Add Pseudonym" : WriteARead.add_pseudonym(dto.username, dto.new_pseudonym)}
 
-@app.get("/My Reading", tags=['user'])
+@app.get("/my_reading", tags=['user'])
 def ShowMyReading(username:str):
      return {"My Reading" : WriteARead.show_my_reading(username)}
 
