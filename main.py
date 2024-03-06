@@ -75,10 +75,9 @@ Mo.add_silver_coin(10)
 Mo.add_silver_coin(50)
 Mo.add_silver_coin(3)
 Mo.add_silver_coin(100)
-Mo.add_golden_coin(88)
+Mo.add_golden_coin(888)
 
 #----------------------------------add to bookshelf----------------------------------
-
 Mo.add_book_shelf_list(Book1)
 Mo.add_book_shelf_list(Book2)
 #----------------------------------fastapi----------------------------------

@@ -179,8 +179,8 @@ class Reader:
         return show_list
     
     def check_repeated_purchase(self, chapter):
-        for purchased_chapter in self.__chapter_transaction_list:
-            if chapter == purchased_chapter:
+        for transaction in self.__chapter_transaction_list:
+            if chapter == transaction.chapter:
                 return True
         return False
 
