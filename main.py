@@ -17,7 +17,7 @@ from Coin import GoldenCoin, SilverCoin
 
 app = FastAPI()
 
-WriteARead = Controller()
+write_a_read = Controller()
 
 if __name__ == "__main__":
      uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
@@ -30,12 +30,12 @@ now = datetime.now()
 #WriteARead.add_reader(Reader("username", "password", "dd/mm/yyyy"))
      
 Mo = Writer("Mozaza", "12345678", "12/05/2000")
-WriteARead.add_reader(Mo)
-WriteARead.add_reader(Reader("Pinttttt", "sawasdee", "01/01/2005"))
-WriteARead.add_reader(Reader("Pangrum", "ehehe", "02/01/2005"))
-WriteARead.add_reader(Reader("Jueeen", "whippedcream", "12/11/2004"))
+write_a_read.add_reader(Mo)
+write_a_read.add_reader(Reader("Pinttttt", "sawasdee", "01/01/2005"))
+write_a_read.add_reader(Reader("Pangrum", "ehehe", "02/01/2005"))
+write_a_read.add_reader(Reader("Jueeen", "whippedcream", "12/11/2004"))
 
-WriteARead.add_writer(Mo)
+write_a_read.add_writer(Mo)
 
 #----------------------------------create books----------------------------------
 # Book("name", writer, [tag_list], "publishing/hiding", age_restricted, "prologue", "dd/mm/yyyy"):
@@ -60,10 +60,10 @@ Book1.add_chapter_list(Chapter("1", "first_ch", "this is the first chapter of sh
 
 
 book_sale = BookPromotion("01/01/2021",50, [])
-WriteARead.add_promotion(book_sale)
+write_a_read.add_promotion(book_sale)
 
 free_coin = CoinPromotion("01/01/2021",40, "chakeawaroi")
-WriteARead.add_promotion(free_coin)
+write_a_read.add_promotion(free_coin)
 
 #----------------------------------create transactions----------------------------------
 
@@ -89,28 +89,28 @@ def FirstPage():
 
 @app.get("/bookname", tags=['search bar'])
 def searchBook(book_name:str):
-     return {"Book": WriteARead.search_book_by_name(book_name)}
+     return {"Book": write_a_read.search_book_by_name(book_name)}
 
 @app.get("/username", tags=['search bar'])
 def SearchUser(username:str):
-     return {"user": WriteARead.search_user(username)}
+     return {"user": write_a_read.search_user(username)}
 
 @app.get("/coin", tags=['coin'])
 def ShowCoins(username:str):
-     return WriteARead.show_coin(username)
+     return write_a_read.show_coin(username)
 
 @app.get("/silver_coin", tags=['coin'])
 def ShowSilverCoins(username:str):
-     user = WriteARead.get_user_by_username(username)
+     user = write_a_read.get_user_by_username(username)
      return {"Silver_Coin" :user.show_silver_coin_list()}
 
 @app.post("/sign_up", tags=['sign up/sign in'])
 def SignUp(username:str, password:str, birth_date: str):
-     return WriteARead.sign_up(username, password, birth_date)
+     return write_a_read.sign_up(username, password, birth_date)
 
 @app.get("/my_page", tags=['user'])
 def ShowMyPage(username:str):
-     return {"My Page" : WriteARead.show_my_page(username)}
+     return {"My Page" : write_a_read.show_my_page(username)}
 
 class dto_edit_introduction(BaseModel):
      username : str
@@ -118,23 +118,23 @@ class dto_edit_introduction(BaseModel):
      
 @app.put("/my_page/edit_introduction", tags=["user"])
 def EditIntroduction(dto : dto_edit_introduction):
-     user = WriteARead.get_user_by_username(dto.username)
+     user = write_a_read.get_user_by_username(dto.username)
      return {"Edit Introduction" : user.edit_introduction(dto.text)}
 
 
 @app.get("/my_profile", tags=['user'])
 def ShowMyProfile(username:str):
-     return {"My Profile" : WriteARead.show_my_profile(username)}
+     return {"My Profile" : write_a_read.show_my_profile(username)}
 
 @app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
-     user = WriteARead.get_user_by_username(username)
+     user = write_a_read.get_user_by_username(username)
      return {"Coin Transaction" : user.show_coin_transaction()}
 
 @app.get("/show_chapter_transaction", tags=['Chapter Transaction'])
 def ShowChapterTransaction(username:str):
-     user = WriteARead.get_user_by_username(username)
-     if WriteARead.if_user_not_found(user): return user
+     user = write_a_read.get_user_by_username(username)
+     if write_a_read.if_user_not_found(user): return user
      return {"Chapter Transaction" : user.show_chapter_transaction()}
 
 class dto_change_password(BaseModel):
@@ -144,7 +144,7 @@ class dto_change_password(BaseModel):
      
 @app.put("/my_profile/change_password", tags=['user'])
 def ChangePassword(dto : dto_change_password):
-     return {"Change Password" : WriteARead.change_password(dto.username, dto.old_password, dto.new_password)}
+     return {"Change Password" : write_a_read.change_password(dto.username, dto.old_password, dto.new_password)}
 
 class dto_change_display_name(BaseModel):
      username : str
@@ -152,7 +152,7 @@ class dto_change_display_name(BaseModel):
      
 @app.put("/my_page/change_display_name", tags=['user'])
 def ChangeDisplayName(dto : dto_change_display_name):
-     return {"Change Display Name" : WriteARead.change_display_name(dto.username, dto.new_display_name)}
+     return {"Change Display Name" : write_a_read.change_display_name(dto.username, dto.new_display_name)}
 
 class dto_add_pseudonym(BaseModel):
      username : str
@@ -160,11 +160,11 @@ class dto_add_pseudonym(BaseModel):
      
 @app.post("/my_profile/psedonym", tags=["user"])
 def AddPseudonym(dto : dto_add_pseudonym):
-     return {"Add Pseudonym" : WriteARead.add_pseudonym(dto.username, dto.new_pseudonym)}
+     return {"Add Pseudonym" : write_a_read.add_pseudonym(dto.username, dto.new_pseudonym)}
 
 @app.get("/my_reading", tags=['user'])
 def ShowMyReading(username:str):
-     return {"My Reading" : WriteARead.show_my_reading(username)}
+     return {"My Reading" : write_a_read.show_my_reading(username)}
 
 class dto_buy_chapter(BaseModel):
      username : str
@@ -172,11 +172,11 @@ class dto_buy_chapter(BaseModel):
      
 @app.post("/buy_chapter", tags=['chapter'])
 def BuyChapter(dto : dto_buy_chapter):
-     return {"Buy Chapter" : WriteARead.buy_chapter(dto.username, dto.chapter_id)}
+     return {"Buy Chapter" : write_a_read.buy_chapter(dto.username, dto.chapter_id)}
 
 @app.get("/test", tags=['test'])
 def Test(book_name:str):
-     return {WriteARead.get_book_by_name(book_name)}
+     return {write_a_read.get_book_by_name(book_name)}
 #----------------------------------test----------------------------------
 
 # print(ShowMyReading("Mozaza"))
