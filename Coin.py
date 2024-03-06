@@ -7,7 +7,6 @@ class GoldenCoin:
     @property
     def balance(self):
         return self.__balance
-
     @balance.setter
     def balance(self,new_balance):
         self.__balance = new_balance
@@ -16,31 +15,24 @@ class GoldenCoin:
       self.__balance -= amount
 
     def add_golden_coin(self,amount):
-        self.golden_coin.balance += amount
+        self.balance += amount
 
 class SilverCoin(GoldenCoin):
-    def __init__(self,balance):
+    def __init__(self, balance):
         super().__init__(balance)
-        self.__exp_date_time = datetime.today() + timedelta(days=10)
-
-    @property
-    def balance(self):
-        return self.__balance
-    @balance.setter
-    def balance(self,amount):
-        self.__balance -= amount 
+        self.__exp_date_time = (datetime.today() + timedelta(days=10)).strftime("%d/%m/%Y")
 
     @property
     def exp_date_time(self):
         return self.__exp_date_time
 
     def deduct_silver_coin(self, amount):
-      silver_coin_amount = self.__balance
-      if amount >= silver_coin_amount:
-        amount -= silver_coin_amount
-        del self
-        return silver_coin_amount
+        silver_coin_amount = self.balance
+        if amount >= silver_coin_amount:
+            amount -= silver_coin_amount
+            del self
+            return silver_coin_amount
       
-      else:
-        self.__balance -= amount
-        return amount
+        else:
+            self.balance -= amount
+            return amount

@@ -4,7 +4,7 @@ class Comment:
   def __init__(self, chapter, user, context):
       self.__commentator = user
       self.__context = context
-      self.__date_time = datetime.now()
+      self.__date_time = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
       self.__chapter = chapter
       self.__report_list = []
       self.__reply_list = []

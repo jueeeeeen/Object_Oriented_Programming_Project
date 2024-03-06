@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 from dateutil import relativedelta
 import Book
 import Chapter
-import Coin
+from Coin import SilverCoin, GoldenCoin
 import ChapterTransaction
 from CoinTransaction import CoinTransaction
 
@@ -13,7 +13,7 @@ class Reader:
         self.__display_name = username
         self.__password = password
         self.__birth_date = birth_date #check age_restricted
-        self.__golden_coin = Coin.GoldenCoin(0)
+        self.__golden_coin = GoldenCoin(0)
         self.__silver_coin_list = []
         self.__book_shelf_list = []
         self.__recent_read_chapter_list = []
@@ -39,7 +39,7 @@ class Reader:
     @property
     def password(self):
         return self.__password
-    @username.setter
+    @password.setter
     def password(self,password):
         self.__password = password
 
@@ -59,6 +59,14 @@ class Reader:
       for silver_coin in self.__silver_coin_list:
         silver_coin_balance += silver_coin.balance
       return silver_coin_balance
+    
+    def show_silver_coin_list(self):
+        silver_coin_dict = {}
+        for silver_coin in self.__silver_coin_list:
+            if not silver_coin_dict.get(silver_coin.exp_date_time):
+                silver_coin_dict[silver_coin.exp_date_time] = []
+            silver_coin_dict[silver_coin.exp_date_time].append(silver_coin.balance)
+        return silver_coin_dict
     
     @property
     def golden_coin(self):
@@ -80,7 +88,7 @@ class Reader:
         return self.__silver_coin_list
 
     def add_silver_coin(self,amount):
-        self.__silver_coin_list.append(Coin.SilverCoin(amount))
+        self.__silver_coin_list.append(SilverCoin(amount))
 
     def delete_exp_silver_coin(self):
         for silver_coin in self.__silver_coin_list:
@@ -100,6 +108,21 @@ class Reader:
                 self.__silver_coin_list.pop(silver_coin)
                 break
     
+    def deduct_coin(self, amount):
+        total = amount
+        for silver_coin in self.__silver_coin_list:
+            if total != 0 or self.__silver_coin_list != []:
+                transac_amount = silver_coin.deduct_silver_coin(total)
+                total -= transac_amount
+                print(f"amount : {total}\ntransac_amount : {transac_amount}")
+                # self.add_coin_transaction(CoinTransaction.CoinTransaction(None, None, transac_amount, self.get_user_coin_balance(), datetime.now()))
+            else:
+                break
+        if total != 0:
+            self.golden_coin.deduct_golden_coin(total)
+            # self.add_coin_transaction(CoinTransaction.CoinTransaction(None, None, amount, self.get_user_coin_balance(), datetime.now()))
+        return "Done"
+
     def get_book_shelf_list(self):
         return self.__book_shelf_list
     def add_book_shelf_list(self,book):
@@ -109,7 +132,8 @@ class Reader:
     def get_follower_list(self):
         return self.__follower_list
 
-    def get_recent_read_chapter_list(self):
+    @property
+    def recent_read_chapter_list(self):
         return self.__recent_read_chapter_list
     def add_recent_read_chapter_list(self,chapter):
         if isinstance(chapter,Chapter.Chapter):
@@ -153,12 +177,13 @@ class Writer(Reader):
     def __init__(self,username,password,birth_date):
         super().__init__(username,password,birth_date)
         self.__writing_book_list = []
-        self.__pseudonym = []
+        self.__pseudonym_list = []
     
-    def get_writing_list(self):
+    @property
+    def writing_list(self):
         return self.__writing_book_list
     
-    def get_writing_name_list(self):
+    def show_writing_name_list(self):
         writing_name_list = []
         for book in self.__writing_book_list:
             writing_name_list.append(book.name)
@@ -168,29 +193,36 @@ class Writer(Reader):
         if isinstance(book,Book.Book):
             self.__writing_book_list.append(book)
 
-    def get_pseudonym_list(self):
-        return self.__pseudonym
+    @property
+    def pseudonym_list(self):
+        return self.__pseudonym_list
     
     def add_pseudonym(self, pseudonym):
-        self.__pseudonym.append(pseudonym)
+        self.__pseudonym_list.append(pseudonym)
+
+    def repeated_pseunonym(self, new_pseudonym):
+        for pseudonym in self.__pseudonym_list:
+            if pseudonym.lower() == new_pseudonym.lower():
+                return True
+        return False
 
     def get_viewer_count(self):
         count = 0
         for book in self.__writing_book_list:
-            for chapter in book.get_chapter_list():
+            for chapter in book.chapter_list():
                 count += chapter.viewer_count
         return count
     
     def get_comment_list(self):
         comment_list = []
         for book in self.__writing_book_list:
-            comment_list.append(book.get_comment_list())
+            comment_list.append(book.comment_list())
         return comment_list
     
     def get_json_comment_list(self):
         comment_list = []
         for book in self.__writing_book_list:
-            for comment in book.get_comment_list():
+            for comment in book.comment_list():
                 comment_dict = {}
                 comment_dict["user"] = comment.commentator.name
                 comment_dict["context"] = comment.context
