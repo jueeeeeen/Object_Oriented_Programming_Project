@@ -7,6 +7,7 @@ class GoldenCoin:
     @property
     def balance(self):
         return self.__balance
+    
     @balance.setter
     def balance(self,new_balance):
         self.__balance = new_balance

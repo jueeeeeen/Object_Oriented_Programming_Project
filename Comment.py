@@ -10,35 +10,32 @@ class Comment:
         self.__reply_list = []
 
     @property
-    def chapter(self):
-        return self.__chapter
-
+    def commentator(self):
+        return self.__commentator
+    
     @property
     def context(self):
         return self.__context
-  
-    @property
-    def commentator(self):
-        return self.__commentator
-  
+
     @property
     def date_time(self):
         return self.__date_time
-    @date_time.setter
-    def date_time(self):
-        self.__date_time = datetime.now()
 
     @property
     def date_time_str(self):
         return self.__date_time.strftime("%d/%m/%Y, %H:%M:%S")
+    
+    @property
+    def chapter(self):
+        return self.__chapter
+
+    @property
+    def report_list(self):
+        return self.__report_list
   
     @property
     def reply_list(self):
         return self.__reply_list
-  
-    @property
-    def report_list(self):
-        return self.__report_list
 
     def add_reply_list(self, reply):
         self.__reply_list.append(reply)

@@ -1,6 +1,7 @@
 from typing import Union
 import uvicorn
 from fastapi import FastAPI
+from pydantic import BaseModel
 import requests
 import json
 from datetime import datetime, timedelta
@@ -129,24 +130,32 @@ def get_coin_transaction(username:str):
 @app.get("/show_chapter_transaction", tags=['Chapter Transaction'])
 def ShowChapterTransaction(username:str):
      user = WriteARead.get_user_by_username(username)
-     if WriteARead.is_user_not_found(user): return user
+     if WriteARead.if_user_not_found(user): return user
      return {"Chapter Transaction" : user.show_chapter_transaction()}
 
 @app.put("/My Profile/change_password", tags=['user'])
 def ChangePassword(username:str,old_password:str, new_password:str):
      return {"Change Password" : WriteARead.change_password(username, old_password, new_password)}
 
-@app.post("/My Profile/psedonym", tags=["user"])
-def AddPseudonym(username:str, new_pseudonym:str):
-     return {"Add Pseudonym" : WriteARead.add_pseudonym(username, new_pseudonym)}
+class dto_add_pseudonym(BaseModel):
+     username : str
+     new_pseudonym : str
+     
+@app.post("/my_profile/psedonym", tags=["user"])
+def AddPseudonym(dto : dto_add_pseudonym):
+     return {"Add Pseudonym" : WriteARead.add_pseudonym(dto.username, dto.new_pseudonym)}
 
 @app.get("/My Reading", tags=['user'])
 def ShowMyReading(username:str):
      return {"My Reading" : WriteARead.show_my_reading(username)}
 
-@app.post("/Buy Chapter", tags=['chapter'])
-def BuyChapter(username:str, chapter_id:str):
-     return {"Buy Chapter" : WriteARead.buy_chapter(username, chapter_id)}
+class dto_buy_chapter(BaseModel):
+     username : str
+     chapter_id : str
+     
+@app.post("/buy_chapter", tags=['chapter'])
+def BuyChapter(dto : dto_buy_chapter):
+     return {"Buy Chapter" : WriteARead.buy_chapter(dto.username, dto.chapter_id)}
 
 @app.get("/test", tags=['test'])
 def Test(book_name:str):

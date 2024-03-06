@@ -10,11 +10,7 @@ class Chapter:
         self.__viewer_count = 0
         self.__comment_list = []
         self.__cost = cost
-
-    @property
-    def name(self):
-        return self.__name
-    
+        
     @property
     def chapter_id(self):
         return self.__chapter_id
@@ -22,6 +18,10 @@ class Chapter:
     @property
     def chapter_number(self):
         return self.__chapter_number
+
+    @property
+    def name(self):
+        return self.__name
     
     @property
     def context(self):
