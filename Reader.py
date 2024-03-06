@@ -4,7 +4,7 @@ from dateutil import relativedelta
 import Book
 import Chapter
 from Coin import SilverCoin, GoldenCoin
-import ChapterTransaction
+from ChapterTransaction import ChapterTransaction
 from CoinTransaction import CoinTransaction
 
 class Reader:
@@ -102,16 +102,19 @@ class Reader:
                 self.__silver_coin_list.remove(silver_coin)
 
     def deduct_coin(self, total_amount):
+        silver_coin_deducted = 0
+        golden_coin_deducted = 0
         for silver_coin in self.__silver_coin_list:
             if total_amount != 0:
-                transac_amount = silver_coin.deduct_silver_coin(total_amount)                
+                transac_amount = silver_coin.deduct_silver_coin(total_amount) 
+                silver_coin_deducted += transac_amount      
                 total_amount -= transac_amount
-                # self.add_coin_transaction(CoinTransaction.CoinTransaction(None, None, transac_amount, self.get_user_coin_balance(), datetime.now()))
             else:
                 break
         if total_amount != 0:
-            self.golden_coin.deduct_golden_coin(total_amount)
-            # self.add_coin_transaction(CoinTransaction.CoinTransaction(None, None, amount, self.get_user_coin_balance(), datetime.now()))
+            golden_coin_deducted = self.golden_coin.deduct_golden_coin(total_amount)
+            
+        self.add_coin_transaction_list(CoinTransaction(None, None, -1*golden_coin_deducted, -1*(silver_coin_deducted), datetime.now()))
         return "Done"
 
     def get_book_shelf_list(self):
@@ -161,7 +164,12 @@ class Reader:
             date_time = coin_transaction.date_time
             show_list.append(f"{payment_type} +{golden_amount}_golden_coin +{silver_amount}_silver_coin -{price} baht at {date_time}")
         return show_list
-
+    
+    def show_chapter_transaction(self):
+        show_list = []
+        for chapter_transaction in self.__chapter_transaction_list:
+            show_list.append(chapter_transaction.chapter_transaction())
+        return show_list
 
 class Writer(Reader):
     money_balance = 0

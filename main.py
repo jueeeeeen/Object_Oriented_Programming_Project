@@ -51,7 +51,7 @@ Mo.add_writing_book_list(Book2)
 #----------------------------------create chapters----------------------------------
 #Chapter("number", "name", "context", "dd/mm/yyyy", price)
 
-Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shincha", 50)
+Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shincha", 184)
 Book1.add_chapter_list(Chapter1_1)
 
 #----------------------------------create promotions----------------------------------
@@ -67,8 +67,8 @@ WriteARead.add_promotion(free_coin)
 
 #----------------------------------create transactions----------------------------------
 
-Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("012-3-45678-9"), 100, [100, 10], now.strftime("%d/%m/%Y, %H:%M:%S")))
-Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("0123456789", "5174"), 200, [200, 20], now.strftime("%d/%m/%Y, %H:%M:%S")))
+Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("012-3-45678-9"), 100, 100, 10, now))
+Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("0123456789", "5174"), 200, 200, 20, now))
 
 #----------------------------------add coin----------------------------------
 Mo.add_silver_coin(20)
@@ -117,6 +117,12 @@ def get_coin_transaction(username:str):
      user = WriteARead.get_user_by_username(username)
      return {"Coin Transaction" : user.show_coin_transaction()}
 
+@app.get("/show_chapter_transaction", tags=['Chapter Transaction'])
+def ShowChapterTransaction(username:str):
+     user = WriteARead.get_user_by_username(username)
+     if WriteARead.is_user_not_found(user): return user
+     return {"Chapter Transaction" : user.show_chapter_transaction()}
+
 @app.put("/My Profile/change_password", tags=['user'])
 def ChangePassword(username:str, new_password:str):
      return {"Change Password" : WriteARead.change_password(username, new_password)}
@@ -144,6 +150,10 @@ print(test)
 print(test1)
 print(test2)
 print(test3)
+
+print(Mo.show_chapter_transaction())
+
+# print(f"{Mo.get_coin_transaction_list()[2].golden_amount} , {Mo.get_coin_transaction_list()[2].silver_amount}")
 
 # print("\n\n\n")
 

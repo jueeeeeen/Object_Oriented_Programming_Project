@@ -13,6 +13,7 @@ class GoldenCoin:
 
     def deduct_golden_coin(self,amount):
         self.__balance -= amount
+        return amount
 
     def add_golden_coin(self,amount):
         self.balance += amount

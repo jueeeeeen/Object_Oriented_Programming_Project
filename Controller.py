@@ -1,6 +1,6 @@
 import Book
 import Chapter
-import ChapterTransaction
+from ChapterTransaction import ChapterTransaction
 import CoinTransaction
 from Reader import Reader, Writer
 from Chapter import Chapter
@@ -35,7 +35,7 @@ class Controller:
             return "huhuuuu"
         else:
             return search_list
-          
+
     def search_user(self, username):
         search_list = []
         for reader in self.__reader_list:
@@ -104,7 +104,7 @@ class Controller:
 
         if coin_balance >= cost:
             user.deduct_coin(cost)
-            # user.add_chapter_transaction()
+            user.add_chapter_transaction_list(ChapterTransaction(chapter, cost))
             return "Done"
         else:
             return "Not enough coin"
