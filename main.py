@@ -134,8 +134,8 @@ def ShowChapterTransaction(username:str):
      return {"Chapter Transaction" : user.show_chapter_transaction()}
 
 @app.put("/My Profile/change_password", tags=['user'])
-def ChangePassword(username:str, new_password:str):
-     return {"Change Password" : WriteARead.change_password(username, new_password)}
+def ChangePassword(username:str,old_password:str, new_password:str):
+     return {"Change Password" : WriteARead.change_password(username, old_password, new_password)}
 
 @app.post("/My Profile/psedonym", tags=["user"])
 def AddPseudonym(username:str, new_pseudonym:str):

@@ -176,11 +176,18 @@ class Controller:
             reading_list.append(reading)
         return reading_list
 
-    def change_password(self, username, new_password):
+    def change_password(self, username, old_password, new_password):
         user = self.get_user_by_username(username)
         if self.is_user_not_found(user): return user
-        user.password = new_password
-        return "Password has been changed"
+        if user.password == old_password and len(new_password) >= 8:
+            user.password = new_password
+            return "Password has been changed"
+        elif user.password != old_password:
+            return "Wrong password"
+        elif len(new_password) < 8:
+            return "Password must be at least 8 letters"
+        else:
+            return "Please try again"
     
     def get_all_pseudonym_list(self):
         pseudonym_list = []
