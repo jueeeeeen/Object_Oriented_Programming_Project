@@ -51,8 +51,7 @@ Mo.add_writing_book_list(Book2)
 #----------------------------------create chapters----------------------------------
 #Chapter("number", "name", "context", "dd/mm/yyyy", price)
 
-Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shincha", 184)
-Book1.add_chapter_list(Chapter1_1)
+Book1.add_chapter_list(Chapter("1", "first_ch", "this is the first chapter of shincha", 184, "Shin_chan"))
 
 #----------------------------------create promotions----------------------------------
 #BookPromotion("dd/mm/yyyy", discount, [book_list])
@@ -77,6 +76,11 @@ Mo.add_silver_coin(50)
 Mo.add_silver_coin(3)
 Mo.add_silver_coin(100)
 Mo.add_golden_coin(88)
+
+#----------------------------------add to bookshelf----------------------------------
+
+Mo.add_book_shelf_list(Book1)
+Mo.add_book_shelf_list(Book2)
 #----------------------------------fastapi----------------------------------
 
 @app.get("/")
@@ -108,6 +112,12 @@ def SignUp(username:str, password:str, birth_date: str):
 def ShowMyPage(username:str):
      return {"My Page" : WriteARead.show_my_page(username)}
 
+@app.put("/My Page/Edit introduction", tags=["user"])
+def EditIntroduction(username:str, text:str):
+     user = WriteARead.get_user_by_username(username)
+     return {"Edit Introduction" : user.edit_introduction(text)}
+
+
 @app.get("/My Profile", tags=['user'])
 def ShowMyProfile(username:str):
      return {"My Profile" : WriteARead.show_my_profile(username)}
@@ -135,23 +145,29 @@ def AddPseudonym(username:str, new_pseudonym:str):
 def ShowMyReading(username:str):
      return {"My Reading" : WriteARead.show_my_reading(username)}
 
-@app.get("/Buy Chapter", tags=['chapter'])
+@app.post("/Buy Chapter", tags=['chapter'])
 def BuyChapter(username:str, chapter_id:str):
-     return {"Buy Chapter" : WriteARead.buy_chapter(username)}
+     return {"Buy Chapter" : WriteARead.buy_chapter(username, chapter_id)}
+
+@app.get("/test", tags=['test'])
+def Test(book_name:str):
+     return {WriteARead.get_book_by_name(book_name)}
 #----------------------------------test----------------------------------
-test0 = WriteARead.show_coin("Mozaza")
-test = Mo.show_silver_coin_list()
-test1 = WriteARead.buy_chapter("Mozaza", "first chapter of shinchan/1")
-test2 = WriteARead.show_coin("Mozaza")
-test3 = Mo.show_silver_coin_list()
 
-print(test0)
-print(test)
-print(test1)
-print(test2)
-print(test3)
+# print(ShowMyReading("Mozaza"))
+# test0 = WriteARead.show_coin("Mozaza")
+# test = Mo.show_silver_coin_list()
+# test1 = WriteARead.buy_chapter("Mozaza", "first chapter of shinchan/1")
+# test2 = WriteARead.show_coin("Mozaza")
+# test3 = Mo.show_silver_coin_list()
 
-print(Mo.show_chapter_transaction())
+# print(test0)
+# print(test)
+# print(test1)
+# print(test2)
+# print(test3)
+
+# print(Mo.show_chapter_transaction())
 
 # print(f"{Mo.get_coin_transaction_list()[2].golden_amount} , {Mo.get_coin_transaction_list()[2].silver_amount}")
 

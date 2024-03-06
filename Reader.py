@@ -1,8 +1,8 @@
 #Reader.py
 from datetime import datetime, date, timedelta
 from dateutil import relativedelta
-import Book
-import Chapter
+from Book import Book
+from Chapter import Chapter
 from Coin import SilverCoin, GoldenCoin
 from ChapterTransaction import ChapterTransaction
 from CoinTransaction import CoinTransaction
@@ -79,6 +79,13 @@ class Reader:
     @introduction.setter
     def introduction(self, text):
         self.__introduction = text
+        
+    def edit_introduction(self, text):
+        if len(text) > 50:
+            return "Introduction cannot be longer than 50 letters"
+        else:
+            self.__introduction = text
+            return "Introduction updated"
     
     def add_golden_coin(self,amount):
         self.golden_coin.balance += amount
@@ -120,7 +127,7 @@ class Reader:
     def get_book_shelf_list(self):
         return self.__book_shelf_list
     def add_book_shelf_list(self,book):
-        if isinstance(book,Book.Book):
+        if isinstance(book,Book):
             self.__book_shelf_list.append(book)
         
     def get_follower_list(self):
@@ -130,7 +137,7 @@ class Reader:
     def recent_read_chapter_list(self):
         return self.__recent_read_chapter_list
     def add_recent_read_chapter_list(self,chapter):
-        if isinstance(chapter,Chapter.Chapter):
+        if isinstance(chapter, Chapter):
             self.__recent_read_chapter_list.append(chapter)
 
     def get_chapter_transaction_list(self):
@@ -170,6 +177,12 @@ class Reader:
         for chapter_transaction in self.__chapter_transaction_list:
             show_list.append(chapter_transaction.chapter_transaction())
         return show_list
+    
+    def check_repeated_purchase(self, chapter):
+        for purchased_chapter in self.__chapter_transaction_list:
+            if chapter == purchased_chapter:
+                return True
+        return False
 
 class Writer(Reader):
     money_balance = 0
@@ -189,7 +202,7 @@ class Writer(Reader):
         return writing_name_list
     
     def add_writing_book_list(self,book):
-        if isinstance(book,Book.Book):
+        if isinstance(book,Book):
             self.__writing_book_list.append(book)
 
     @property
@@ -208,7 +221,7 @@ class Writer(Reader):
     def get_viewer_count(self):
         count = 0
         for book in self.__writing_book_list:
-            for chapter in book.chapter_list():
+            for chapter in book.chapter_list:
                 count += chapter.viewer_count
         return count
     
@@ -221,7 +234,7 @@ class Writer(Reader):
     def get_json_comment_list(self):
         comment_list = []
         for book in self.__writing_book_list:
-            for comment in book.comment_list():
+            for comment in book.comment_list:
                 comment_dict = {}
                 comment_dict["user"] = comment.commentator.name
                 comment_dict["context"] = comment.context

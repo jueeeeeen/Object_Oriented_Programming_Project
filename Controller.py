@@ -27,7 +27,7 @@ class Controller:
     def search_book_by_name(self, book_name):
         search_list=[]
         for writer in self.__writer_list:
-            for book in writer.writing_book_list:
+            for book in writer.writing_list:
                 if book_name.lower() in book.name.lower():
                     search_list.append(book.name)
                     
@@ -53,7 +53,7 @@ class Controller:
                     
     def get_book_by_name(self, book_name):
         for writer in self.__writer_list:
-            for book in writer.book:
+            for book in writer.writing_list:
                 if book.name == book_name:
                     return book
         return "Book Not Found"
@@ -98,6 +98,9 @@ class Controller:
 
         chapter = self.get_chapter_by_chapter_id(chapter_id)
         if not isinstance(chapter, Chapter): return chapter
+        
+        if user.check_repeated_purchase(chapter): return "You have already purchased this chapter."
+        
         cost = chapter.cost
 
         coin_balance = user.get_user_coin_balance()
@@ -105,7 +108,7 @@ class Controller:
         if coin_balance >= cost:
             user.deduct_coin(cost)
             user.add_chapter_transaction_list(ChapterTransaction(chapter, cost))
-            return "Done"
+            return "Your purchase was successful"
         else:
             return "Not enough coin"
         
@@ -127,12 +130,12 @@ class Controller:
     def show_my_page(self, username):
         writing_count = 0
         reads = 0
-        writing_list = None
-        pseudonym_list = None
-        comments = None
+        writing_list = "-"
+        pseudonym_list = "-"
+        comment_list = "-"
         user = self.get_user_by_username(username)
         if isinstance(user, Writer):
-            writing_count = len(user.get_writing_list())
+            writing_count = len(user.writing_list)
             reads = user.get_viewer_count()
             writing_list = user.show_writing_name_list()
             pseudonym_list = user.pseudonym_list
@@ -152,8 +155,7 @@ class Controller:
     
     def show_my_profile(self, username):
         user = self.get_user_by_username(username)
-        if self.is_user_not_found(user): 
-            return user
+        if self.is_user_not_found(user): return user
         return {"username" : user.username,
                 "password" : "******",
                 "menu" : ["change password",
@@ -161,6 +163,18 @@ class Controller:
                             "upgrade to writer",
                             "pseudonym",
                             "verify age"]}
+        
+    def show_my_reading(self, username):
+        user = self.get_user_by_username(username)
+        if self.is_user_not_found(user): return user
+        reading_list = []
+        for book in user.get_book_shelf_list():
+            reading = {"name" : book.name,
+                       "tags" : book.tag,
+                       "status" : book.status,
+                       "prologue" : book.prologue}
+            reading_list.append(reading)
+        return reading_list
 
     def change_password(self, username, new_password):
         user = self.get_user_by_username(username)
@@ -168,7 +182,7 @@ class Controller:
         user.password = new_password
         return "Password has been changed"
     
-    def get_all_pseudonym_list(self, username):
+    def get_all_pseudonym_list(self):
         pseudonym_list = []
         for user in self.__writer_list:
             for pseudonym in user.pseudonym_list:
@@ -188,14 +202,6 @@ class Controller:
             return "pseudonym already exists"
         user.add_pseudonym(pseudonym)
         return "pseudonym added"
-
-    def show_my_reading(self, username):
-        user = self.get_user_by_username(username)
-        if self.is_user_not_found(user): return user
-        reading_list = []
-        for book in user.recent_read_chapter_list:
-            reading_list.append(book)
-        return reading_list
     
     def is_user_not_found(self, user):
         if not (isinstance(user, Reader) or isinstance(user, Writer)):
