@@ -51,7 +51,7 @@ Mo.add_writing_book_list(Book2)
 #----------------------------------create chapters----------------------------------
 #Chapter("number", "name", "context", "dd/mm/yyyy", price)
 
-Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shincha", 100)
+Chapter1_1 = Chapter("1", "first chapter of shinchan", "this is the first chapter of shincha", 50)
 Book1.add_chapter_list(Chapter1_1)
 
 #----------------------------------create promotions----------------------------------
@@ -72,9 +72,11 @@ Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("0123456789", "5174
 
 #----------------------------------add coin----------------------------------
 Mo.add_silver_coin(20)
+Mo.add_silver_coin(10)
 Mo.add_silver_coin(50)
+Mo.add_silver_coin(3)
 Mo.add_silver_coin(100)
-Mo.add_golden_coin(2)
+Mo.add_golden_coin(88)
 #----------------------------------fastapi----------------------------------
 
 @app.get("/")
@@ -83,7 +85,7 @@ def FirstPage():
 
 @app.get("/bookname", tags=['search bar'])
 def searchBook(book_name:str):
-    return {"Book": WriteARead.search_book_by_name(book_name)}
+     return {"Book": WriteARead.search_book_by_name(book_name)}
 
 @app.get("/username", tags=['search bar'])
 def SearchUser(username:str):
@@ -100,7 +102,7 @@ def ShowSilverCoins(username:str):
 
 @app.post("/signup", tags=['sign up/sign in'])
 def SignUp(username:str, password:str, birth_date: str):
-    return WriteARead.sign_up(username, password, birth_date)
+     return WriteARead.sign_up(username, password, birth_date)
 
 @app.get("/My Page", tags=['user'])
 def ShowMyPage(username:str):
@@ -112,8 +114,8 @@ def ShowMyProfile(username:str):
 
 @app.get("/get_coin_transacttion", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
-    user = WriteARead.get_user_by_username(username)
-    return {"Coin Transaction" : user.show_coin_transaction()}
+     user = WriteARead.get_user_by_username(username)
+     return {"Coin Transaction" : user.show_coin_transaction()}
 
 @app.put("/My Profile/change_password", tags=['user'])
 def ChangePassword(username:str, new_password:str):
@@ -131,11 +133,24 @@ def ShowMyReading(username:str):
 def BuyChapter(username:str, chapter_id:str):
      return {"Buy Chapter" : WriteARead.buy_chapter(username)}
 #----------------------------------test----------------------------------
+test0 = WriteARead.show_coin("Mozaza")
 test = Mo.show_silver_coin_list()
 test1 = WriteARead.buy_chapter("Mozaza", "first chapter of shinchan/1")
 test2 = WriteARead.show_coin("Mozaza")
 test3 = Mo.show_silver_coin_list()
+
+print(test0)
 print(test)
 print(test1)
 print(test2)
 print(test3)
+
+# print("\n\n\n")
+
+# print(Mo.show_silver_coin_list())
+# for silver_coin in Mo.get_silver_coin_list():
+#      print((silver_coin.balance))
+
+# print(Mo.show_silver_coin_list())
+# for silver_coin in Mo.get_silver_coin_list():
+#      print((silver_coin.balance))

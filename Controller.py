@@ -3,7 +3,6 @@ import Chapter
 import ChapterTransaction
 import CoinTransaction
 from Reader import Reader, Writer
-from Book import Book
 from Chapter import Chapter
 
 

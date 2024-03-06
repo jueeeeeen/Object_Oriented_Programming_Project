@@ -34,7 +34,7 @@ class SilverCoin(GoldenCoin):
         silver_coin_amount = self.balance
         if amount >= silver_coin_amount:
             amount -= silver_coin_amount
-            del self
+            self.balance = 0
             return silver_coin_amount
         else:
             self.balance -= amount
