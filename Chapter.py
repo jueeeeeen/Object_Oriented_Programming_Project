@@ -6,7 +6,7 @@ class Chapter:
         self.__chapter_number = chapter_number
         self.__name = book_name
         self.__context = context
-        self.__publish_date_time = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+        self.__publish_date_time = datetime.now()
         self.__viewer_count = 0
         self.__comment_list = []
         self.__cost = cost
@@ -30,6 +30,10 @@ class Chapter:
     @property
     def publish_date_time(self):
         return self.__publish_date_time
+    
+    @property
+    def publish_date_time_str(self):
+        return self.__publish_date_time.strftime("%d/%m/%Y, %H:%M:%S")
     
     @property
     def cost(self):

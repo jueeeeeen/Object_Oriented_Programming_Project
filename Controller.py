@@ -160,8 +160,8 @@ class Controller:
                 "menu" : ["change password",
                             "go to page",
                             "upgrade to writer",
-                              "pseudonym",
-                              "verify age"]}
+                            "pseudonym",
+                            "verify age"]}
 
     def change_password(self, username, new_password):
         user = self.get_user_by_username(username)

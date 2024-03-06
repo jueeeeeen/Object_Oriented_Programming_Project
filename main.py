@@ -131,12 +131,11 @@ def ShowMyReading(username:str):
 def BuyChapter(username:str, chapter_id:str):
      return {"Buy Chapter" : WriteARead.buy_chapter(username)}
 #----------------------------------test----------------------------------
-#test1 = Chapter1_1.chapter_id
-# test = Mo.show_silver_coin_list()
-# test1 = WriteARead.buy_chapter("Mozaza", "first chapter of shinchan/1")
-# test2 = WriteARead.show_coin("Mozaza")
-# test3 = Mo.show_silver_coin_list()
-# print(test)
-# print(test1)
-# print(test2)
-# print(test3)
+test = Mo.show_silver_coin_list()
+test1 = WriteARead.buy_chapter("Mozaza", "first chapter of shinchan/1")
+test2 = WriteARead.show_coin("Mozaza")
+test3 = Mo.show_silver_coin_list()
+print(test)
+print(test1)
+print(test2)
+print(test3)

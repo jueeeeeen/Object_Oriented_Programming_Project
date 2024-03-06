@@ -19,7 +19,7 @@ class Book:
         self.__chapter_list = []
         self.__comment_list = []
         self.__report_list = []
-        self.__date_time = datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+        self.__date_time = datetime.now()
     
     @property
     def name(self):
@@ -66,6 +66,10 @@ class Book:
     @date_time.setter
     def date_time(self,date_time):
         self.__date_time = date_time
+        
+    @property
+    def date_time_str(self):
+        return self.__date_time.strftime("%d/%m/%Y, %H:%M:%S")
 
     @property
     def chapter_list(self):

@@ -52,13 +52,13 @@ class Reader:
         return self.__follower_list
     
     def get_user_coin_balance(self):
-      return self.__golden_coin.balance + self.get_silver_coin_balance()
+        return self.__golden_coin.balance + self.get_silver_coin_balance()
     
     def get_silver_coin_balance(self):
-      silver_coin_balance = 0
-      for silver_coin in self.__silver_coin_list:
-        silver_coin_balance += silver_coin.balance
-      return silver_coin_balance
+        silver_coin_balance = 0
+        for silver_coin in self.__silver_coin_list:
+            silver_coin_balance += silver_coin.balance
+        return silver_coin_balance
     
     def show_silver_coin_list(self):
         silver_coin_dict = {}
@@ -90,36 +90,23 @@ class Reader:
     def add_silver_coin(self,amount):
         self.__silver_coin_list.append(SilverCoin(amount))
 
-    def delete_exp_silver_coin(self):
+    def delete_silver_coin(self):
         for silver_coin in self.__silver_coin_list:
-            if silver_coin.exp_date_time - datetime.today():
-                self.__silver_coin_list.pop(silver_coin)
+            if (silver_coin.exp_date_time - datetime.today() == -1) or (silver_coin.balance == 0):
+                self.__silver_coin_list.remove(silver_coin)
 
-    def deduct_silver_coin(self,amount):
-        self.delete_exp_silver_coin()
-        for silver_coin in self.__silver_coin_list:
-            if amount > silver_coin.balance :
-                self.__silver_coin_list.pop(silver_coin)
-                amount -= silver_coin.balance
-            elif amount < silver_coin.balance :
-                silver_coin.balance -= amount
-                break
-            else :
-                self.__silver_coin_list.pop(silver_coin)
-                break
-    
     def deduct_coin(self, amount):
-        total = amount
         for silver_coin in self.__silver_coin_list:
-            if total != 0 or self.__silver_coin_list != []:
-                transac_amount = silver_coin.deduct_silver_coin(total)
-                total -= transac_amount
-                print(f"amount : {total}\ntransac_amount : {transac_amount}")
+            if amount != 0 or self.__silver_coin_list != []:
+                transac_amount = silver_coin.deduct_silver_coin(amount)
+                amount -= transac_amount
+                print(f"amount : {amount}\ntransac_amount : {transac_amount}")
+                self.delete_silver_coin()
                 # self.add_coin_transaction(CoinTransaction.CoinTransaction(None, None, transac_amount, self.get_user_coin_balance(), datetime.now()))
             else:
                 break
-        if total != 0:
-            self.golden_coin.deduct_golden_coin(total)
+        if amount != 0:
+            self.golden_coin.deduct_golden_coin(amount)
             # self.add_coin_transaction(CoinTransaction.CoinTransaction(None, None, amount, self.get_user_coin_balance(), datetime.now()))
         return "Done"
 
