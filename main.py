@@ -29,7 +29,7 @@ now = datetime.now()
 #----------------------------------create users----------------------------------
 #WriteARead.add_reader(Reader("username", "password", "dd/mm/yyyy"))
      
-Mo = Writer("Mozaza", "namchakeawpun", "12/05/2000")
+Mo = Writer("Mozaza", "12345678", "12/05/2000")
 WriteARead.add_reader(Mo)
 WriteARead.add_reader(Reader("Pinttttt", "sawasdee", "01/01/2005"))
 WriteARead.add_reader(Reader("Pangrum", "ehehe", "02/01/2005"))
@@ -112,17 +112,21 @@ def SignUp(username:str, password:str, birth_date: str):
 def ShowMyPage(username:str):
      return {"My Page" : WriteARead.show_my_page(username)}
 
-@app.put("/my_page/Edit introduction", tags=["user"])
-def EditIntroduction(username:str, text:str):
-     user = WriteARead.get_user_by_username(username)
-     return {"Edit Introduction" : user.edit_introduction(text)}
+class dto_edit_introduction(BaseModel):
+     username : str
+     text : str
+     
+@app.put("/my_page/edit_introduction", tags=["user"])
+def EditIntroduction(dto : dto_edit_introduction):
+     user = WriteARead.get_user_by_username(dto.username)
+     return {"Edit Introduction" : user.edit_introduction(dto.text)}
 
 
 @app.get("/my_profile", tags=['user'])
 def ShowMyProfile(username:str):
      return {"My Profile" : WriteARead.show_my_profile(username)}
 
-@app.get("/get_coin_transacttion", tags=['Coin Transaction'])
+@app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
      user = WriteARead.get_user_by_username(username)
      return {"Coin Transaction" : user.show_coin_transaction()}
@@ -133,11 +137,22 @@ def ShowChapterTransaction(username:str):
      if WriteARead.if_user_not_found(user): return user
      return {"Chapter Transaction" : user.show_chapter_transaction()}
 
+class dto_change_password(BaseModel):
+     username : str
+     old_password :str
+     new_password : str
+     
 @app.put("/my_profile/change_password", tags=['user'])
-def ChangePassword(username:str,old_password:str, new_password:str):
-     return {"Change Password" : WriteARead.change_password(username, old_password, new_password)}
+def ChangePassword(dto : dto_change_password):
+     return {"Change Password" : WriteARead.change_password(dto.username, dto.old_password, dto.new_password)}
 
-# @app.put("/my_page")
+class dto_change_display_name(BaseModel):
+     username : str
+     new_display_name : str
+     
+@app.put("/my_page/change_display_name", tags=['user'])
+def ChangeDisplayName(dto : dto_change_display_name):
+     return {"Change Display Name" : WriteARead.change_display_name(dto.username, dto.new_display_name)}
 
 class dto_add_pseudonym(BaseModel):
      username : str
