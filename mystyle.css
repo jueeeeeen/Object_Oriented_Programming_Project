@@ -1,0 +1,26 @@
+h1 {
+    background-color:rgb(155, 214, 235);
+    text-align: center;
+}
+p{
+    font-family: monospace;
+}
+.page_name{
+    margin: 0px;
+    font-family: monospace;
+    text-align: center;
+    padding: 3%;
+    background-image: linear-gradient(rgb(249, 187, 247), rgb(197, 222, 255));
+}
+
+.menu_button{
+    color: White;
+    text-align: center;
+    padding: 3px;
+    background-color:rgb(107, 128, 213);
+    font-family: monospace;
+    display: inline-block;
+    width: 12%;
+    margin-bottom: 3px;
+    margin-right: 1px;
+}
