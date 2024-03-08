@@ -1,26 +1,54 @@
-h1 {
-    background-color:rgb(155, 214, 235);
-    text-align: center;
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "IBM Plex Sans Thai", sans-serif;
 }
-p{
-    font-family: monospace;
-}
+
 .page_name{
+    color: White;
     margin: 0px;
-    font-family: monospace;
     text-align: center;
     padding: 3%;
-    background-image: linear-gradient(rgb(249, 187, 247), rgb(197, 222, 255));
+    background-color: rgb(59, 163, 182);
 }
 
 .menu_button{
     color: White;
+}
+
+.flexbox{
+    display: flex;
+    /* box-sizing: border-box; */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.item{
+    display: block;
+    box-sizing: border-box;
+    width: 20%;
+    color: White;
     text-align: center;
     padding: 3px;
-    background-color:rgb(107, 128, 213);
-    font-family: monospace;
-    display: inline-block;
-    width: 12%;
-    margin-bottom: 3px;
+    background-color: rgb(98, 153, 177);
+    margin-bottom: 1px;
     margin-right: 1px;
+}
+
+.search_item{
+    display: block;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.search_bar{
+    box-sizing: border-box;
+    width: 400px;
+    height: 30px
+}
+
+.search_button{
+    box-sizing: border-box;
+    height: 30px;
 }
