@@ -30,7 +30,7 @@ class SilverCoin(GoldenCoin):
     
     @property
     def exp_date_time_str(self):
-        return self.__exp_date_time.strftime("%d/%m/%Y, %H:%M:%S")
+        return self.__exp_date_time.strftime("%x")
 
     def deduct_silver_coin(self, amount):
         silver_coin_amount = self.balance

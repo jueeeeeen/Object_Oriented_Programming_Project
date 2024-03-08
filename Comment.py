@@ -23,7 +23,7 @@ class Comment:
 
     @property
     def date_time_str(self):
-        return self.__date_time.strftime("%d/%m/%Y, %H:%M:%S")
+        return self.__date_time.strftime("%x %X")
     
     @property
     def chapter(self):
@@ -32,7 +32,7 @@ class Comment:
     @property
     def report_list(self):
         return self.__report_list
-  
+
     @property
     def reply_list(self):
         return self.__reply_list
@@ -46,3 +46,13 @@ class Comment:
             print(f"Reply is deleted from the list")
         else:
             print(f"Reply is not found in the list")
+
+    def update_time(self):
+        self.__date_time = datetime.now()
+        
+    def show_comment(self):
+        return {"user" : self.commentator.display_name,
+                "chapter" : f"#{self.chapter.chapter_number} {self.chapter.name}",
+                "context" : self.context,
+                "date_time" : self.date_time_str,
+                "context" : self.context}
