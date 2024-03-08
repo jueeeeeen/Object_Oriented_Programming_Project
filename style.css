@@ -1,0 +1,60 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "IBM Plex Sans Thai", sans-serif;
+}
+
+.buy_coin_title {
+    background-color: rgb(98, 153, 177);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.payment_title {
+    color: rgb(30, 26, 29);
+    margin-left: 20px;
+    font-size: 25px;
+}
+
+.top_header {
+    background-color: rgb(59, 163, 182);
+}
+
+.menu_item {
+    font-size: 18px;
+    color: aliceblue;
+    padding: 15px;
+    display: inline-block;
+    text-decoration:none ;
+}
+
+.brand {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.button {
+    color:antiquewhite;
+    background-color: brown;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 10px;
+    /* display: block; */
+    display: inline-block;
+    width: 50px;
+}
+
+.payment_img {
+    /* color:rgb(73, 72, 72); */
+    background-color: rgba(75, 73, 73, 0.493);
+    padding: 0.7px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 200px;
+}
+
+.bottom_footer {
+    background-color: rgb(75, 81, 82);
+}
