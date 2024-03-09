@@ -29,11 +29,22 @@
             <a class="menu_item" href="homepage.html">Home</a>
         </header> -->
 
-        <!-- <header class="menu_banner"> -->
-        <div class="menu_banner">
-            <h3 class="writing_type" style="margin-left: 40px;">นิยาย</h3> <h3 class="writing_type">แฟนฟิค</h3> <h3 class="writing_type">การ์ตูน</h3>
+        <div class="flexbox_menu">
+            <div class="menu_banner_item">
+                <a class="writing_type" href="#">นิยาย</a>
+                <a class="writing_type" href="#">แฟนฟิค</a>
+                <a class="writing_type" href="#">การ์ตูน</a>
+            </div>
+            <div class="menu_banner_item">
+                <a href="index.html"><img src="image/WriteARead_white.png" class="WriteARead_image"></a>
+            </div>
+            <div class="menu_banner_item">
+                <a href="#"> <img class="ring_icon" src="image/ring_button_light.png" alt="Original Image"></a>
+                <a href="#"> <img class="pen_icon" src="image/writing_button_light.png" alt=Original Image"></a>
+                <a href="#"> <img class="user_icon" src="image/user_button_light.png" alt=Original Image"></a>
+            </div>
         </div>
-            <!-- </header> -->
+
         <header class="top_banner">
             <form id="searchForm">
                 <div class="flexbox">
@@ -41,12 +52,22 @@
                         <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
                     </div>
                     <div class="search_item">
-                        <input class="search_button" type="image" src="image/search_button_bw.png" alt="Submit">
+                        <input class="search_button" type="image" src="image/search_button_light.png" alt="Submit">
                     </div>
                 </div>
             </form>
-            <a href="index.html"><img src="image/WriteARead_white.png" class="WriteARead_image"></a>
         </header>
+        <hr>
+        <div class="center">
+            <img class="banner" src="image/temp_banner1.png">
+            <img class="banner" src="image/temp_banner2.png">
+        </div>
+        <hr>
+
+        <div class="right">
+            <a href="payment.html"> <img class="top_up" src="image/buy_coin.png"></a>
+        </div>
+
 
         <ul id="search_result"></ul>
         <a href="payment.html">Payment</a>

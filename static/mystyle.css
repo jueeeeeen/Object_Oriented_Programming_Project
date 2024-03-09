@@ -1,3 +1,10 @@
+:root{
+    --main_color: rgb(0, 203, 195);
+    --main_color_light: #95DBD5;
+    /* #89d3cd */
+    --main_color_dark: rgb(59, 163, 182);
+    --main_font: "IBM Plex Sans Thai", sans-serif
+}
 html{
     margin: 0;
     padding: 0;
@@ -9,7 +16,7 @@ html{
     margin: 0px;
     text-align: center;
     padding: 3%;
-    background-color: rgb(59, 163, 182);
+    background-color: var(--main_color);
 }
 
 .menu_button{
@@ -33,7 +40,7 @@ html{
     color: White;
     text-align: center;
     padding: 3px;
-    background-color: rgb(98, 153, 177);
+    background-color: var(--main_color);
     margin-bottom: 1px;
     margin-right: 1px;
 }
@@ -54,6 +61,8 @@ html{
 
 .search_input {
     background-color: rgb(244, 244, 244);
+    font-size: 15px;
+    font-family: --main_font;
     width: 500px;
     height: 40px;
     padding: 10px;
@@ -64,44 +73,142 @@ html{
 
 }
 
+input { font-family: var(--main_font); }
+
 .WriteARead_image{
-    background-color: rgb(59, 163, 182);
+    background-color: var(--main_color);
     Width: 200px;
+    margin-top: 10px;
 }
 
 .top_banner{
-    background-color: rgb(59, 163, 182);
-    padding: 50px;
+    background-color: var(--main_color);
+    padding: 10px;
     text-align: center;
 }
-
-.search_banner{
-    background-color: rgb(59, 163, 182);
-    padding: 1px;
-    text-align: center;
-    overflow: hidden;
-}
-
 .writing_type{
     font-weight: 500;
+    font-size: 20px;
     color: rgb(255, 255, 255);
     display: inline-block;
     margin-left: 20px;
     margin-bottom: 0px;
+    margin-top: 10px;
     text-decoration:none ;
 }
+
+.writing_type:hover
+{
+    color: rgb(0, 0, 0);
+}
+
 
 #searchForm{
     /* display: inline-block; */
     text-align: center;
-    margin-top: -30px;
-    margin-bottom: 20px;
+    /* margin-top: 30px;
+    margin-bottom: -20px; */
 }
 
-.menu_banner{
-    background-color: rgb(59, 163, 182);
+.flexbox_menu{
+    background-color: var(--main_color);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0px 0px;
+    padding-top: 20px
 }
 
-.move_right{
-    margin-left: 20px
+.menu_banner_item{
+    background-color: var(--main_color);
+    color: White;
+    text-align: center;
+    box-sizing: border-box;
+    width: 33.33%;
+    margin-bottom: 0px;
+    padding: 0px 0px;
 }
+
+.ring_icon{
+    box-sizing: border-box;
+    margin-top: 7px;
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    text-decoration:none
+}
+
+.pen_icon{
+    box-sizing: border-box;
+    margin-top: 7px;
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    text-decoration:none
+}
+
+.user_icon{
+    box-sizing: border-box;
+    margin-top: 7px;
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    text-decoration:none
+}
+
+
+.ring_icon:hover {
+    transform: scale(1.2);
+    content: url('../Templates/image/ring_button.png');
+}
+
+.pen_icon:hover {
+    transform: scale(1.2);
+    content: url('../Templates/image/writing_button.png');
+}
+
+.user_icon:hover {
+    transform: scale(1.2);
+    content: url('../Templates/image/user_button.png');
+}
+
+.center{
+    text-align: center;
+}
+
+.right{
+    text-align: right;
+}
+
+.banner{
+    background-color: var(--main_color);
+    Width: 40%;
+    margin-top: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.top_up{
+    width: 9.5%;
+    margin-right: 10%;
+    min-width: 100px;
+}
+
