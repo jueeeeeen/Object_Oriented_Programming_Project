@@ -1,0 +1,13 @@
+<header class="top_banner">
+            <form id="searchForm">
+                <div class="flexbox">
+                    <div class="search_item">
+                        <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
+                    </div>
+                    <div class="search_item">
+                        <input class="search_button" type="image" src="image/search_button_bw.png" alt="Submit">
+                    </div>
+                </div>
+            </form>
+            <a href="index.html"><img src="image/WriteARead_white.png" class="WriteARead_image"></a>
+        </header>

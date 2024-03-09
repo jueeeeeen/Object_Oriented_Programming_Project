@@ -3,63 +3,54 @@
     <head>
         <title>WriteARead</title>
         <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-        <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-                document.getElementById("searchForm").addEventListener("submit", function (e) {
-                  e.preventDefault() // Cancel the default action
-                    var search_str = document.getElementById('search_str').value;
-                    fetch('/search_all/' + search_str, {
-                        method: 'GET',
-                        })
-                        .then(resp => resp.text()) // or, resp.json(), etc.
-                        .then(data => {
-                        document.getElementById("search_result").innerHTML = data;
-                        })
-                        .catch(error => {
-                        console.error(error);
-                    });
-                });
-            });
-        </script>
-    </head>
-    <body style="background-color: rgb(252, 255, 240);">
-        <header>
-            <div class="flexbox">
-                <div class="item">
-                    <a class="menu_button" href="MyPage.html">My Page</a>
-                </div>
-                <div class="item">
-                    <a class="menu_button" href="MyProfile.html">My Profile</a>
-                </div>
-                <div class="item">
-                    <a class="menu_button" href="MyProfile.html">My Profile</a>
-                </div>
-                <div class="item">
-                    <a class="menu_button" href="MyCoin.html">My Coin</a>
-                </div>
-                <div class="item">
-                    <a class="menu_button" href="MyWriting.html">My Writing</a>
-                </div>
-            </div>
-        </header>
-        
-        <h1 class="page_name">WriteARead</h1>
+        <script src="/scripts/search_bar.js"></script>
 
-        <form id="searchForm">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    </head>
+    <body>
+        <!-- <header>
             <div class="flexbox">
-                <div class="search_item">
-                    <input class="search_bar" id="search_str" type="text" name="search_str" required>
-                </div>
-                <div class="search_item">
-                    <input class="search_button" type="submit" value="Submit">
-                    <!-- <button type="submit" class="search_button">search</button> -->
+                <div class="item">
+                    <a class="menu_button" href="/Templates/MyPage.html">My Page</a>
                 </div>
             </div>
-        </form>
+        </header> -->
+
+        <!-- <header class="top_header"> 
+            <a class="menu_item brand" href="homepage.html">WriteARead</a>
+            <a class="menu_item" href="homepage.html">Home</a>
+        </header> -->
+
+        <!-- <header class="menu_banner"> -->
+        <div class="menu_banner">
+            <h3 class="writing_type" style="margin-left: 40px;">นิยาย</h3> <h3 class="writing_type">แฟนฟิค</h3> <h3 class="writing_type">การ์ตูน</h3>
+        </div>
+            <!-- </header> -->
+        <header class="top_banner">
+            <form id="searchForm">
+                <div class="flexbox">
+                    <div class="search_item">
+                        <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
+                    </div>
+                    <div class="search_item">
+                        <input class="search_button" type="image" src="image/search_button_bw.png" alt="Submit">
+                    </div>
+                </div>
+            </form>
+            <a href="index.html"><img src="image/WriteARead_white.png" class="WriteARead_image"></a>
+        </header>
+
         <ul id="search_result"></ul>
         <a href="payment.html">Payment</a>
+        <a href="/Templates/MyPage.html">My Page</a>
+
     </body>
 </html>
