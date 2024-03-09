@@ -6,6 +6,24 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.getElementById("searchForm").addEventListener("submit", function (e) {
+                  e.preventDefault() // Cancel the default action
+                    var search_str = document.getElementById('search_str').value;
+                    fetch('/search_all/' + search_str, {
+                        method: 'GET',
+                        })
+                        .then(resp => resp.text()) // or, resp.json(), etc.
+                        .then(data => {
+                        document.getElementById("search_result").innerHTML = data;
+                        })
+                        .catch(error => {
+                        console.error(error);
+                    });
+                });
+            });
+        </script>
     </head>
     <body style="background-color: rgb(252, 255, 240);">
         <header>
@@ -30,16 +48,18 @@
         
         <h1 class="page_name">WriteARead</h1>
 
-        <form action="http://127.0.0.1:8000/search_all">
+        <form id="searchForm">
             <div class="flexbox">
                 <div class="search_item">
-                    <input class="search_bar" id="input" type="text" name="search_str" >
+                    <input class="search_bar" id="search_str" type="text" name="search_str" required>
                 </div>
                 <div class="search_item">
-                    <button type="submit" class="search_button">search</button>
+                    <input class="search_button" type="submit" value="Submit">
+                    <!-- <button type="submit" class="search_button">search</button> -->
                 </div>
             </div>
         </form>
-
+        <ul id="search_result"></ul>
+        <a href="payment.html">Payment</a>
     </body>
 </html>

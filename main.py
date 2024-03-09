@@ -1,10 +1,13 @@
 from typing import Union, Optional, Annotated
 import uvicorn
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Request
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import requests
 import json
 from datetime import datetime, timedelta
+
 
 from Controller import Controller
 from Reader import Reader, Writer
@@ -16,6 +19,8 @@ from Promotion import BookPromotion, CoinPromotion, Promotion
 from Coin import GoldenCoin, SilverCoin
 
 app = FastAPI()
+
+templates = Jinja2Templates(directory="Templates")
 
 write_a_read = Controller()
 
@@ -84,9 +89,9 @@ Mo.add_book_shelf_list(book2)
 # ____________________________________FastAPI___________________________________
 # _________________________________________________ GET _________________________________________________
 
-@app.get("/")
-def FirstPage():
-     return "Welcome to WriteARead"
+# @app.get("/")
+# def FirstPage(req: Request):
+#      return template.TemplateResponse(name="index.html", context={"request":req})
 
 @app.get("/bookname", tags=['search bar'])
 def searchBook(book_name:str):
@@ -136,9 +141,13 @@ def Test(book_name:str):
 def SignIN(username:str, password:str):
      return write_a_read.sign_in(username, password)
 
-@app.get("/search_all", tags=['search bar'])
+@app.get("/search_all/{search_str}", tags=['search bar'])
 def searchBar(search_str:str):
      return {"Search": write_a_read.search_all_list(search_str)}
+
+@app.get('/', response_class=HTMLResponse)
+def main(request: Request):
+     return templates.TemplateResponse('index.html', {'request': request})
 
 # _________________________________________________ POST _________________________________________________
 
@@ -298,52 +307,52 @@ def EditChapterInfo(dto : dto_edit_chapter):
 # mo_username = "Mozaza"
 # mo_password = "namchakeawpun"
 
-print("________________________________________________sign in_______________________________________________")
-print(write_a_read.sign_in("Mozaza", "12345678"))
+# print("________________________________________________sign in_______________________________________________")
+# print(write_a_read.sign_in("Mozaza", "12345678"))
 
-print("_______________________________________________sign up_______________________________________________")
-print(write_a_read.sign_up("reader1", "12345678", "01/01/2000", "reader"))
-print(write_a_read.sign_up("writer1", "12345678", "01/01/2000", "reader"))
+# print("_______________________________________________sign up_______________________________________________")
+# print(write_a_read.sign_up("reader1", "12345678", "01/01/2000", "reader"))
+# print(write_a_read.sign_up("writer1", "12345678", "01/01/2000", "reader"))
 
 print("_______________________________________________search all_______________________________________________")
-print(write_a_read.search_all_list("n"))
+print(write_a_read.search_all_list("mo"))
 
-print("_______________________________________________My Page_______________________________________________")
-print(write_a_read.show_my_page("Mozaza"))
+# print("_______________________________________________My Page_______________________________________________")
+# print(write_a_read.show_my_page("Mozaza"))
 
-print("_______________________________________________My Page____________________________________")
-print(write_a_read.show_my_profile("Mozaza"))
+# print("_______________________________________________My Page____________________________________")
+# print(write_a_read.show_my_profile("Mozaza"))
 
-print("_______________________________________________My Reading_______________________________________________")
-print(write_a_read.show_my_reading("Mozaza"))
+# print("_______________________________________________My Reading_______________________________________________")
+# print(write_a_read.show_my_reading("Mozaza"))
 
-print("_______________________________________________Create Book_______________________________________________")
-print(write_a_read.create_book("SAO", "Mola", "Mozaza", ["romance", "anime"], "publishing", True, "Kirito<3Asuna"))
+# print("_______________________________________________Create Book_______________________________________________")
+# print(write_a_read.create_book("SAO", "Mola", "Mozaza", ["romance", "anime"], "publishing", True, "Kirito<3Asuna"))
 
-print("_______________________________________________Edit Book_______________________________________________")
-print("----------Edit everything-----------")
-print(write_a_read.edit_book_info("SAO", "Shinnosuke", "lala", ["kids", "comedy"], [], "hiding", False, "edited"))
-print("----------Edit tags-----------")
-print(write_a_read.edit_book_info("Shinnosuke", "Shinnosuke", "lala", ["family"], ["romance"], "hiding", False, "edited"))
+# print("_______________________________________________Edit Book_______________________________________________")
+# print("----------Edit everything-----------")
+# print(write_a_read.edit_book_info("SAO", "Shinnosuke", "lala", ["kids", "comedy"], [], "hiding", False, "edited"))
+# print("----------Edit tags-----------")
+# print(write_a_read.edit_book_info("Shinnosuke", "Shinnosuke", "lala", ["family"], ["romance"], "hiding", False, "edited"))
 
-print("_______________________________________________Creat Chapter_______________________________________________")
-print(write_a_read.create_chapter("Shin_chan", "10", "second", "hihi", 50))
+# print("_______________________________________________Creat Chapter_______________________________________________")
+# print(write_a_read.create_chapter("Shin_chan", "10", "second", "hihi", 50))
 
-print("_______________________________________________Edit Chapter_______________________________________________")
-print(write_a_read.edit_chapter_info("Shin_chan/10", "edited_name", "this is edited version", 99))
+# print("_______________________________________________Edit Chapter_______________________________________________")
+# print(write_a_read.edit_chapter_info("Shin_chan/10", "edited_name", "this is edited version", 99))
 
 
-print("_______________________________________________Add Comment_______________________________________________")
-print(write_a_read.create_comment("Shin_chan/1", "Mozaza", "this is amazing"))
+# print("_______________________________________________Add Comment_______________________________________________")
+# print(write_a_read.create_comment("Shin_chan/1", "Mozaza", "this is amazing"))
 
-print("_______________________________________________View Chapter_______________________________________________\n")
-print(write_a_read.view_chapter("Shin_chan/1"))
+# print("_______________________________________________View Chapter_______________________________________________\n")
+# print(write_a_read.view_chapter("Shin_chan/1"))
 
-print("_______________________________________________View Book_______________________________________________\n")
-print(write_a_read.view_book("Shin_chan"))
+# print("_______________________________________________View Book_______________________________________________\n")
+# print(write_a_read.view_book("Shin_chan"))
 
-print("_______________________________________________Creat Chapter_______________________________________________")
-print(MyCoin("Mozaza"))
+# print("_______________________________________________Creat Chapter_______________________________________________")
+# print(MyCoin("Mozaza"))
 
 #________________________________________Error________________________________________
 # print("_______________________________________________Buy Coin_______________________________________________")
