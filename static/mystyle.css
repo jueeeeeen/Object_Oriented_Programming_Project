@@ -209,7 +209,7 @@ input { font-family: var(--main_font); }
 }
 
 .top_up:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .tag_title{
@@ -265,7 +265,7 @@ input { font-family: var(--main_font); }
 .gallery_item {
     box-sizing: border-box;
     height: 100%;
-    padding: 0px 0px;
+    padding: 0px 10px;
     
 }
 
