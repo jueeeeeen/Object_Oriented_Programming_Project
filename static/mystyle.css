@@ -27,22 +27,20 @@ html{
     display: flex;
     /* box-sizing: border-box; */
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    
+    align-items: flex-start;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .item{
     display: block;
     box-sizing: border-box;
-    width: 20%;
-    color: White;
-    text-align: center;
+    width: 15.8%;
+    text-align: left;
     padding: 3px;
-    background-color: var(--main_color);
-    margin-bottom: 1px;
-    margin-right: 1px;
+    margin-right: 5px;
 }
 
 .search_item{
@@ -91,7 +89,7 @@ input { font-family: var(--main_font); }
     font-size: 20px;
     color: rgb(255, 255, 255);
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 5%;
     margin-bottom: 0px;
     margin-top: 10px;
     text-decoration:none ;
@@ -174,6 +172,10 @@ input { font-family: var(--main_font); }
     text-decoration:none
 }
 
+.search_button:hover {
+    transform: scale(1.2);
+    /* src: url('../Templates/image/search_button.png'); */
+}
 
 .ring_icon:hover {
     transform: scale(1.2);
@@ -198,6 +200,81 @@ input { font-family: var(--main_font); }
     text-align: right;
 }
 
+
+.top_up{
+    width: 9.5%;
+    margin-top: 10px;
+    margin-right: 10%;
+    min-width: 100px;
+}
+
+.top_up:hover{
+    transform: scale(1.1);
+}
+
+.tag_title{
+    font-size: 30px;
+    font-weight: 500;
+    margin-left: 10%;
+}
+
+.subtag_title{
+    font-size: 22px;
+    font-weight: 500;
+    margin-left: 10%;
+}
+
+.book_title{
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.book_title:hover{
+    font-weight: 500;
+    color: var(--main_color)
+}
+
+.temporary_text{
+    color: white;
+}
+
+/*gallery slide*/
+
+.gallery-wrapper {
+    box-sizing: border-box;
+    height: 300px;
+    /* overflow: hidden; */
+}
+
+.gallery-scroll {
+    box-sizing: border-box;
+    height: 330px;
+    overflow-x: auto;
+    /* overflow-y: hidden; */
+}
+
+.gallery {
+    display: flex;
+    box-sizing: border-box;
+    width: max-content;
+    height: 300px;
+    padding: 0px 0px;
+}
+
+.gallery_item {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0px 0px;
+    
+}
+
+.gallery_item img {
+    display: block;
+    height: 100%;
+    border-radius: 20px;
+}
+
 .banner{
     background-color: var(--main_color);
     Width: 40%;
@@ -206,9 +283,10 @@ input { font-family: var(--main_font); }
     overflow: hidden;
 }
 
-.top_up{
-    width: 9.5%;
-    margin-right: 10%;
-    min-width: 100px;
+.temp_cover_preview{
+    background-color: black;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 15px;
 }
 
