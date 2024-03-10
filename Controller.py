@@ -115,13 +115,12 @@ class Controller:
         
     def search_all_list(self, search_str):
         search_book_list = self.search_book_by_name(search_str)
-        search_reader_list = self.search_user(search_str).get("Reader")
-        search_writer_list = self.search_user(search_str).get("Writer")
+        search_pseudonym_list = self.search_pseudonym(search_str)
 
-        search_dict = {"Book": search_book_list,"Reader": search_reader_list, "Writer": search_writer_list}
+        search_dict = {"book": search_book_list,"pseudonym": search_pseudonym_list}
 
-        if search_book_list == [] and search_reader_list == [] and search_writer_list == []:
-            return "Nothing matches your search"
+        # if search_book_list == [] and search_pseudonym_list == []:
+        #     return "Nothing matches your search"
         return search_dict
 
     def search_book_by_name(self, book_name):
@@ -130,8 +129,18 @@ class Controller:
             if book_name.lower() in book.name.lower():
                 search_list.append(book.name)
                 
-        if search_list==[]:
-            return "Not found"
+        # if search_list==[]:
+        #     return "Not found"
+        return search_list
+    
+    def search_pseudonym(self, pseudonym_str):
+        search_list=[]
+        for pseudonym in self.all_pseudonym_list:
+            if pseudonym_str.lower() in pseudonym.lower():
+                search_list.append(pseudonym)
+                
+        # if search_list==[]:
+        #     return "Not found"
         return search_list
 
     def search_user(self, username):
@@ -145,10 +154,11 @@ class Controller:
             if username.lower() in writer.username.lower():
                 search_writer_list.append(writer.username)
 
-        if search_reader_list == [] : search_reader_list = "Not Found"
-        if search_writer_list == [] : search_writer_list = "Not Found"
+        # if search_reader_list == [] : search_reader_list = "Not Found"
+        # if search_writer_list == [] : search_writer_list = "Not Found"
         
-        return {"Reader" : search_reader_list, "Writer" : search_writer_list} 
+        return {"Reader" : search_reader_list, "Writer" : search_writer_list}
+    
         
     def search_coin_promotion(self, code):
         if(code != None):

@@ -76,6 +76,12 @@ write_a_read.add_promotion(book_sale)
 free_coin = CoinPromotion("01/01/2021",40, "chakeawaroi")
 write_a_read.add_promotion(free_coin)
 
+Mo.add_pseudonym("molala")
+Mo.add_pseudonym("testm")
+Mo.add_pseudonym("lalalalaalalalm")
+Mo.add_pseudonym("hello worldm")
+
+
 #----------------------------------create transactions----------------------------------
 
 Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("012-3-45678-9"), 100, 100, 10, now))
@@ -149,7 +155,7 @@ def SignIN(username:str, password:str):
 
 @app.get("/search_all/{search_str}", tags=['search bar'])
 def searchBar(search_str:str):
-     return {"Search": write_a_read.search_all_list(search_str)}
+     return write_a_read.search_all_list(search_str)
 
 @app.get('/', response_class=HTMLResponse)
 def main(request: Request):

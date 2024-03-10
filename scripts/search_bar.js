@@ -1,31 +1,11 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById("searchForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Cancel the default action
-        var search_str = document.getElementById('search_str').value;
-        fetch('/search_all/' + search_str, {
-            method: 'GET',
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            $('#search_result').empty();
-            displayResults('Reader', data.Search.Reader);
-            displayResults('Writer', data.Search.Writer);
-            displayResults('Book', data.Search.Book);
-            
-        })
-        .catch(error => {
-            console.error(error);
+search_from_home();
+function search_from_home(){
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById("searchForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Cancel the default action
+            var search_str = document.getElementById('search_str').value;
+            var queryString = 'data=' + encodeURIComponent(search_str);
+            window.location.href = 'search_page.html?' + queryString;
         });
     });
-});
-
-function displayResults(category, results) {
-    $('#search_result').append('<h3>' + category + ' :</h3>');
-    if (Array.isArray(results)) {
-        results.forEach(result => {
-            $('#search_result').append('<ul>' + result + '</ul>');
-        });
-    } else {
-        $('#search_result').append('<ul>' + results + '</ul>');
-    }
-}
+}q
