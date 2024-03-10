@@ -108,91 +108,17 @@ html{
 
 input { font-family: var(--main_font); }
 
-.WriteARead_image{
-    background-color: var(--main_color);
-    Width: 50%;
-    max-width: 200px;
-    margin-top: 10px;
-}
-
 .top_banner{
     background-color: var(--main_color);
     padding: 10px;
     text-align: center;
 }
-.writing_type{
-    font-weight: 500;
-    font-size: 20px;
-    color: rgb(255, 255, 255);
-    display: inline-block;
-    margin-left: 5%;
-    margin-bottom: 0px;
-    margin-top: 10px;
-    text-decoration:none ;
-}
-
-.writing_type:hover
-{
-    color: rgb(0, 0, 0);
-}
-
 
 #searchForm{
     /* display: inline-block; */
     text-align: center;
     /* margin-top: 30px;
     margin-bottom: -20px; */
-}
-
-
-.flexbox_menu{
-    background-color: var(--main_color);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    /* top: -55px; */
-    margin: 0px 0px;
-    padding-top: 20px;
-}
-
-.menu_banner_item{
-    background-color: var(--main_color);
-    color: White;
-    text-align: center;
-    box-sizing: border-box;
-    width: 33.33%;
-    margin-bottom: 0px;
-    padding: 0px 0px;
-    /* position: relative; */
-}
-
-.pen_icon, .user_icon, .search_icon{
-    box-sizing: border-box;
-    margin-top: 7px;
-    margin-left: 5px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-
-    display: inline-block;
-    margin-left: 10px;
-    margin-bottom: 0px;
-    text-decoration:none
-}
-
-.search_icon:hover {
-    content: url('../Templates/image/search_button.png');
-}
-
-.pen_icon:hover {
-    content: url('../Templates/image/writing_button.png');
-}
-
-.user_icon:hover {
-    content: url('../Templates/image/user_button.png');
 }
 
 .center{
@@ -205,10 +131,9 @@ input { font-family: var(--main_font); }
 
 
 .top_up{
-    width: 9.5%;
+    width: 125px;
     margin-top: 10px;
     margin-right: 10%;
-    min-width: 100px;
 }
 
 .top_up:hover{

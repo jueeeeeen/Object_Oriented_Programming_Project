@@ -4,8 +4,11 @@
         <title>WriteARead</title>
         <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
         <link rel="stylesheet" type="text/css" href="/static/style.css">
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+
+        <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -32,34 +35,21 @@
             </div>
         </section>
 
-        <div class="flexbox_menu">
-            <div class="menu_banner_item">
-                <a class="writing_type" href="#">นิยาย</a>
-                <a class="writing_type" href="#">แฟนฟิค</a>
-                <a class="writing_type" href="#">การ์ตูน</a>
+        <div class="header_flexbox_menu">
+            <div class="header_menu_item">
+                <a class="header_writing_type" href="#">นิยาย</a>
+                <a class="header_writing_type" href="#">แฟนฟิค</a>
+                <a class="header_writing_type" href="#">การ์ตูน</a>
             </div>
-            <div class="menu_banner_item">
+            <div class="header_menu_item">
                 <a href="index.html"><img src="image/WriteARead_white.png" class="WriteARead_image"></a>
             </div>
-            <div class="menu_banner_item">
+            <div class="header_menu_item">
                 <a href="#" onclick="toggle_search()"> <img class="search_icon" src="image/search_button_light.png" alt="Original Image"></a>
                 <a href="#"> <img class="pen_icon" src="image/writing_button_light.png" alt=Original Image"></a>
                 <a href="#"> <img class="user_icon" src="image/user_button_light.png" alt=Original Image"></a>
             </div>
         </div>
-
-        <!-- <header class="top_banner">
-            <form id="searchForm">
-                <div class="flexbox">
-                    <div class="search_item">
-                        <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
-                    </div>
-                    <div class="search_item">
-                        <input href="#searchBar" class="search_button" type="image" src="image/search_button_light.png" alt="Submit">
-                    </div>
-                </div>
-            </form>
-        </header> -->
         <br>
 
         
@@ -183,12 +173,14 @@
 
         
         <hr>
-        <footer class="bottom_footer">
-            <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
-            <a class="temporary_text" href="payment.html">Payment</a>
-            <a class="temporary_text" href="MyPage.html">My Page</a>
-            <a class="temporary_text" href="https://www.canva.com/design/DAF--8n14UM/A16peiKoGKzyiTvsguoHaw/edit?utm_content=DAF--8n14UM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Canva</a>
+        <footer class="footer">
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a><br>
+            <a class="footer_menu_text" href="payment.html">Payment</a><br>
+            <a class="footer_menu_text" href="MyPage.html">My Page</a><br>
+            <a class="footer_menu_text" href="https://www.canva.com/design/DAF--8n14UM/A16peiKoGKzyiTvsguoHaw/edit?utm_content=DAF--8n14UM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Canva</a>
         </footer>
+
+        <br>
     
     </body>
 </html>

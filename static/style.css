@@ -20,14 +20,6 @@ html, body {
     background-color: rgb(59, 163, 182);
 }
 
-.menu_item {
-    font-size: 18px;
-    color: aliceblue;
-    padding: 15px;
-    display: inline-block;
-    text-decoration:none ;
-}
-
 .brand {
     font-size: 25px;
     font-weight: 600;
@@ -55,6 +47,3 @@ html, body {
     width: 200px;
 }
 
-.bottom_footer {
-    background-color: rgb(75, 81, 82);
-}
