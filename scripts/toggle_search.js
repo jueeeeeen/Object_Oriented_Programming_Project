@@ -1,9 +1,11 @@
 function toggle_search() {
-    var searchBar = document.getElementById("searchBar")
+    const searchBar = document.getElementById("searchBar")
+    const searchInput = document.getElementById("search_str")
 
     console.log(searchBar)
 
     searchBar.style.display = "flex";
+    searchInput.focus();
 }
 
 function toggle_search_off(){
