@@ -20,13 +20,13 @@ from CoinTransaction import CoinTransaction
 from Promotion import BookPromotion, CoinPromotion, Promotion
 from Coin import GoldenCoin, SilverCoin
 
+
 app = FastAPI()
 
 templates = Jinja2Templates(directory="Templates")
 app.mount("/Templates", StaticFiles(directory="Templates"), name="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/scripts", StaticFiles(directory="scripts"), name="scripts")
-
 
 write_a_read = Controller()
 

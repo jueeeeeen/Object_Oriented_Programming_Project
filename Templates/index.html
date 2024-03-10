@@ -9,25 +9,28 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
         <script src="/scripts/search_bar.js"></script>
+        <script src="/scripts/banner_slide.js"></script>
+        <script src="/scripts/toggle_search.js"></script>
+
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     </head>
     <body>
-        <!-- <header>
-            <div class="flexbox">
-                <div class="item">
-                    <a class="menu_button" href="/Templates/MyPage.html">My Page</a>
+        <section id="searchBar">
+            <div id="dark_overlay"></div>
+            <div  id="search_header">
+                <div class="search_item">
+                    <form id="searchForm">
+                        <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
+                        <a href="#" onclick="toggle_search_off()"> <img class="close_search" src="image/close_search.png" alt=Original Image"></a>
+                    </form>
                 </div>
             </div>
-        </header> -->
-
-        <!-- <header class="top_header"> 
-            <a class="menu_item brand" href="homepage.html">WriteARead</a>
-            <a class="menu_item" href="homepage.html">Home</a>
-        </header> -->
+        </section>
 
         <div class="flexbox_menu">
             <div class="menu_banner_item">
@@ -39,50 +42,56 @@
                 <a href="index.html"><img src="image/WriteARead_white.png" class="WriteARead_image"></a>
             </div>
             <div class="menu_banner_item">
-                <a href="#"> <img class="ring_icon" src="image/ring_button_light.png" alt="Original Image"></a>
+                <a href="#" onclick="toggle_search()"> <img class="search_icon" src="image/search_button_light.png" alt="Original Image"></a>
                 <a href="#"> <img class="pen_icon" src="image/writing_button_light.png" alt=Original Image"></a>
                 <a href="#"> <img class="user_icon" src="image/user_button_light.png" alt=Original Image"></a>
             </div>
         </div>
 
-        <header class="top_banner">
+        <!-- <header class="top_banner">
             <form id="searchForm">
                 <div class="flexbox">
                     <div class="search_item">
                         <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
                     </div>
                     <div class="search_item">
-                        <input class="search_button" type="image" src="image/search_button_light.png" alt="Submit">
+                        <input href="#searchBar" class="search_button" type="image" src="image/search_button_light.png" alt="Submit">
                     </div>
                 </div>
             </form>
-        </header>
+        </header> -->
         <br>
 
-        <div class="gallery-wrapper">
-            <div class="gallery-scroll">
-                <div class="gallery">
-                <div class="gallery_item">
-                    <img src="image/temp_banner1.png" alt="Image" />
-                </div>
-                <div class="gallery_item">
-                    <img src="image/temp_banner2.png" alt="Image" />
-                </div>
-                <div class="gallery_item">
-                    <img src="image/temp_banner3.png" alt="Image" />
-                </div>
-                <!-- <div class="gallery_item">
-                    <img src="https://images.unsplash.com/photo-1476673160081-cf065607f449?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Image" />
-                </div> -->
-                </div>
-            </div>
-            </div>
-        <br>
+        
+<div class="slideshow-container">
+
+    <div class="mySlides slide-right" style="display: block;">
+        <img src="image/temp_banner1.png" style="width:100%">
+    </div>
+    
+    <div class="mySlides slide-right">
+        <img src="image/temp_banner2.png" style="width:100%">
+    </div>
+    
+    <div class="mySlides slide-right">
+        <img src="image/temp_banner3.png" style="width:100%">
+    </div>
+    <div>
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(0)"></span> 
+        <span class="dot" onclick="currentSlide(1)"></span> 
+        <span class="dot" onclick="currentSlide(2)"></span> 
+    </div>
+</div>    
+    <br>
         <div class="right">
             <a href="payment.html"> <img class="top_up" src="image/buy_coin.png"></a>
         </div>
         <hr>
-        <a class="subtag_title">ผลการค้าหาชั่วคราว</a>
+        <a class="subtag_title">ผลการค้นหาชั่วคราว</a>
         <ul id="search_result"></ul>
 
         <hr>
@@ -116,7 +125,7 @@
                     <a class="book_title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</a>
                 </div>
                 <div class="item">
-                    <a class="book_title">พี่ครับนมผลไหล ref:เพื่อนในกลุ่ม</a>
+                    <a class="book_title">พี่ครับนมผมไหล ref:เพื่อนในกลุ่ม</a>
                 </div>
                 <div class="item">
                     <a class="book_title">ชื่อหนังสือ</a>
@@ -158,7 +167,7 @@
                     <a class="book_title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</a>
                 </div>
                 <div class="item">
-                    <a class="book_title">พี่ครับนมผลไหล ref:เพื่อนในกลุ่ม</a>
+                    <a class="book_title">พี่ครับนมผมไหล ref:เพื่อนในกลุ่ม</a>
                 </div>
                 <div class="item">
                     <a class="book_title">ชื่อหนังสือ</a>
