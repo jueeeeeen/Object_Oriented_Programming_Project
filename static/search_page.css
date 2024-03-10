@@ -1,0 +1,49 @@
+:root{
+    --light_gray: rgba(233, 233, 233, 0.956);
+}
+
+.searchbar{
+    position: relative;
+}
+
+.btn-search{
+    position: absolute;
+    background-color: var(--main_color);
+    color: white;
+    width : 80px; height: 50px;
+    left: 50%;
+    margin-left: 235px; /*(inputw+btnw)/2 - btnw*/
+    top: 50%;  margin-top:  -35px;
+    border-radius: 0 40px 40px 0;
+    cursor: pointer;
+    /* transition: all 0.4s ease-in-out; */
+        &:after{
+            position: absolute;
+            content:'ค้นหา';
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 17px;
+            display: block;
+            top: 13px; left: 17px;
+        }
+}
+    
+.btn-extended{
+    position: absolute;
+    width: 550px;
+    height: 50px;
+    left: 50%;  
+    margin-left: -315px;
+    top: 50%;   margin-top:  -35px;
+    padding: 0;
+    font-size: 16px;
+    border: none;
+    color: gray;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    border: 1px solid var(--light_gray);
+    padding: 20px 30px;
+    opacity: 1;
+    border-radius: 40px 0 0 40px;
+    outline: none;
+    /* transition: all 0.4s ease-in-out; */
+}

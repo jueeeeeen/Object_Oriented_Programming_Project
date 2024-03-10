@@ -4,6 +4,9 @@
         <title>WriteARead Search Page</title>
         <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+        <link rel="stylesheet" type="text/css" href="/static/search_bar.css">
+
+        <link rel="stylesheet" type="text/css" href="/static/search_page.css">
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -11,10 +14,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
-        <script src="/scripts/search_bar.js"></script>
-        <script src="/scripts/banner_slide.js"></script>
-        <script src="/scripts/toggle_search.js"></script>
-
+        <script src="/scripts/search_page.js"></script>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,11 +36,49 @@
             </div>
         </div>
 
+        <!-- <section id="searchBar"> -->
+            <!-- <div id="dark_overlay" onclick="toggle_search_off()"></div> -->
+            <!-- <div  id="search_header">
+                <div class="search_item">
+                    <form id="searchForm">
+                        <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
+                        <a href="#" onclick="toggle_search_off()"> <img class="close_search" src="image/close_search.png" alt=Original Image"></a>
+                        <input class="search_button" type="image" src="image/search_button_bw.png" alt="Submit">
+
+                    </form>
+                </div>
+            </div> -->
+        <!-- </section> -->
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="stage">
+            <div class="cell">
+                <div class="searchbar">
+                    <form id="searchFormPage">
+                        <input type="text" class="btn-extended" id="searchInputPage" name="search_str" placeholder="ค้นหา" required>
+                        <div class="btn-search" type="Submit"></div>
+                    </form>
+                </div><!-- .searchbar -->
+            </div><!-- .cell -->
+        </div><!-- .stage -->
+
+        <br>
+        <br>
+        <br>
+
+        <ul id="search_result_page"></ul>
+        
+
         <footer class="footer">
-            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
-            <a class="temporary_text" href="payment.html">Payment</a>
-            <a class="temporary_text" href="MyPage.html">My Page</a>
-            <a class="temporary_text" href="https://www.canva.com/design/DAF--8n14UM/A16peiKoGKzyiTvsguoHaw/edit?utm_content=DAF--8n14UM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Canva</a>
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a><br>
+            <a class="footer_menu_text" href="payment.html">Payment</a><br>
+            <a class="footer_menu_text" href="MyPage.html">My Page</a><br>
+            <a class="footer_menu_text" href="search_page.html">My Page</a><br>
+            <a class="footer_menu_text" href="https://www.canva.com/design/DAF--8n14UM/A16peiKoGKzyiTvsguoHaw/edit?utm_content=DAF--8n14UM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Canva</a>
         </footer>
     </body>
 </html>

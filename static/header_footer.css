@@ -1,3 +1,7 @@
+:root{
+    --gray: rgb(144, 144, 144);
+}
+
 .header_flexbox_menu{
     background-color: var(--main_color);
     display: flex;
@@ -12,6 +16,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     z-index: 2;
+    border-bottom: 1px solid var(--gray); 
 }
 
 
@@ -23,7 +28,7 @@
     width: 33.33%;
     margin-bottom: 0px;
     padding: 0px 0px;
-    /* position: relative; */
+    position: relative var(--gray);
 }
 
 .header_writing_type{

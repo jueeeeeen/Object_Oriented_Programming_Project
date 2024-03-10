@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById("searchForm").addEventListener("submit", function (e) {
+    document.getElementById("searchFormPage").addEventListener("submit", function (e) {
         e.preventDefault(); // Cancel the default action
-        var search_str = document.getElementById('search_str').value;
+        var search_str = document.getElementById('searchInputPage').value;
         fetch('/search_all/' + search_str, {
             method: 'GET',
         })
@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function displayResults(category, results) {
-    $('#search_result').append('<h3>' + category + ' :</h3>');
+    $('#search_result_page').append('<h3>' + category + ' :</h3>');
     if (Array.isArray(results)) {
         results.forEach(result => {
-            $('#search_result').append('<ul>' + result + '</ul>');
+            $('#search_result_page').append('<ul>' + result + '</ul>');
         });
     } else {
-        $('#search_result').append('<ul>' + results + '</ul>');
+        $('#search_result_page').append('<ul>' + results + '</ul>');
     }
 }
