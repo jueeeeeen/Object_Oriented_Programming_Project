@@ -3,6 +3,22 @@ search();
 var receivedString = getParams().data;
 console.log('Received Data:', receivedString);
 
+{/* <div class="search_result_container">
+                <div class="image-container">
+                    <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
+                </div>
+                <div class="book_content_container"><br>
+                    <p class="title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</p>
+                    <p class="description">นามปากกา</p>
+                    <p class="description">หมวดหมู่</p>
+                    <p class="description">อื่นๆ</p>
+                </div>
+            </div> */}
+
+const search_result_container = document.createElement()
+
+const search_result = '<div class="search_result_container"></div>'
+search_result.innerhtml = '<p class="title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</p>'
 const open_tag = '<div class="search_result_container"><div class="image-container"><img src="image/temp_cover.jpg" alt="Book Cover"></div><div class="book_content_container"><br><p class="title">'
 const close_tag = '</p><p class="description">นามปากกา</p><p class="description">หมวดหมู่</p><p class="description">อื่นๆ</p></div></div>'
 

@@ -9,6 +9,7 @@ import json
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 from datetime import datetime, timedelta
 from Controller import Controller
@@ -27,6 +28,8 @@ templates = Jinja2Templates(directory="Templates")
 app.mount("/Templates", StaticFiles(directory="Templates"), name="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/scripts", StaticFiles(directory="scripts"), name="scripts")
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+
 
 write_a_read = Controller()
 
@@ -103,7 +106,8 @@ Mo.add_book_shelf_list(book2)
 
 # @app.get("/")
 # def FirstPage(req: Request):
-#      return template.TemplateResponse(name="index.html", context={"request":req})
+#      return template.TemplateResponse(name="homepage.html", context={"request":req})
+
 
 @app.get("/bookname", tags=['search bar'])
 def searchBook(book_name:str):
@@ -159,7 +163,12 @@ def searchBar(search_str:str):
 
 @app.get('/', response_class=HTMLResponse)
 def main(request: Request):
-     return templates.TemplateResponse('index.html', {'request': request})
+     return templates.TemplateResponse('homepage.html', {'request': request})
+
+@app.get("/get_coin_transaction", tags=['Coin Transaction'])
+def get_coin_transaction(username:str):
+     user = write_a_read.get_user_by_username(username)
+     return {"Coin_Transaction" : user.show_coin_transaction()}
 
 # _________________________________________________ POST _________________________________________________
 
@@ -235,13 +244,14 @@ def CreateComment(dto: dto_create_comment):
 #..........................................................................................................
 
 class dto_buy_coin(BaseModel):
-     username:str
-     golden_coin_amount:int
-     payment_info: str
-     payment_method:str 
-     code: Optional[str]
+     username : str
+     golden_coin_amount : int
+     payment_method : str 
+     payment_info : str
+     code: Optional[str] = None
+
      
-@app.post("/buy_coin", tags=['Coin'])
+@app.post("/buy_coin", tags=['Buy Coin'])
 def buy_coin(dto : dto_buy_coin):
      payment = write_a_read.create_payment_method(dto.payment_method, dto.payment_info)
      write_a_read.buy_coin(dto.username, payment, dto.code, dto.golden_coin_amount)  
