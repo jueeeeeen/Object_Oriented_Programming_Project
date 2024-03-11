@@ -4,8 +4,6 @@
         <title>WriteARead Search Page</title>
         <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
-        <link rel="stylesheet" type="text/css" href="/static/search_bar.css">
-
         <link rel="stylesheet" type="text/css" href="/static/search_page.css">
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -58,16 +56,16 @@
         <br>
         <br>
         <div class="search_type_div">
-            <a class="search_type" onclick="select_type(0)">ทั้งหมด</a>
+            <a class="search_type search_page_select_default" onclick="select_type(0)">ทั้งหมด</a>
             <a class="search_type" onclick="select_type(1)">ชื่อเรื่อง</a>
             <a class="search_type" onclick="select_type(2)">นามปากกา</a>
             <hr class="lines">
         </div>
         
-        <br><hr>
+        <br><br>
 
         <div id="search_result_page" class="result_area">
-            
+
             <a class="not_found">ไม่พบรายการค้นหา</a>
             
             <div class="search_result_container">
@@ -75,10 +73,9 @@
                     <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
                 </div>
                 <div class="book_content_container"><br>
-                    <p class="title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</p>
-                    <p class="description">นามปากกา</p>
-                    <p class="description">หมวดหมู่</p>
-                    <p class="description">อื่นๆ</p>
+                    <p class="book_title">Shin_chan</p>
+                    <p class="book_description">นามปากกา</p>
+                    <p class="book_description">หมวดหมู่</p>
                 </div>
             </div>
         </div>

@@ -8,4 +8,4 @@ function search_from_home(){
             window.location.href = 'search_page.html?' + queryString;
         });
     });
-}q
+}

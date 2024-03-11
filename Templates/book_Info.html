@@ -13,41 +13,30 @@
             rel="stylesheet">
 
         <meta charset="UTF-8">
+
+        <script src="/scripts/book_info.js"></script>
         
     </head>
 
     <body>
         <script>
-            // let book_name
-            function displayBookInfo(bookName) {
-                fetch(`/book/${bookName}`)
-                .then(response => response.json())
-                .then(data => {
-                    // document.querySelector('book_name').innerText = data.name;
-                    // book_name = data.name
-                    // pseudonym = data.pseudonym
-                    // genre = data.genre
-                    // // status = data.status
-                    // // age_restricted = data.age_restricted
-                    // prologue = data.prologue
+            const bookInfo = JSON.parse(sessionStorage.getItem('bookInfo'));
 
-                    let genre = data.genre;
-                    let book_name = data.name;
-                    let pseudonym = data.pseudonym;
-                    let prologue = data.prologue;
+console.log("Retrieved book information:", data);
 
-                    // Update content dynamically
-                    document.querySelector('.info_item:nth-child(1) a').innerText = genre;
-                    document.querySelector('.info_item:nth-child(2) a').innerText = book_name;
-                    document.querySelector('.info_item:nth-child(3) a').innerText = pseudonym;
-                    document.querySelector('.info_item:nth-child(4) a').innerText = prologue;
-                    
-                    // name, pseudonym, writer, genre, status, age_restricted, prologue
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
+// Check if the parsed object has the expected properties
+if (bookInfo && bookInfo.genre && bookInfo.name && bookInfo.pseudonym && bookInfo.prologue && bookInfo.writer_name && bookInfo.date_time) {
+    // Display book information in the HTML page
+    // document.getElementById('book').textContent = bookInfo;
+    document.getElementById('genre').textContent = bookInfo.genre;
+    document.getElementById('bookName').textContent = bookInfo.name;
+    document.getElementById('prologueInfo').textContent = bookInfo.prologue;
+    document.getElementById('prologueDisplay').textContent = bookInfo.prologue;
+    document.getElementById('pseudonymInfo').textContent = bookInfo.pseudonym;
+    document.getElementById('pseudonymDisplay').textContent = bookInfo.pseudonym;
+    document.getElementById('writer_username').textContent = bookInfo.writer_name;
+    document.getElementById('date_time').textContent = bookInfo.date_time;
+}
         </script>
         <!--หัวกระดาษ-->
         <div class="header_flexbox_menu">
@@ -71,68 +60,70 @@
         <div>
             <div class="book_flexbox">
                 <div class="book_item">
-                    <img class="book_cover" src="../assets/covers_img/temp_cover2.png" alt="book_cover" />
+                    <img class="book_cover" src="../assets/covers_img/shin_chan_cover.jfif" alt="book_cover" />
                 </div>
-                <!-- <div class ="item"> -->
-                <div class="info_flexbox">
-                    <div class="info_item">
-                        <a>${data.genre}</a>
+                <div class="book_info_flexbox">
+                    <div class="book_info_item">
+                        <div class="text-0">
+                            <a id="genre"></a>
+                        </div>
                     </div>
-                    <div class="info_item">
-                        <a>${data.book_name}</a>
+                    <div class="book_info_item">
+                        <div class="book_title">
+                            <a id="bookName"></a>
+                        </div>
                     </div>
-                    <div class="info_item">
-                        <a>${data.pseudonym}</a>
+                    <div class="book_info_item">
+                        <div class="text-0">
+                            <a id="pseudonymInfo"></a>
+                        </div>
                     </div>
-                    <div class="info_item">
-                        <a>${data.prologue}</a>
+                    <div class="book_info_item">
+                        <div class="book_title">
+                            <a id="prologueInfo"></a>
+                        </div>
                     </div>
-                </div>
-                <!-- </div> -->
-            </div>
-            <div class="flexbox-3">
-                <div class="item-3">
-                    <a class="title">prologue</a>
-                    <br>
-                    <a class="text">once upon a time</a>
-                </div>
-            </div>
-            <div class="flexbox-3">
-                <div class="item-3">
-                    <a class="title">writer infomation</a>
-                    <br>
-                    <a class="text"><span>pseudonym :</span> <span>Mozaza007</span></a>
-                    <br>
-                    <a class="text"><span>Username :</span> <span>Mozaza</span></a>
-                    <!-- <br>
-                    <a class="title">publish</a>
-                    <br>
-                    <a class="text"><span>Lastest edit : </span> <span>02 Mar 2024</span></a> -->
                 </div>
             </div>
             <div class="flexbox-3">
                 <div class="item-3">
-                    <a class="title">publish</a>
-                    <br>
-                    <a class="text"><span>Lastest edit : </span> <span>02 Mar 2024</span></a>
+                    <div class="info_title">prologue</div>
+                    <a id="prologueDisplay"></a>
                 </div>
             </div>
             <div class="flexbox-3">
                 <div class="item-3">
-                    <a class="title">ตอนทั้งหมด</a>
-                    <div class="grid">
-                        <p class="text text-3 text-2 content">บทที่</p>
-                        <p class="text text-3 content">ชื่อตอน</p>                    
-                        <img class="watch_icon content" src="../assets/book_img/eye.png" alt="watched" />
-                        <p class="text text-4 content">แก้ไข</p>
-                        <p class="text text-3 text-2 content">#1</p>
-                        <a href="../Templates/payment.html" class="text text-3 content">เมื่อไหร่จะทำ oop เส้ดดดด</a>
-                        <p class="text text-4 content">152</p>
-                        <p class="text text-4 content">12/5/2023</p>
-                        <p class="text text-3 text-2 content">#2</p>
-                        <a href="../Templates/payment.html" class="text text-3 content">ขี้เกียจแล้ววววว</a>
-                        <p class="text text-4 content">100</p>
-                        <p class="text text-4 content">14/5/2023</p>
+                    <div class="info_title">writer information</div>
+                    <a>Pseudonym : </a>
+                    <a id="pseudonymDisplay"></a>
+                    <br>
+                    <a>Writer : </a>
+                    <a id="writer_username" ></a>
+                </div>
+            </div>
+            <div class="flexbox-3">
+                <div class="item-3">
+                    <div class="info_title">publish</div>
+                    <a>Latest Edit : </a>
+                    <a id="date_time"></a>
+                </div>
+            </div>
+            <div class="flexbox-3">
+                <div class="item-3">
+                    <a class="info_title">ตอนทั้งหมด</a>
+                    <div class="chapter_grid">
+                        <p class="info_text text-3 text-2 chapter_content">บทที่</p>
+                        <p class="info_text text-3 chapter_content">ชื่อตอน</p>
+                        <img class="watch_icon chapter_content" src="../assets/book_img/eye.png" alt="watched" />
+                        <p class="info_text text-4 chapter_content">แก้ไข</p>
+                        <p class="info_text text-3 text-2 chapter_content">#1</p>
+                        <a href="payment.html" class="text text-3 chapter_content">เมื่อไหร่จะทำ oop เส้ดดดด</a>
+                        <p class="info_text text-4 chapter_content">152</p>
+                        <p class="info_text text-4 chapter_content">12/5/2023</p>
+                        <p class="info_text text-3 text-2 chapter_content">#2</p>
+                        <a href="payment.html" class="text text-3 chapter_content">ขี้เกียจแล้ววววว</a>
+                        <p class="info_text text-4 chapter_content">100</p>
+                        <p class="info_text text-4 chapter_content">14/5/2023</p>
                     </div>
                 </div>
             </div>

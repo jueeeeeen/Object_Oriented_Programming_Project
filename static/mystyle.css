@@ -249,6 +249,7 @@ input { font-family: var(--main_font); }
 .temp_cover_preview{
     background-color: black;
     width: 90%;
+    height: 90%;
     cursor: pointer;
     border-radius: 15px;
 }

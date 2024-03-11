@@ -4,11 +4,11 @@ from Comment import Comment #
 from datetime import datetime, timedelta
 
 class Book:
-    def __init__(self, name, pseudonym, writer, tag_list, status, age_restricted, prologue):
+    def __init__(self, name, pseudonym, writer, genre, status, age_restricted, prologue):
         self.__name = name
         self.__pseudonym = pseudonym
         self.__writer = writer
-        self.__tag = tag_list
+        self.__genre = genre
         self.__status = status
         self.__age_restricted = age_restricted
         self.__prologue = prologue
@@ -16,7 +16,6 @@ class Book:
         self.__comment_list = []
         self.__report_list = []
         self.__date_time = datetime.now()
-        #*****book ควรมี pseudonym ของตัวเองเป็น str ด้วย
     
     @property
     def name(self):
@@ -28,7 +27,7 @@ class Book:
         
     @property
     def pseudonym(self):
-        self.__pseudonym
+        return self.__pseudonym
         
     @pseudonym.setter
     def pseudonym(self, new_pseudonym):
@@ -39,8 +38,8 @@ class Book:
         return self.__writer
 
     @property
-    def tag(self):
-        return self.__tag
+    def genre(self):
+        return self.__genre
         
     @property
     def age_restricted(self):

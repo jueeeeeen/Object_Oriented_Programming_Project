@@ -118,29 +118,26 @@ class Controller:
         search_pseudonym_list = self.search_pseudonym(search_str)
 
         search_dict = {"book": search_book_list,"pseudonym": search_pseudonym_list}
-
-        # if search_book_list == [] and search_pseudonym_list == []:
-        #     return "Nothing matches your search"
         return search_dict
 
     def search_book_by_name(self, book_name):
         search_list=[]
         for book in self.all_book_list:
             if book_name.lower() in book.name.lower():
-                search_list.append(book.name)
-                
-        # if search_list==[]:
-        #     return "Not found"
+                search_dict = {"book_name" : book.name,
+                                "pseudonym": book.pseudonym,
+                                "genre" : book.genre}
+                search_list.append(search_dict)
         return search_list
     
     def search_pseudonym(self, pseudonym_str):
         search_list=[]
-        for pseudonym in self.all_pseudonym_list:
-            if pseudonym_str.lower() in pseudonym.lower():
-                search_list.append(pseudonym)
-                
-        # if search_list==[]:
-        #     return "Not found"
+        for book in self.all_book_list:
+            if pseudonym_str.lower() in book.pseudonym.lower():
+                search_dict = {"book_name" : book.name,
+                                "pseudonym": book.pseudonym,
+                                "genre" : book.genre}
+                search_list.append(search_dict)
         return search_list
 
     def search_user(self, username):

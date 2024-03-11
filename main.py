@@ -158,7 +158,7 @@ def SignIN(username:str, password:str):
      return write_a_read.sign_in(username, password)
 
 @app.get("/search_all/{search_str}", tags=['search bar'])
-def searchBar(search_str:str):
+def search_all(search_str:str):
      return write_a_read.search_all_list(search_str)
 
 @app.get('/', response_class=HTMLResponse)
@@ -169,6 +169,13 @@ def main(request: Request):
 def get_coin_transaction(username:str):
      user = write_a_read.get_user_by_username(username)
      return {"Coin_Transaction" : user.show_coin_transaction()}
+
+@app.get("/book/{book_name}")
+async def get_book_info(book_name: str):
+     book = write_a_read.get_book_by_name(book_name)
+     return {"name":book.name, "pseudonym":book.pseudonym, "genre":book.genre, "status":book.status, \
+               "age_restricted":book.age_restricted, "prologue":book.prologue, "date_time":book.date_time_str,\
+               "writer_name":book.writer.username}
 
 # _________________________________________________ POST _________________________________________________
 
@@ -336,8 +343,8 @@ def EditChapterInfo(dto : dto_edit_chapter):
 # print(write_a_read.sign_up("reader1", "12345678", "01/01/2000", "reader"))
 # print(write_a_read.sign_up("writer1", "12345678", "01/01/2000", "reader"))
 
-print("_______________________________________________search all_______________________________________________")
-print(write_a_read.search_all_list("mo"))
+# print("_______________________________________________search all_______________________________________________")
+# print(write_a_read.search_all_list("mo"))
 
 # print("_______________________________________________My Page_______________________________________________")
 # print(write_a_read.show_my_page("Mozaza"))

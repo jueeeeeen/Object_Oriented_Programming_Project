@@ -11,7 +11,6 @@ body{
     margin-left: auto;
     margin-right: auto;
     max-width:1024px;
-    border-radius: 10px 10px 0 0;
     width: 93%;
     background-color: rgb(255, 255, 255);
     position: relative;
@@ -23,11 +22,16 @@ body{
     top: 0px;
     overflow: hidden;
     display: flex;
+    border-radius: 10px 10px 0 0;
+    /* margin-top: 5px; */
 }
 
 .cover_image {
     position: relative;
+    width: 100%;
     flex-shrink: 0;
+    /* background-color: aquamarine; */
+    overflow: hidden;
 }
 
 .cover_image img {
@@ -35,12 +39,12 @@ body{
     max-width: 1024px;
     max-height: 600px;
     background-size: cover;
-    width: 130%
+    /* width: 100% */
     /* border-radius: 15px; */
 }
 
 .profile_pic_container {
-    width: 20%;
+    width: 15%;
     height: 500px;
     /* background-color: yellow; */
     margin-top: 15px;
@@ -48,7 +52,7 @@ body{
 }
 
 .profile_pic{
-    width: 60%;
+    width: 75%;
     display: block;
     flex-shrink: 0;
     margin:0;
@@ -56,7 +60,7 @@ body{
 }
 
 .info_container {
-    width:80%;
+    width:85%;
     height: 500px;
     /* background-color: rgb(187, 187, 252); */
     margin-top: 0;
@@ -68,16 +72,16 @@ body{
     line-height: 1.3;
     font-size: 40px;
     margin-top: 50px;
-    margin-left: 35px;
+    margin-left: 20px;
     cursor: pointer;
 }
 
 .stats_container{
-    margin-left: 35px;
+    margin-left: 20px;
     display: flex;
     justify-content: flex-start;
     box-sizing: border-box;
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
 }
 
 .stat_item {
@@ -85,4 +89,131 @@ body{
     display: inline-block;
     width: 160px;
     box-sizing: border-box;
+}
+
+.my_page_view_type_div{
+    margin-top: 30px;
+    width: 100%;
+    margin-left: 15px;
+    /* background-color: aqua; */
+}
+
+.my_page_view_type{
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    margin-right: -3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    /* background-color: beige; */
+}
+
+.my_page_view_type:hover{
+    text-decoration: underline;
+}
+
+.my_page_select_default{
+    border-bottom: 4px solid var(--main_color);
+}
+
+.lines{    
+    height:1px;
+    width:100%;
+    border: 0px;
+    margin:0;
+    margin-top: 5px;
+    background-color:var(--light_gray);
+}
+
+.my_page_view_container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 93%;
+    /* background-color: var(--light_gray); */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.my_page_writing_container{
+    top: 0px;
+    display:flex;
+    position: relative;
+    height: 140px;
+    /* background-color: rgb(227, 225, 225); */
+    box-sizing: border-box;
+    width: 49.5%;
+    /* margin-bottom: 20px; */
+}
+
+.my_page_book_content_container{
+    display: block;
+    flex-grow: 1;
+    line-height: 1.3;
+    top: 10px;
+    /* background-color: aquamarine; */
+}
+
+.my_page_book_description {
+    color: var(--gray);
+    font-size: 14px;
+    margin: 0;
+    /* background-color: aquamarine; */
+}
+
+.my_page_book_title{
+    font-weight: 500;
+    font-size: 16px;
+    color: rgb(16, 16, 16);
+    display:inline;
+    text-decoration:none ;
+    cursor: pointer;
+        /* background-color: aquamarine; */
+
+}
+
+.my_page_book_title:hover{
+    color: var(--main_color);
+}
+
+.my_page_image_container {
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.my_page_image_container img {
+    max-height: 140px;
+    cursor: pointer;
+    height: auto;
+    border-radius: 15px;
+}
+
+.my_page_not_found{
+    font-size: 16px;
+    color: var(--gray);
+}
+
+.my_page_view_types_container{
+    margin-left: auto;
+    margin-right: auto;
+    max-width:1024px;
+    min-height: 500px;
+    width: 93%;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+    top: 0px;
+    overflow: hidden;
+    display: flex;
+    border-radius: 10px 10px 0 0;
+    margin-top: 5px;
 }

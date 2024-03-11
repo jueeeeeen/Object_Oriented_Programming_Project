@@ -1,32 +1,46 @@
 search();
 
 var receivedString = getParams().data;
-console.log('Received Data:', receivedString);
+//  `<div class="search_result_container">
+//                         <div class="image-container">
+//                             <img src="../assets/covers_img/${book_name}.png" alt="../assets/covers_img/temp_cover.jpg">
+//                         </div>
+//                         <div class="book_content_container"><br>
+//                             <p class="book_title">${book_name}</p>
+//                             <p class="book_description">${pseudonym}</p>
+//                             <p class="book_description">${genre}</p>
+//                         </div>
+//                     </div>`;
 
-{/* <div class="search_result_container">
-                <div class="image-container">
-                    <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
-                </div>
-                <div class="book_content_container"><br>
-                    <p class="title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</p>
-                    <p class="description">นามปากกา</p>
-                    <p class="description">หมวดหมู่</p>
-                    <p class="description">อื่นๆ</p>
-                </div>
-            </div> */}
-
-const search_result_container = document.createElement()
-
-const search_result = '<div class="search_result_container"></div>'
-search_result.innerhtml = '<p class="title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</p>'
-const open_tag = '<div class="search_result_container"><div class="image-container"><img src="image/temp_cover.jpg" alt="Book Cover"></div><div class="book_content_container"><br><p class="title">'
 const close_tag = '</p><p class="description">นามปากกา</p><p class="description">หมวดหมู่</p><p class="description">อื่นๆ</p></div></div>'
 
 const not_found = '<a class="not_found">ไม่พบรายการค้นหา</a>'
-
+console.log(receivedString);
 if (receivedString){
     search_by_string(receivedString);
+    
 }
+
+function display_result(result){
+    var book_name = result.book_name;
+    var pseudonym = result.pseudonym;
+    var genre = result.genre;
+    var element = `<div class="search_result_container">
+    <div class="image-container">
+        <img src="../assets/covers_img/${book_name}.png" 
+            onerror="this.onerror=null;this.src='../assets/covers_img/temp_cover.jpg';" 
+            alt="../assets/covers_img/temp_cover.jpg">
+    </div>
+    <div class="book_content_container"><br>
+        <p class="book_title">${book_name}</p>
+        <p class="book_description">${pseudonym}</p>
+        <p class="book_description">${genre}</p>
+    </div>
+</div>`;
+
+    $('#search_result_page').append(element);
+}
+
 
 var current_data; 
 var search_type = 0;
@@ -81,6 +95,7 @@ function search_by_string(search_str){
             })
             .then(resp => resp.json())
             .then(data => {
+                console.log(search_str);
                 const search_input = document.getElementById("searchInputPage")
                 search_input.value = search_str;
                 current_data = data;
@@ -98,8 +113,7 @@ function display_books(){
     }
     else{
         current_data.book.forEach(result => {
-            var element = open_tag + result + close_tag;
-            $('#search_result_page').append(element);
+            display_result(result);
         });
     }   
 }
@@ -110,8 +124,7 @@ function display_pseudonyms(){
     }
     else{
         current_data.pseudonym.forEach(result => {
-            var element = open_tag + result + close_tag;
-            $('#search_result_page').append(element);
+            display_result(result);
         });
         console.log(not_found);
     }   
@@ -121,25 +134,32 @@ function display_not_found(){
     var element = not_found;
     $('#search_result_page').append(element);
 }
-
 function display_all(results) {
-    if (results.book.length == 0 && results.pseudonym.length == 0) {
+    if (results.book.length === 0 && results.pseudonym.length === 0) {
         display_not_found();
     } else {
-        if (results.book.length != 0) {
+        let search_names = [];
+
+        if (results.book.length !== 0) {
             results.book.forEach(result => {
-                var element = open_tag + result + close_tag;
-                $('#search_result_page').append(element);
+                display_result(result);
+                search_names.push(result.book_name); // Use push to add elements to the array
+                console.log(result.book_name);
             });
         }
-        if (results.pseudonym.length != 0) {
+
+        console.log(search_names);
+
+        if (results.pseudonym.length !== 0) {
             results.pseudonym.forEach(result => {
-                var element = open_tag + result + close_tag;
-                $('#search_result_page').append(element);
+                if (!search_names.includes(result.book_name)) {
+                    display_result(result);
+                }
             });
         }
     }
 }
+
 
 
 function getParams() {

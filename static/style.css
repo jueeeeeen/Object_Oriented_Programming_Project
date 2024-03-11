@@ -85,7 +85,12 @@ html, body {
     padding: 0;
     border-radius: 8px;
     border: 1px solid rgba(128, 128, 128, 0.381);
+    cursor: pointer;
 }
+
+.payment_button.selected {
+    border: 2px solid rgb(0, 203, 195) !important;
+  }
 
 .coin_box {
     background-color: rgb(255, 255, 255);
@@ -99,7 +104,13 @@ html, body {
     border-radius: 8px;
     border: 1px solid rgba(128, 128, 128, 0.381);
     position: relative; 
+    cursor: pointer;
 }
+
+.coin_box.selected {
+    border-width: 2px !important; /* Make the border 3px for the selected box */
+    border-color: rgb(0, 203, 195) !important; /* Change the border color for the selected box */
+  }
 
 .coin_img {
     width: 85px;
@@ -127,6 +138,7 @@ html, body {
     top: 3px; 
     z-index: 12;
 }
+
 
 .coin_cost {
     /* font-weight: 400; */
@@ -186,7 +198,12 @@ html, body {
 
 .final_button {
     padding: 40px;
-    position: relative;
+    margin: auto;
+    text-align: center;
+}
+
+.final_box {
+    display:flexbox;
 }
 
 .cancel_button {
@@ -201,11 +218,6 @@ html, body {
     border: 1px solid rgba(128, 128, 128, 0.692);
     border-radius: 50px;
     width: 100px;
-    display: inline-block;
-    position: absolute;
-    left: 150px; 
-    top: 21.5px; 
-    z-index: 12;
 }
 
 .submit_button {
@@ -220,11 +232,7 @@ html, body {
     border: 1px solid rgb(0, 203, 195);
     border-radius: 50px;
     width: 300px;
-    display: inline-block;
-    position: absolute;
-    left: 100px; 
-    top: 21.5px; 
-    z-index: 12;
+    
 }
 
 .bottom_footer {

@@ -114,31 +114,25 @@
     display: block;
     flex-grow: 1;
     line-height: 1.3;
+    top: 10px;
+    /* background-color: aquamarine; */
 }
 
-.description {
+.book_description {
     color: var(--gray);
     font-size: 14px;
     margin: 0;
+    /* background-color: aquamarine; */
 }
 
-.title{
+.book_title{
     font-weight: 500;
     font-size: 16px;
     color: rgb(16, 16, 16);
     display:inline;
     text-decoration:none ;
     cursor: pointer;
-}
-
-.temp_search_cover{
-    position: absolute;
-    background-color: black;
-    height: 92%;
-    max-height: 145px;
-    cursor: pointer;
-    border-radius: 15px;
-    margin-top: 5px;
+        /* background-color: aquamarine; */
 }
 
 .image-container {
@@ -156,4 +150,8 @@
 .not_found{
     font-size: 16px;
     color: var(--gray);
+}
+
+.search_page_select_default{
+    border-bottom: 4px solid var(--main_color);
 }

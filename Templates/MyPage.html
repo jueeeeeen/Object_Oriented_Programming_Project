@@ -7,7 +7,6 @@
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
         <link rel="stylesheet" type="text/css" href="/static/my_page.css">
 
-
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -18,7 +17,7 @@
         <script src="/scripts/search_bar.js"></script>
         <script src="/scripts/banner_slide.js"></script>
         <script src="/scripts/toggle_search.js"></script>
-        <script src="/scripts/search_page.js"></script>
+        <script src="/scripts/my_page.js"></script>
         <!-- <script src="/scripts/sending_page.js"></script> -->
 
         <meta charset="UTF-8">
@@ -74,10 +73,41 @@
                         <a>รี้ด 0 รีด</a>
                     </div>
                 </div>
+                <br><br><br><br><br><br><br><br><br><br>
                 <div class="stats_container">
-                    <a>แนะนำตัว</a>
+                    <div class="stat_item">
+                        <a>แนะนำตัว</a>
+                    </div>
                 </div>
             </div>
+        </div>
+        <br>
+        <div class="my_page_view_types_container">
+            <div class="my_page_view_type_div">
+                <a class="my_page_view_type my_page_select_default" onclick="select_type(0)">งานเขียน</a>
+                <a class="my_page_view_type" onclick="select_type(1)">นามปากกา</a>
+                <a class="my_page_view_type" onclick="select_type(2)">รี้ดถึงไรต์</a>
+                <hr class="lines">
+            </div>
+
+            
+
+            <div class="my_page_view_container" id="my_page_view_container">
+                <a class="my_page_not_found">ไม่พบข้อมูล</a>
+                
+                <div class="my_page_writing_container">
+                    <div class="my_page_image_container">
+                        <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
+                    </div>
+                    <div class="my_page_book_content_container"><br>
+                        <p class="my_page_book_title">Shin_chan</p>
+                        <p class="my_page_book_description">นามปากกา</p>
+                        <p class="my_page_book_description">หมวดหมู่</p>
+                    </div>
+                </div>
+            </div>
+
+            
         </div>
         
         
