@@ -1,6 +1,4 @@
-:root{
-    --gray: rgb(144, 144, 144);
-}
+
 
 .header_flexbox_menu{
     background-color: var(--main_color);

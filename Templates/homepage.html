@@ -5,6 +5,8 @@
         <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
         <link rel="stylesheet" type="text/css" href="/static/style.css">
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+        <link rel="stylesheet" type="text/css" href="/static/homepage.css">
+
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -17,6 +19,7 @@
         <script src="/scripts/banner_slide.js"></script>
         <script src="/scripts/toggle_search.js"></script>
         <script src="/scripts/search_page.js"></script>
+        <script src="/scripts/homepage.js"></script>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,10 +50,44 @@
             <div class="header_menu_item">
                 <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button_light.png" alt="Original Image"></a>
                 <a href="#"> <img class="pen_icon" src="../assets/header_img/writing_button_light.png" alt=Original Image"></a>
-                <a href="#"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
+                <a href="#" onclick="toggle_user_icon_drop_down()"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
             </div>
         </div>
-        <br>
+    <br>
+    <section id="home_dd_container">
+        <div>
+            <div class="home_dd_item home_dd_cursor_coin" onclick="go_to_my_page()">
+                <a class="home_dd_display_name">display name</a> <br>
+                <a class="home_dd_user_name">username</a>
+            </div>
+            <hr class="home_dd_lines">
+            <div onclick="go_to_my_buy_coin()" class="home_dd_item space home_dd_cursor_coin">
+                <div>
+                    <a class="้home_dd_menu coin_color ">เมพคอยน์</a>
+                </div>
+                <div>
+                    <a class="home_dd_show_coin">0.00</a>
+                    <a class="home_dd_top_up_btn">+</a>
+                </div>
+            </div>
+            <hr class="home_dd_lines">
+            <div class="home_dd_item">
+                <div onclick="go_to_my_writing()" class="home_dd_menu">My Writing</div>
+                <div onclick="go_to_my_reading()" class="home_dd_menu">My Reading</div>
+                <div onclick="go_to_my_page()" class="home_dd_menu">My Page</div>
+                <div onclick="go_to_my_profile()" class="home_dd_menu">My Profile</div>
+            </div>
+            <hr class="home_dd_lines">
+            <div class="home_dd_item">
+                <div onclick="go_to_my_coin_transac()" class="home_dd_menu">ประวัติการสั่งซื้อ</div>
+                <div onclick="go_to_my_chapter_transac()" class="home_dd_menu">รายการที่ซื้อแล้ว</div>
+            </div>
+            <hr class="home_dd_lines">
+            <div class="home_dd_item">
+                <div onclick="go_to_homepage()" class="home_dd_menu">ออกจากระบบ</div>
+            </div>
+        </div>
+    </section>
 
         
 <div class="slideshow-container">

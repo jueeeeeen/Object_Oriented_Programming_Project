@@ -3,7 +3,11 @@
     --main_color_light: #95DBD5;
     /* #89d3cd */
     --main_color_dark: rgb(59, 163, 182);
-    --main_font: "IBM Plex Sans Thai", sans-serif
+    --main_font: "IBM Plex Sans Thai", sans-serif;
+    --coin_color:#FF8204;
+    --light_gray: rgba(228, 228, 228, 0.793);
+    --white_gray: #F4F4F4;
+    --gray: rgb(144, 144, 144);
 }
 html{
     margin: 0;

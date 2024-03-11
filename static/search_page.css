@@ -1,7 +1,3 @@
-:root{
-    --light_gray: rgba(228, 228, 228, 0.793);
-}
-
 .searchbar{
     position: relative;
 }

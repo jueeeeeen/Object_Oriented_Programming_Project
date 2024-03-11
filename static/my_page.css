@@ -1,7 +1,4 @@
-:root{
-    --light_gray: rgba(228, 228, 228, 0.793);
-    --white_gray: #F4F4F4;
-}
+
 
 body{
     background-color: var(--white_gray);
@@ -39,7 +36,7 @@ body{
     max-width: 1024px;
     max-height: 600px;
     background-size: cover;
-    /* width: 100% */
+    width: 100%
     /* border-radius: 15px; */
 }
 
