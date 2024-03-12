@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="/static/style.css">
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
         <link rel="stylesheet" type="text/css" href="/static/my_page.css">
+        <link rel="stylesheet" type="text/css" href="/static/search_page.css">
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -43,6 +44,19 @@
         </div>
         <br>
 
+        <br>
+        <div>
+            <div class="cell">
+                <div class="searchbar">
+                    <form id="my_page_search_username">
+                        <input type="text" class="btn-extended" id="search_input_my_page" name="search_str" placeholder="ค้นหา" required>
+                        <button type="submit" class="btn-search"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+
         <div class="info_page">
             <div class="cover_image">
                 <img src="../assets/background_cover_img/my_page_cover.png" alt="Book Cover">
@@ -52,47 +66,47 @@
             </div>
             <div class="info_container">
                 <div class="display_name">
-                    <a>ชื่อที่แสดง</a><br>
-                </div><br>
+                    <a id="my_page_display_name">{display_name}</a><br>
+                </div>
+                <br>
                 <div class="stats_container">
                     <div class="stat_item">
-                        <a>งานเขียน 0 เรื่อง</a>
+                    <a id="my_page_writing_count">งานเขียน {writing_count} เรื่อง</a>
                     </div>
                     <div class="stat_item">
-                        <a>ติดตาม 0 คน</a>
+                    <a id="my_page_book_on_shelf_count">เพิ่มเข้าชั้น {book_on_shelf_count} ครั้ง</a>
                     </div>
                     <div class="stat_item">
-                        <a>งานเขียน 0 เรื่อง</a>
-                    </div>
+                    <a id="my_page_followers">ติดตาม {followers} คน</a>
+                  </div>
                 </div>
                 <div class="stats_container">
-                    <div class="stat_item">
-                        <a>อ่าน 0 ครั้ง</a>
-                    </div>
-                    <div class="stat_item">
-                        <a>รี้ด 0 รีด</a>
-                    </div>
+                  <div class="stat_item">
+                    <a id="my_page_read_count">อ่าน {read_count} ครั้ง</a>
+                  </div>
+                  <div class="stat_item">
+                    <a id="my_page_viewer_count">รี้ด {viewer_count} รีด</a>
+                  </div>
                 </div>
                 <br><br><br><br><br><br><br><br><br><br>
                 <div class="stats_container">
-                    <div class="stat_item">
-                        <a>แนะนำตัว</a>
-                    </div>
+                  <div class="stat_item">
+                    <a id="my_page_introduction">{introduction}</a>
+                  </div>
                 </div>
-            </div>
+              </div>
+              
         </div>
         <br>
         <div class="my_page_view_types_container">
             <div class="my_page_view_type_div">
-                <a class="my_page_view_type my_page_select_default" onclick="select_type(0)">งานเขียน</a>
-                <a class="my_page_view_type" onclick="select_type(1)">นามปากกา</a>
-                <a class="my_page_view_type" onclick="select_type(2)">รี้ดถึงไรต์</a>
+                <a class="my_page_view_type my_page_select_default" onclick="my_page_select_view_type(0)">งานเขียน</a>
+                <a class="my_page_view_type" onclick="my_page_select_view_type(1)">นามปากกา</a>
+                <a class="my_page_view_type" onclick="my_page_select_view_type(2)">รี้ดถึงไรต์</a>
                 <hr class="lines">
             </div>
 
-            
-
-            <div class="my_page_view_container" id="my_page_view_container">
+            <div class="my_page_view_container" id="my_page_show_view_type">
                 <a class="my_page_not_found">ไม่พบข้อมูล</a>
                 
                 <div class="my_page_writing_container">

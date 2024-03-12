@@ -238,7 +238,10 @@ class Writer(Reader):
     def show_writing_name_list(self):
         writing_name_list = []
         for book in self.__writing_list:
-            writing_name_list.append(book.name)
+            book_dict = {"book_name" : book.name,
+                                "pseudonym": book.pseudonym,
+                                "genre" : book.genre}
+            writing_name_list.append(book_dict)
         return writing_name_list
     
     def check_repeated_pseudonym(self, new_pseudonym):

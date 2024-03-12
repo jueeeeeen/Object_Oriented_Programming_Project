@@ -126,9 +126,9 @@ def ShowSilverCoins(username:str):
      user = write_a_read.get_user_by_username(username)
      return {"Silver_Coin" :user.show_silver_coin_list()}
 
-@app.get("/my_page", tags=['My Page'])
+@app.get("/my_page/{username}", tags=['My Page'])
 def ShowMyPage(username:str):
-     return {"My Page" : write_a_read.show_my_page(username)}
+     return write_a_read.show_my_page(username)
 
 @app.get("/my_profile", tags=['My Profile'])
 def ShowMyProfile(username:str):
