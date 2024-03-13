@@ -1,5 +1,7 @@
 let toggle_dd_status = false;
 
+show_book_from_all();
+
 function toggle_user_icon_drop_down(){
     toggle_search_off();
     toggle_dd_status = !toggle_dd_status;
@@ -14,7 +16,7 @@ function toggle_user_icon_drop_down(){
 }
 
 function go_to_my_page(){
-    window.location.href = 'myPage.html';
+    window.location.href = 'my_page.html';
 }
 
 function go_to_my_profile(){
@@ -25,20 +27,12 @@ function go_to_buy_coin(){
     window.location.href = 'payment.html';
 }
 
-function go_to_my_reading(){
-    window.location.href = 'my_reading.html';
-}
-
 function go_to_my_writing(){
     window.location.href = 'my_writing.html';
 }
 
-function go_to_my_coin_transac(){
-    window.location.href = 'my_coin_tranasac.html';
-}
-
-function go_to_my_chapter_transac(){
-    window.location.href = 'my_chapter_transac.html';
+function go_to_transac(){
+    window.location.href = 'transaction.html';
 }
 
 function go_to_homepage(){

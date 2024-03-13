@@ -8,7 +8,6 @@ const username = "Mozaza";
 
 show_my_page();
 
-
 const not_found_html = '<a class="not_found">ไม่พบข้อมูล</a>'
 const pseudonym_html = '<a class="not_found">นามปากกา</a>'
 const show_book_html = `<div class="search_result_container">

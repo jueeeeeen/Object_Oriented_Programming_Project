@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="/static/style.css">
-        <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
-
+        <link rel="stylesheet" href="/static/payment_style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,10 +9,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Payment</title>
+
     </head>
     <body>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script type="module" src="/scripts/payment_script.js"></script>
+        <!-- scriptต้องอยู่ล่างสุดใน body นะ -->
         
         <header class="top_header"> 
             <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
@@ -25,11 +23,10 @@
         
         <div>
             <h1 class="payment_title">เลือกช่องทางชำระเงิน</h1>
-
+           
             <button class="payment_button" id="online_banking"><img class="payment_img" src="/assets/payment_img/onlinebanking.png"></button>
             <button class="payment_button" id="debit_card"><img class="payment_img" src="/assets/payment_img/debitcard.png"></button>
             <button class="payment_button" id="truemoney_wallet"><img class="payment_img" src="/assets/payment_img/truemoneywallet.png"></button>
-
         </div>
 
         <div>
@@ -70,6 +67,13 @@
             </div>
         </div>
 
+        <div class="info_box">
+            <h1 class="payment_title">Your Payment Infomation</h1>
+            <form>
+                <input class="promotion_code" type="text" id="payment_info" name="payment_info" placeholder="account no./card no./phone no." required>
+            </form>
+        </div>
+
         <div class="promotion_box">
             <h1 class="payment_title">Promotion Code :</h1>
             <form>
@@ -78,43 +82,54 @@
             </form>
         </div>
 
-        <div class="final_button">
+        <!-- <div class="final_button">
             <div class="final_box">
                 <p>มูลค่ารวม : </p>
-                <!-- <p>บาท</p> -->
+                <p>บาท</p>
             </div>
             <div class="final_box">
                 <p>จำนวนเหรียญทอง : </p>
-                <!-- <p>เหรียญทอง</p> -->
+                <p>เหรียญทอง</p>
             </div>
-        </div>
+        </div> -->
 
         <div class="final_button">
-            <button class="cancel_button" id="cancel">ยกเลิก</button>
-            <button class="submit_button" onclick="" id="submit">ยืนยัน</button>
+            <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
+            <button class="submit_button" onclick="pop_up_success_form()" type="submit">ยืนยัน</button> 
         </div>
 
-    
-        <footer class="footer">
-            <div class="footer_item_container">
-                <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
-            </div>
-            <div class="footer_item_container">
-                <a class="footer_menu_text" href="payment.html">Payment</a>
-            </div>
-            <div class="footer_item_container">
-                <a class="footer_menu_text" href="MyPage.html">My Page</a>
-            </div>
-            <div class="footer_item_container">
-                <a class="footer_menu_text" href="search_page.html">search</a>
-            </div>
-            <div class="footer_item_container">
-                <a class="footer_menu_text" href="payment.html">Payment</a>
-            </div>
-            <div class="footer_item_container">
-                <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
-            </div>
+        <!-- pop up1 -->
+        <!-- <div class="popup" id="info_form">
+            <form class="info_form_container">
+                <h1 class="payment_title">ยืนยันการซื้อ</h1>
+
+                <img>
+                <p></p>
+
+                <input class="" type="text" id="payment_info" placeholder="" minlength="10" maxlength="10">
+                
+                <button class="small_submit_button" onclick="pop_all_down()" type="submit">ยกเลิก</button>
+                <button class="small_submit_button" onclick="pop_up_success_form()" type="submit">ยืนยัน</button> 
+                
+            </form>
+        </div> -->
+
+        <!-- pop up2 -->
+        <div class="popup" id="success_form">
+            <form class="info_form_container">
+                <div id="content"></div>
+            </form>
+        </div>
+
+        
+        
+        <footer class="bottom_footer">
+            <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
+            <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
+            <p class="bottom_context">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
         </footer>
 
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/scripts/payment_script.js"></script>
     </body>
 </html>

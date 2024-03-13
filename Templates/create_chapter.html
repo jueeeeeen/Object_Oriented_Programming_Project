@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/payment_style.css">
+        <link rel="stylesheet" href="/static/create_chapter.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Chapter</title>
+
+    </head>
+    <body>
+        
+        <header class="top_header"> 
+            <a class="menu_item brand" href="homepage.html"><img class="brand_img" src="/assets/writearead_img/WriteARead_white.png"></a>
+            <!-- <a class="menu_item" href="homepage.html">Home</a> -->
+        </header>
+
+        <h1 class="first_payment_title">รายตอน</h1>
+
+        <div class="">
+            <h1 class="pangcreate_chap_label">บทที่</h1>
+            <form>
+                <input class="pangfill_box1" type="number" id="chapter_number" name="chapter_number" placeholder="บทที่" required>
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="pangcreate_chap_label">ชื่อตอน</h1>
+            <form>
+                <input class="pangfill_box2" type="text" id="chapter_name" name="chapter_name" placeholder="(ตัวอย่าง การผจญภัยครั้งใหม่)" required>
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="pangcreate_chap_label">เนื้อหา</h1>
+            <form>
+                <textarea class="pangcontent_box" id="context" name="context" rows="4" cols="50" placeholder="เริ่มต้นเรื่องราวของคุณ" required></textarea>
+            </form>
+        </div>
+
+        <div class="">
+            <h1 class="pangcreate_chap_label">ราคา</h1>
+            <form>
+                <input class="pangfill_box3" type="number" id="cost" name="cost" placeholder="ราคา" value="0">
+                <!-- <p class="pangchap_coin_unit">เหรียญ</p> -->
+            </form>
+        </div>
+
+
+
+        <div class="final_button">
+            <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
+            <button class="submit_button" onclick="submit_create_chap()" type="submit">ยืนยัน</button> 
+        </div>
+
+        <!-- pop up2 -->
+        <div class="popup" id="success_form">
+            <form class="info_form_container">
+                <div id="content"></div>
+            </form>
+        </div>
+
+
+
+        
+        
+        <footer class="bottom_footer">
+            <a class="menu_item" href="https://www.readawrite.com/">ReadAWrite</a>
+            <a class="menu_item" href="https://www.mareads.com/my-coin/payment">Ref from MaReads</a>
+            <p class="bottom_context">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </footer>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/scripts/create_chapter.js"></script>
+    </body>
+</html>

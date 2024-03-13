@@ -156,7 +156,7 @@ class Book:
     def show_book_info(self):
         return {"name" : self.__name,
                 "pseudonym" : self.__pseudonym,
-                "tags" : self.tag,
+                "genre" : self.genre,
                 "status" : self.status,
                 "prologue" : self.prologue,
                 "age_retricted" : self.show_age_restricted(),

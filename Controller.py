@@ -402,11 +402,11 @@ class Controller:
         #                     "pseudonym",
         #                     "verify age"
         
-    def show_my_reading(self, username):
+    def show_my_writing(self, username):
         user = self.get_user_by_username(username)
         if self.if_user_not_found(user): return user
         reading_list = []
-        for book in user.book_shelf_list:
+        for book in user.writing_list:
             reading_list.append(book.show_book_info())
         return reading_list
     

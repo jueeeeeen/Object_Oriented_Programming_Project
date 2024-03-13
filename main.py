@@ -117,8 +117,8 @@ write_a_read.create_comment("Shin_chan-1", "Mozaza", "55555")
 
 #----------------------------------create transactions----------------------------------
 
-Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("012-3-45678-9"), 100, 100, 10, now))
-Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("0123456789"), 200, 200, 20, now))
+Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", now))
+Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500, "+500", "+50", now))
 
 #----------------------------------add coin----------------------------------
 Mo.add_silver_coin(20)
@@ -209,16 +209,20 @@ def ShowMyPage(username:str):
 def ShowMyProfile(username:str):
      return write_a_read.show_my_profile(username)
 
-@app.get("/get_coin_transaction", tags=['Coin Transaction'])
-def get_coin_transaction(username:str):
-     user = write_a_read.get_user_by_username(username)
-     return {"Coin Transaction" : user.show_coin_transaction()}
+@app.get("/my_writing/{username}", tags=['My Writing'])
+def show_my_writing(username:str):
+     return write_a_read.show_my_writing(username)
 
-@app.get("/show_chapter_transaction", tags=['Chapter Transaction'])
+@app.get("/get_coin_transaction/{username}", tags=['Coin Transaction'])
+def get_coin_transaction(username:str):
+    user = write_a_read.get_user_by_username(username)
+    return user.show_coin_transaction()
+
+@app.get("/show_chapter_transaction/{username}", tags=['Chapter Transaction'])
 def ShowChapterTransaction(username:str):
      user = write_a_read.get_user_by_username(username)
      if write_a_read.if_user_not_found(user): return user
-     return {"Chapter Transaction" : user.show_chapter_transaction()}
+     return user.show_chapter_transaction()
 
 @app.get("/my_reading", tags=['My Reading'])
 def ShowMyReading(username:str):
@@ -337,18 +341,17 @@ def CreateComment(dto: dto_create_comment):
 #..........................................................................................................
 
 class dto_buy_coin(BaseModel):
-     username : str
-     golden_coin_amount : int
-     payment_method : str 
-     payment_info : str
-     code: Optional[str] = None
-
-     
+    username : str
+    golden_coin_amount : int
+    payment_method : str 
+    payment_info : str
+    code: Optional[str] = None
+    
 @app.post("/buy_coin", tags=['Buy Coin'])
 def buy_coin(dto : dto_buy_coin):
-     payment = write_a_read.create_payment_method(dto.payment_method, dto.payment_info)
-     write_a_read.buy_coin(dto.username, payment, dto.code, dto.golden_coin_amount)  
-     return "Purchase successful, THANK YOU"
+    payment = write_a_read.create_payment_method(dto.payment_method, dto.payment_info)
+    write_a_read.buy_coin(dto.username, payment, dto.code, dto.golden_coin_amount)  
+    return "Purchase successful, THANK YOU"
 
 # _________________________________________________ PUT _________________________________________________
 

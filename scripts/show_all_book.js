@@ -21,7 +21,7 @@ function home_display_writing(writing) {
     console.log(writing.book_name);
     var element = `<div class="homepage_book_item">
                         <div class="homepage_cover_container"><img src="../assets/covers_img/${writing.book_name}.png"></div>
-                        <a class="homepage_book_title"  onclick="displayBookInfoAndNavigate('${writing.book_name}')">${writing.book_name}</a>
+                        <a class="homepage_book_title" onclick="displayBookInfoAndNavigate('${writing.book_name}')">${writing.book_name}</a>
                         <a class="homepage_book_pseudonym">${writing.pseudonym}</a>
                     </div>`;
     $('#home_page_book_flexbox').append(element);

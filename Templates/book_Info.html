@@ -55,7 +55,7 @@
     <!--book info-->
     <div class="book_flexbox">
         <div class="book_item">
-            <img class="book_cover" src="../assets/covers_img/Shin_chan.png" alt="book_cover" />
+            <img class="book_cover" id="book_cover_img" alt="book_cover" />
         </div>
         <div class="book_info_flexbox">
             <div class="book_info_item">
@@ -196,6 +196,10 @@
     <br>
 
     <script>
+        const book_naame = localStorage.getItem('book_name_last')
+        console.log(book_naame)
+        document.getElementById('book_cover_img').src = `../assets/covers_img/${book_naame}.png`;
+        
         // Retrieve book information from sessionStorage
         const bookInfoString = sessionStorage.getItem('bookInfo');
         console.log("bookInfoString", bookInfoString)

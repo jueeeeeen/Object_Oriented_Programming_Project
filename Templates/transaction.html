@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/transaction.css">
+        <link rel="stylesheet" href="/static/header_footer.css">
+        <link rel="stylesheet" href="/static/mystyle.css">
+
+        <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- <script src="/script/search_bar.js"></script>
+        <script src="/script/banner_slide.js"></script>
+        <script src="/script/toggle_search.js"></script>
+        <script src="/script/search_page.js"></script> -->
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transaction</title>
+    </head>
+
+    <body>
+        <!-- <section id="searchBar">
+            <div id="dark_overlay" onclick="toggle_search_off()"></div>
+            <div  id="search_header">
+                <div class="search_item">
+                    <form id="searchForm">
+                        <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
+                        <a href="#" onclick="toggle_search_off()"> <img class="close_search" src="../assets/header_img/close_search.png" alt=Original Image"></a>
+                    </form>
+                </div>
+            </div>
+        </section> -->
+
+        <div class="header_flexbox_menu">
+            <!-- <div class="header_menu_item">
+                <a class="header_writing_type" href="#">นิยาย</a>
+                <a class="header_writing_type" href="#">แฟนฟิค</a>
+                <a class="header_writing_type" href="#">การ์ตูน</a>
+            </div> -->
+            <div class="header_menu_item">
+                <a href="homepage.html"><img src="/assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
+            </div>
+            <!-- <div class="header_menu_item">
+                <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button_light.png" alt="Original Image"></a>
+                <a href="#"> <img class="pen_icon" src="../assets/header_img/writing_button_light.png" alt=Original Image"></a>
+                <a href="#"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
+            </div> -->
+        </div>
+        <br>
+
+        <h1 class="pangtransac_title">ประวัติการสั่งซื้อ</h1>
+        <!-- รีเทินรับจาก apiมา  โชว๋เปนbox -->
+
+        <div class="pangdrop_down_box">
+            <select class="pangdrop_down" name="transaction_type" id="transaction_type">
+                <option value="coin">ประวัติการซื้อเหรียญ</option>
+                <option value="chapter">ประวัติการซื้อตอน</option>
+            </select>
+        </div>
+
+        <!-- ถ้าทำทันจะมาทำ  drop down ช่วงเวลา -->
+       <div id="not_found" class="pangimg_pop">
+            <img src="/assets/transaction_img/not_found_transac.png">
+            <p class="pangtext">Not Found</p>
+       </div>
+        
+
+        <!-- <div id="return_coin_transaction"></div> -->
+
+        <div class="pangcoin_transaction_pop" id="coin_transaction_box">
+            <div class="pangtransaction" id="return_coin_transaction"></div>
+        </div>
+
+        <div class="pangchapter_transaction_pop" id="chapter_transaction_box">
+            <div class="pangtransaction" id="return_chapter_transaction"></div>
+        </div>
+        
+        
+        <footer class="footer">
+            <div class="footer_item_container">
+                <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+            </div>
+            
+            <div class="footer_item_container">
+                <a class="footer_menu_text" href="payment.html">Payment</a>
+            </div>
+            <div class="footer_item_container">
+                <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+        <script src="/scripts/transaction.js"></script>
+    </body>
+</html>

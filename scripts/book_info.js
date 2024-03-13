@@ -17,6 +17,7 @@ function displayBookInfoAndNavigate(bookName) {
             // showChapter(bookName)
             localStorage.setItem('book_name_last',bookName);
             console.log(localStorage.getItem('book_name_last'));
+            // console.log(bookName)
             window.location.href = "book_info.html";
         })
         .catch(error => {

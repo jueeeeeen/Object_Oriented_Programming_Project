@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WriteARead</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+    <link rel="stylesheet" type="text/css" href="/static/my_writing.css">
+    <link rel="stylesheet" type="text/css" href="/static/search_page.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="/scripts/search_bar.js"></script>
+    <script src="/scripts/banner_slide.js"></script>
+    <script src="/scripts/toggle_search.js"></script>
+    <script src="/scripts/my_writing.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="header_flexbox_menu">
+        <div class="header_menu_item">
+            <a class="header_writing_type" href="#">นิยาย</a>
+            <a class="header_writing_type" href="#">แฟนฟิค</a>
+            <a class="header_writing_type" href="#">การ์ตูน</a>
+        </div>
+        <div class="my_writingview_types_container">
+            <a href="homepage.html"><img src="/assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
+        </div>
+        <div class="header_menu_item">
+            <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button_light.png" alt="Original Image"></a>
+            <a href="#"> <img class="pen_icon" src="../assets/header_img/writing_button_light.png" alt=Original Image"></a>
+            <a href="#"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
+        </div>
+    </div>
+    <br>
+
+    <br>
+    <div class="my_writingview_types_container">
+        <div class="box"></div>
+        <h1>My Writing</h1>
+        <div class="my_writing_writing_container">
+            <div class="my_writing_image_container" onclick="viewBookInfo()">
+                <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
+            </div>
+            <div class="my_writingbook_content_container" onclick="viewBookInfo()"><br>
+                <p class="my_writing_book_title">Shin_chan</p>
+                <p class="my_writing_book_description">นามปากกา</p>
+                <p class="my_writing_book_description">หมวดหมู่</p>
+            </div>
+            <div class="my_writing_image_container" onclick="viewBookInfo()">
+                <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
+            </div>
+            <div class="my_writingbook_content_container" onclick="viewBookInfo()"><br>
+                <p class="my_writing_book_title">Shin_chan</p>
+                <p class="my_writing_book_description">นามปากกา</p>
+                <p class="my_writing_book_description">หมวดหมู่</p>
+            </div>
+            <div class="my_writing_image_container" onclick="viewBookInfo()">
+                <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
+            </div>
+            <div class="my_writingbook_content_container" onclick="viewBookInfo()"><br>
+                <p class="my_writing_book_title">Shin_chan</p>
+                <p class="my_writing_book_description">นามปากกา</p>
+                <p class="my_writing_book_description">หมวดหมู่</p>
+            </div>
+            <div class="my_writing_image_container" onclick="viewBookInfo()">
+                <img src="../assets/covers_img/temp_cover.jpg" alt="Book Cover">
+            </div>
+            <div class="my_writingbook_content_container" onclick="viewBookInfo()"><br>
+                <p class="my_writing_book_title">Shin_chan</p>
+                <p class="my_writing_book_description">นามปากกา</p>
+                <p class="my_writing_book_description">หมวดหมู่</p>
+            </div>
+        <div class="my_writing_button">
+            <button class="submit_button" onclick="addNewWritingTask()" id="addWritingTask">เพิ่มงานเขียน</button>
+        </div>
+
+        <div class="box"></div>
+    </div>
+    <hr>
+    <footer class="footer">
+        <div class="footer_item_container">
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="MyPage.html">My Page</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="search_page.html">search</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+    </footer>
+    <br>
+</body>
+</html>

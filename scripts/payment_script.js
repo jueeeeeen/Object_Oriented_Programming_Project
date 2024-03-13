@@ -1,6 +1,10 @@
 const payment_data = {};
 
-payment_data.username = "Mozaza"
+// localStorage
+// localStorage.getItem("login_username")
+
+payment_data.username = localStorage.getItem("login_username");
+// payment_data.username = "Mozaza";
 
 document.getElementById('online_banking').addEventListener('click', function() {
     payment_data.payment_method = "OnlineBanking";
@@ -8,12 +12,12 @@ document.getElementById('online_banking').addEventListener('click', function() {
 });
 
 document.getElementById('debit_card').addEventListener('click', function() {
-    payment_data.payment_method = "CreditCard";
+    payment_data.payment_method = "Debit Card";
     console.log(payment_data.payment_method);
 });
 
 document.getElementById('truemoney_wallet').addEventListener('click', function() {
-    payment_data.payment_method = "TrueMoneyWallet";
+    payment_data.payment_method = "TrueMoney Wallet";
     console.log(payment_data.payment_method);
 });
 
@@ -67,15 +71,61 @@ document.getElementById('coin_box_click_costom').addEventListener('click', funct
     console.log(payment_data.golden_coin_amount);
 });
 
+info_form = document.getElementById('info_form');
+success_form = document.getElementById('success_form');
 
-payment_data.code = document.getElementById('promotion_code').value;
-console.log(payment_data.code);
-
-// submit
-async function submit() {
+function pop_up_info_form() {
+    payment_data.code = document.getElementById('promotion_code').value;
+    payment_data.payment_info = document.getElementById('payment_info').value;
     console.log(payment_data);
 
-    // const response = await axios.post(`http://127.0.0.1:8000/get_coin_transaction?username=${input}`);
-    // console.log(response.data);
+    info_form.style.display = 'block';
+}
+
+function pop_up_success_form() {
+    payment_data.code = document.getElementById('promotion_code').value;
+    payment_data.payment_info = document.getElementById('payment_info').value;
     
+    const jsonDataString = JSON.stringify(payment_data)
+    fetch(`/buy_coin`, {
+
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json'},
+
+        body: jsonDataString
+
+    })  
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Failed to submit comment');
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        console.log(data);
+
+        const content = document.getElementById("content");
+        content.innerHTML = `<p>${data}</p>`;
+        
+    })
+
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+
+    success_form.style.display = 'block';
+    setTimeout(function () {
+        success_form.style.display = 'none';
+        window.location.href = '/Templates/transaction.html';
+      }, 3000);
+}
+
+
+function cancel_button() {
+    window.location.reload(); 
+}
+
+function pop_all_down() {
+    console.log("yayyy");
 }
