@@ -3,7 +3,9 @@ import uvicorn
 from fastapi import FastAPI, Query, Request, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
+from fastapi import HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer
 import requests
 import json
 from fastapi.staticfiles import StaticFiles
@@ -20,9 +22,29 @@ from Payment import PaymentMethod, OnlineBanking, TrueMoneyWallet
 from CoinTransaction import CoinTransaction
 from Promotion import BookPromotion, CoinPromotion, Promotion
 from Coin import GoldenCoin, SilverCoin
+from Comment import Comment
+
+from fastapi.middleware.cors import CORSMiddleware
+origins = [
+     "http://localhost:5500",
+     "localhost:5500",
+     "http://127.0.0.1:5500",
+     "127.0.0.1:5500/",
+     "http://localhost:8000",
+     "localhost:8000",
+     "http://127.0.0.1:8000",
+     "127.0.0.1:8000/"
+]
 
 
 app = FastAPI()
+app.add_middleware(
+     CORSMiddleware,
+     allow_origins=origins,
+     allow_credentials=True,
+     allow_methods=["*"],
+     allow_headers=["*"]
+)
 
 templates = Jinja2Templates(directory="Templates")
 app.mount("/Templates", StaticFiles(directory="Templates"), name="templates")
@@ -34,7 +56,7 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 write_a_read = Controller()
 
 if __name__ == "__main__":
-     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+     uvicorn.run("main:app", host="127.0.0.1", port=5500, log_level="info")
 
 now = datetime.now()
 
@@ -84,6 +106,9 @@ Mo.add_pseudonym("testm")
 Mo.add_pseudonym("lalalalaalalalm")
 Mo.add_pseudonym("hello worldm")
 
+#----------------------------------create comments----------------------------------
+
+write_a_read.create_comment("Shin_chan-1", "Mozaza", "55555")
 
 #----------------------------------create transactions----------------------------------
 
@@ -108,6 +133,51 @@ Mo.add_book_shelf_list(book2)
 # def FirstPage(req: Request):
 #      return template.TemplateResponse(name="homepage.html", context={"request":req})
 
+@app.get("/show_all_book")
+def get_all_book():
+     return write_a_read.show_all_book_list()
+
+@app.get("/", response_class=HTMLResponse)
+async def read_items(request: Request):
+     with open("Templates/homepage.html") as f:
+          html_content = f.read()
+     return HTMLResponse(content=html_content, status_code=200)
+
+@app.get("/book/{book_name}")
+async def get_book_info(book_name: str):
+     book = write_a_read.get_book_by_name(book_name)
+     if isinstance(book,Book):
+          return {"name":book.name, "pseudonym":book.pseudonym, "genre":book.genre, "status":book.status, \
+               "age_restricted":book.age_restricted, "prologue":book.prologue, "date_time":book.date_time_str,\
+               "writer_name":book.writer.username}
+     else:
+          return {"message": "Book not found"}
+     
+@app.get("/chapter/comment/{chapter_id}", tags=['chapter'])
+def show_comment_list(chapter_id:str):
+     chapter = write_a_read.get_chapter_by_chapter_id(chapter_id)
+     if isinstance(chapter,Chapter):
+          return chapter.show_comment_list()
+     elif isinstance(chapter,Book):
+          return chapter.show_comment_list()
+     else:
+          return chapter
+
+@app.get("/chapter/info/{chapter_id}")
+async def get_chapter_info(chapter_id: str):
+     chapter =write_a_read.get_chapter_by_chapter_id_or_book(chapter_id)
+     if isinstance(chapter, Chapter):
+          return chapter.show_chapter_info()
+     else:
+          raise HTTPException(status_code=404, detail="Chapter not found")
+     
+@app.get("/book/chapter/{book_name}", tags=['book'])
+def show_chapter_list(book_name:str):
+     book = write_a_read.get_book_by_name(book_name)
+     if isinstance(book,Book):
+          return book.show_chapter_list()
+     else:
+          return {"message" : "error"}
 
 @app.get("/bookname", tags=['search bar'])
 def searchBook(book_name:str):
@@ -130,9 +200,9 @@ def ShowSilverCoins(username:str):
 def ShowMyPage(username:str):
      return write_a_read.show_my_page(username)
 
-@app.get("/my_profile", tags=['My Profile'])
+@app.get("/my_profile/{username}", tags=['My Profile'])
 def ShowMyProfile(username:str):
-     return {"My Profile" : write_a_read.show_my_profile(username)}
+     return write_a_read.show_my_profile(username)
 
 @app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
@@ -170,12 +240,13 @@ def get_coin_transaction(username:str):
      user = write_a_read.get_user_by_username(username)
      return {"Coin_Transaction" : user.show_coin_transaction()}
 
-@app.get("/book/{book_name}")
-async def get_book_info(book_name: str):
-     book = write_a_read.get_book_by_name(book_name)
-     return {"name":book.name, "pseudonym":book.pseudonym, "genre":book.genre, "status":book.status, \
-               "age_restricted":book.age_restricted, "prologue":book.prologue, "date_time":book.date_time_str,\
-               "writer_name":book.writer.username}
+class dto_check_bought_chapter(BaseModel):
+     username:str
+     chapter_id:str
+
+@app.get("/check_bought_chapter/{username}", tags=['check'])
+def check_bought_chapter(username:str, chapter_id:str):
+     return write_a_read.check_bought_chapter(username, chapter_id)
 
 # _________________________________________________ POST _________________________________________________
 
@@ -206,10 +277,13 @@ class dto_buy_chapter(BaseModel):
      username : str
      chapter_id : str
 
-@app.post("/buy_chapter", tags=['chapter'])
+@app.post("/buy_chapter/{username}", tags=['chapter'])
 def BuyChapter(dto : dto_buy_chapter):
-     return {"Buy Chapter" : write_a_read.buy_chapter(dto.username, dto.chapter_id)}
+     return write_a_read.buy_chapter(dto.username, dto.chapter_id)
 
+# print(check_bought_chapter("Mozaza", "Shin_chan-1"))
+# print(write_a_read.buy_chapter("Mozaza", "Shin_chan-1"))
+# print(check_bought_chapter("Mozaza", "Shin_chan-1"))
 #..........................................................................................................
 
 class dto_create_book(BaseModel):
@@ -244,10 +318,17 @@ class dto_create_comment(BaseModel):
      username : str
      context : str
      
-@app.post("/comment", tags=['Comment'])
+@app.post("/comment/{chapter_id}", tags=['Comment'])
 def CreateComment(dto: dto_create_comment):
-     return write_a_read.create_comment(dto.chapter_id, dto.username, dto.context)
-
+     comment = write_a_read.create_comment(dto.chapter_id, dto.username, dto.context)
+     if isinstance(comment, Comment):
+          print("yes")
+          # "message": "Comment created successfully", 
+          return comment.show_comment()
+     
+     else:
+          print("no")
+          raise HTTPException(status_code=404, detail="Error creating comment")
 #..........................................................................................................
 
 class dto_buy_coin(BaseModel):
@@ -282,16 +363,14 @@ class dto_change_password(BaseModel):
      old_password :str
      new_password : str
 
-@app.put("/my_profile/change_password", tags=['My Profile'])
-def ChangePassword(dto : dto_change_password):
-     return {"Change Password" : write_a_read.change_password(dto.username, dto.old_password, dto.new_password)}
-
+@app.put("/change_password/{username}", tags=['My Profile'])
+def ChangePassword(dto: dto_change_password):
+     return write_a_read.change_password(dto.username, dto.old_password, dto.new_password)
 #..........................................................................................................
 
 class dto_change_display_name(BaseModel):
      username : str
      new_display_name : str
-
 
 @app.put("/my_page/change_display_name", tags=['My Page'])
 def ChangeDisplayName(dto : dto_change_display_name):
@@ -326,11 +405,7 @@ class dto_edit_chapter(BaseModel):
      
 @app.put("/edit_chapter", tags=['Chapter'])
 def EditChapterInfo(dto : dto_edit_chapter):
-     chapter =  write_a_read.edit_chapter_info(dto.chapter_id, dto.name, dto.context, dto.cost)
-     if isinstance(chapter,Chapter):
-          return chapter
-     else:
-          return {"error": "Book not found"}
+     return write_a_read.edit_chapter_info(dto.chapter_id, dto.name, dto.context, dto.cost)
      
 # _________________________________________________ TEST _________________________________________________
 # mo_username = "Mozaza"

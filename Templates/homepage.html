@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="/static/style.css">
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
         <link rel="stylesheet" type="text/css" href="/static/homepage.css">
+        <link rel="stylesheet" type="text/css" href="/static/display_book_homepage.css">
 
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -20,6 +21,8 @@
         <script src="/scripts/toggle_search.js"></script>
         <script src="/scripts/search_page.js"></script>
         <script src="/scripts/homepage.js"></script>
+        <script src="/scripts/book_info.js"></script>
+        <script src="/scripts/show_all_book.js"></script>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,6 +56,7 @@
                 <a href="#" onclick="toggle_user_icon_drop_down()"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
             </div>
         </div>
+        <body
     <br>
     <section id="home_dd_container">
         <div>
@@ -122,31 +126,47 @@
             <a class="tag_title">Love Novel</a><br><br>
             <a class="subtag_title">นิยายรัก</a>
 
-            <div class="flexbox">
-                <div class="item">
-                        <li onclick="displayBookInfo('Book 1')">Book 1</li>
-                        <a href="../Templates/book_info.html"> <img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
+            <div class="home_page_book_flexbox">
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title"  onclick="displayBookInfoAndNavigate('Shin_chan')">Shin_chan</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
                 </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
                 </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title">พี่ครับนมผมไหล ref:เพื่อนในกลุ่ม</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
                 </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title">test book name if too longgggggggggggg</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
                 </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title">book name</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
                 </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title">book name</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
+                </div>
+                <div class="homepage_book_item">
+                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
+                    <a class="homepage_book_title">book name</a>
+                    <a class="homepage_book_pseudonym">pseudonym</a>
                 </div>
             </div>
             
             <div class="flexbox">
                 <div class="item">
-                    <a class="book_title">รักลับๆกับเจ้านายเย็นชา</a>
+                    <a class="book_title" onclick="displayBookInfoAndNavigate('Shin_chan')">Shin_chan</a>
                 </div>
                 <div class="item">
                     <a class="book_title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</a>
@@ -166,51 +186,6 @@
             </div>
 
             <br>
-        
-            <a class="subtag_title">นิยายรักจีนโบราณ</a>
-
-            <div class="flexbox">
-                <div class="item">
-                        <li onclick="displayBookInfo('Book 1')">Book 1</li>
-                        <a href="../Templates/book_info.html"> <img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
-                </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
-                </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
-                </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
-                </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
-                </div>
-                <div class="item">
-                    <a><img class="temp_cover_preview" src="../assets/covers_img/temp_cover2.png"></a>
-                </div>
-            </div>
-            
-            <div class="flexbox">
-                <div class="item">
-                    <a class="book_title">รักลับๆกับเจ้านายเย็นชา</a>
-                </div>
-                <div class="item">
-                    <a class="book_title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</a>
-                </div>
-                <div class="item">
-                    <a class="book_title">พี่ครับนมผมไหล ref:เพื่อนในกลุ่ม</a>
-                </div>
-                <div class="item">
-                    <a class="book_title">ชื่อหนังสือ</a>
-                </div>
-                <div class="item">
-                    <a class="book_title">ชื่อหนังสือ</a>
-                </div>
-                <div class="item">
-                    <a class="book_title">ชื่อหนังสือ</a>
-                </div>
-            </div>
 
         
         <hr>

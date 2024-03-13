@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 class Chapter:
     def __init__(self, book_name, chapter_number, chapter_name, context, cost):
-        self.__chapter_id = str(book_name) + "/" + str(chapter_number)
+        self.__chapter_id = str(book_name) + "-" + str(chapter_number)
         self.__chapter_number = chapter_number
         self.__name = chapter_name
         self.__context = context
@@ -37,7 +37,7 @@ class Chapter:
     
     @property
     def publish_date_time_str(self):
-        return self.__publish_date_time.strftime("%d/%m/%Y, %H:%M:%S")
+        return self.__publish_date_time.strftime("%x %X")
     
     @property
     def cost(self):
@@ -65,12 +65,21 @@ class Chapter:
     def show_chapter_info(self):
         return {"chapter_number" : self.__chapter_number,
                 "name" : self.__name,
-                "price" : self.__cost,
                 "context" : self.__context,
-                "comments" : self.show_comment_list()}
+                "chapter_id": self.__chapter_id,
+                "cost": self.__cost,
+                "date_time" : self.__publish_date_time.strftime("%x %X")}
     
     def show_comment_list(self):
         comment_list = []
         for comment in self.__comment_list:
             comment_list.append(comment.show_comment())
         return comment_list
+    
+    def show_chapter_briefly(self):
+        return {"chapter_number" : self.__chapter_number,
+                "name" : self.__name,
+                "price" : self.__cost,
+                "viewer":self.__viewer_count,
+                "chapter_id": self.__chapter_id,
+                "date_time" : self.__publish_date_time.strftime("%x %X")}

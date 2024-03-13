@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ReadingPage</title>
+    <!-- Include your CSS and other meta tags here -->
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/read_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+    <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="../scripts/reading_chapter.js"></script>
+    <script src="../scripts/book_info.js"></script>
+
+</head>
+
+<body>
+    <div id="reading"></div>
+
+    <!--หัวกระดาษ-->
+    <div class="header_flexbox_menu" style=" background-color: white; border-color: white;">
+        <div class="header_menu_item" style="background-color: white; text-align: left; padding-left: 10%;">
+            <!-- <a href="book_Info.html" class="header_writing_type" style="color: rgb(0, 203, 195);" href="#">Book</a> -->
+            <a onclick="back_to_book_info()"><img src="../assets/book_img/home_button.png" class="home_icon"
+                    style="vertical-align: bottom;"></a>
+            <div class="header_box_text">
+                <a id="chapter_number_header" class="header_chapter_text"></a>
+                <a id="chapter_name_header" class="header_chapter_text"></a>
+            </div>
+        </div>
+        <div class="header_menu_item" style="background-color: white;">
+            <a href="homepage.html"><img src="../assets/writearead_img/WriteARead.png" class="WriteARead_image"></a>
+        </div>
+        <div class="header_menu_item" style="background-color: white;">
+            <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button.png"
+                    alt="Original Image"></a>
+            <a href="#"> <img class="pen_icon" src="../assets/header_img/writing_button.png" alt="Original Image"></a>
+            <a href="#"> <img class="user_icon" src="../assets/header_img/user_button.png" alt="Original Image"></a>
+        </div>
+    </div>
+
+    <!-- reading header-->
+    <div class="flexbox-3">
+        <div class="item-3">
+            <div class="info_text"
+                style="font-size: 14px; color: rgb(106, 106, 106); text-align: center; margin-bottom: 20px;">
+                <a id='book_name'></a>
+            </div>
+            <div class="info_text" style="font-size: 30px; color: rgb(29, 29, 29); text-align: center;">
+                <a>บทที่</a>
+                <a id="chapter_number"></a>
+                <a id="chapter_name"></a>
+
+            </div>
+        </div>
+        <div class="context_text item-3" style="margin-top: 0; padding-left: 7%; padding-right: 7%;">
+            <a id="chapter_context"></a>
+        </div>
+        <div class="context_text item-3" style="margin-top: 1px; padding-left: 7%; padding-right: 7%; ">
+            <a>Lastest edit : </a>
+            <a id="chapter_date_time"></a>
+        </div>
+    </div>
+
+
+
+    <!-- add comment -->
+    <div class="flexbox-3">
+        <div class="item-3">
+            <div class="search_item">
+                <form id="commentForm">
+                    <h1 class="info_title">Chapter no :</h1>
+                    <select id="chapter_id" name="chapter_id" class="input_box" style="width: 25%;">
+                        <option value="Shin_chan-1" class="input_box">Chapter 1</option>
+                        <option value="Shin_chan-2" class="input_box">Chapter 2</option>
+                    </select><br><br>
+
+                    <h1 class="info_title">Your Username : </h1>
+                    <input type="text" class="input_box" id="username" style="width: 40%;" name="username"
+                        placeholder="username" required><br><br>
+
+                    <h1 class="info_title">Your Comment : </h1>
+                    <textarea id="context" class="input_box" name="context" style="width: 40%;" rows="4" cols="50"
+                        placeholder="context" required></textarea><br><br>
+
+                    <button type="submit" class="submit_button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- show comment -->
+    <div id="commentsContainer"></div>
+
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer_item_container">
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="MyPage.html">My Page</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="search_page.html">search</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </div>
+    </footer>
+    <br>
+
+    <script>
+        var book_name = localStorage.getItem('book_name_last');
+        document.getElementById("book_name").innerHTML = book_name;
+        // Retrieve book information from sessionStorage
+        const chapterInfoString = sessionStorage.getItem('chapterInfo');
+        console.log("chapterInfoString", chapterInfoString);
+
+        if (chapterInfoString) {
+            try {
+                const chapterInfo = JSON.parse(chapterInfoString);
+                console.log("chapterInfo", chapterInfo);
+
+                if (chapterInfo) {
+                    const { chapter_number, chapter_id, name, context, date_time } = chapterInfo;
+
+                    // Display book information in the HTML page
+                    document.getElementById('chapter_number').textContent = chapter_number || '';
+                    document.getElementById('chapter_number_header').textContent = chapter_number || '';
+                    document.getElementById('chapter_name').textContent = name || '';
+                    document.getElementById('chapter_name_header').textContent = name || '';
+                    document.getElementById('chapter_context').textContent = context || '';
+                    document.getElementById('chapter_date_time').textContent = date_time || '';
+
+                    // Retrieve the comment data from sessionStorage
+                    const commentDataUse = JSON.parse(sessionStorage.getItem('commentData'));
+                    const commentsContainer = document.getElementById('commentsContainer');
+                    commentsContainer.innerHTML = ''; // Clear existing comments
+                    console.log(commentsContainer);
+
+                    // Check if commentDataUse is not null and is an array
+                    if (commentDataUse && Array.isArray(commentDataUse)) {
+                        // Iterate over each comment data and create HTML elements
+                        commentDataUse.forEach(commentData => {
+                            console.log("commentData", commentData);
+                            commentsContainer.innerHTML += `
+                            <div class="flexbox-3">
+                                <div class="item-3">
+                                    <div class="comment-context-text">${commentData.context}</div>
+                                    <div class="comment-username-text">${commentData.user}</div>
+                                    <div class="comment-date-text">${commentData.date_time}</div>
+                                    <div class="comment-chapter-text">${commentData.chapter}</div>
+                                </div>
+                            </div>
+                            `;
+                        });
+                    } else {
+                        console.error('commentDataUse is null or not an array.');
+                    }
+
+                    // Call the showChapter and showComment functions when the window loads
+                    window.onload = function () {
+                        showComment(chapterInfo.chapter_id);
+                    };
+                } else {
+                    console.error('chapterInfo object is null or undefined.');
+                }
+            } catch (error) {
+                console.error('Error parsing chapterInfo JSON:', error);
+            }
+        } else {
+            console.error('chapterInfoString is null or undefined.');
+        }
+    </script>
+
+</body>
+
+</html>

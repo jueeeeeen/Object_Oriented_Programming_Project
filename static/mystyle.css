@@ -38,6 +38,8 @@ html{
     margin-right: 10%;
 }
 
+
+
 .item{
     display: block;
     box-sizing: border-box;
@@ -94,6 +96,15 @@ html{
 
 
 #dark_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dark_overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -248,12 +259,4 @@ input { font-family: var(--main_font); }
 @keyframes fade {
     from {opacity: .4}
     to {opacity: 1}
-}
-
-.temp_cover_preview{
-    background-color: black;
-    width: 90%;
-    height: 90%;
-    cursor: pointer;
-    border-radius: 15px;
 }

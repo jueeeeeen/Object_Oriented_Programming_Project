@@ -32,7 +32,6 @@ body{
 }
 
 .cover_image img {
-    cursor: pointer;
     max-width: 1024px;
     max-height: 600px;
     background-size: cover;
@@ -50,10 +49,12 @@ body{
 
 .profile_pic{
     width: 75%;
+    max-width: 150px;
     display: block;
     flex-shrink: 0;
     margin:0;
     margin-left: auto;
+    border-radius: 50%;
 }
 
 .info_container {
@@ -213,4 +214,18 @@ body{
     display: flex;
     border-radius: 10px 10px 0 0;
     margin-top: 5px;
+}
+
+.my_page_pseudonym_box {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 50%;
+    border-radius: 10px;
+    border: 1.5px solid var(--light_gray);
+    font-size: 25px;
+    font-weight: 500;
 }

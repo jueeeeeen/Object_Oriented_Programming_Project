@@ -190,6 +190,12 @@ class Reader:
             return "over 18"
         else: 
             return "under 18"
+        
+    def get_chapter_id_list(self):
+        list = []
+        for chapter_transac in self.chapter_transaction_list:
+            list.append(chapter_transac.chapter.chapter_id)
+        return list
 
 class Writer(Reader):
     money_balance = 0

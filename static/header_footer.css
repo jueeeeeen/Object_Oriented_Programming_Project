@@ -47,7 +47,7 @@
 
 
 .WriteARead_image{
-    background-color: var(--main_color);
+    /* background-color: var(--main_color); */
     Width: 50%;
     max-width: 200px;
     margin-top: 10px;

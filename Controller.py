@@ -75,12 +75,30 @@ class Controller:
                     return chapter
         return "Chapter Not Found"
     
+    def get_chapter_by_chapter_id_or_book(self, chapter_id):
+        if "-" in chapter_id:
+            for book in self.all_book_list:
+                for chapter in book.chapter_list:
+                    if chapter.chapter_id == chapter_id:
+                        return chapter
+        elif isinstance(self.get_book_by_name(chapter_id),Book):
+            return self.get_book_by_name(chapter_id)
+        else:
+            return {"message":"Chapter Not Found"}
+        
+    
     def get_book_by_chapter_id(self, chapter_id):
         for book in self.all_book_list:
             for chapter in book.chapter_list:
                 if chapter.chapter_id == chapter_id:
                     return book
         return "Book Not Found"
+    
+    def show_all_book_list(self):
+        book_list=[]
+        for book in self.all_book_list:
+            book_list.append({"book_name": book.name,"pseudonym":book.pseudonym})
+        return book_list
     
     # ____________________________________Add to list___________________________________
 
@@ -106,6 +124,12 @@ class Controller:
     
     def if_user_not_found(self, user):
         if not (isinstance(user, Reader) or isinstance(user, Writer)):
+            return True
+        return False
+    
+    def check_bought_chapter(self, username, chapter_id):
+        user = self.get_user_by_username(username)
+        if chapter_id in user.get_chapter_id_list():
             return True
         return False
     
@@ -208,9 +232,9 @@ class Controller:
         if coin_balance >= cost:
             user.deduct_coin(cost)
             user.add_chapter_transaction_list(ChapterTransaction(chapter, cost))
-            return "Your purchase was successful"
+            return "Done"
         else:
-            return "Not enough coin"
+            return "No coin"
     
     # ____________________________________Create / Add___________________________________
 
@@ -310,20 +334,20 @@ class Controller:
         if cost:
             chapter.update_cost(cost)
         # chapter.publish_date_time(0) #last edit
-        return {"Chapter updated" : chapter.show_chapter_info()}
+        return chapter.show_chapter_info()
     
     def change_password(self, username, old_password, new_password):
         user = self.get_user_by_username(username)
         if self.if_user_not_found(user): return user
         if user.password == old_password and len(new_password) >= 8:
             user.password = new_password
-            return "Password has been changed"
+            return "Done"
         elif user.password != old_password:
-            return "Wrong password"
+            return "Wrong"
         elif len(new_password) < 8:
-            return "Password must be at least 8 letters"
+            return "Length"
         else:
-            return "Please try again"
+            return "Error"
         
     def change_display_name(self, username, new_display_name):
         user = self.get_user_by_username(username)
@@ -370,13 +394,13 @@ class Controller:
         user = self.get_user_by_username(username)
         if self.if_user_not_found(user): return user
         return {"display_name" : user.display_name,
-                "username" : user.username,
-                "password" : "******",
-                "menu" : ["change password",
-                            "go to page",
-                            "upgrade to writer",
-                            "pseudonym",
-                            "verify age"]}
+                "username" : user.username}
+        
+        # "change password",
+        #                     "go to page",
+        #                     "upgrade to writer",
+        #                     "pseudonym",
+        #                     "verify age"
         
     def show_my_reading(self, username):
         user = self.get_user_by_username(username)

@@ -1,6 +1,6 @@
 search();
 
-var receivedString = getParams().data;
+var received_search_str = localStorage.getItem('search_str_from_home');
 //  `<div class="search_result_container">
 //                         <div class="image-container">
 //                             <img src="../assets/covers_img/${book_name}.png" alt="../assets/covers_img/temp_cover.jpg">
@@ -15,10 +15,9 @@ var receivedString = getParams().data;
 const close_tag = '</p><p class="description">นามปากกา</p><p class="description">หมวดหมู่</p><p class="description">อื่นๆ</p></div></div>'
 
 const not_found = '<a class="not_found">ไม่พบรายการค้นหา</a>'
-console.log(receivedString);
-if (receivedString){
-    search_by_string(receivedString);
-    
+
+if (received_search_str){
+    search_by_string(received_search_str);
 }
 
 function display_result(result){
@@ -159,18 +158,3 @@ function display_all(results) {
         }
     }
 }
-
-
-
-function getParams() {
-    var params = {};
-    var paramArray = window.location.search.substring(1).split('&');
-
-    for (var i = 0; i < paramArray.length; i++) {
-        var pair = paramArray[i].split('=');
-        params[pair[0]] = decodeURIComponent(pair[1]);
-    }
-
-    return params;
-}
-

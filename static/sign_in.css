@@ -1,0 +1,48 @@
+.sign_in-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 50px solid white;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.sign_in-container .box {
+    background-color: white;
+    padding: 0px 0px;
+}
+
+.sign_in-container .image {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.sign_in-container .form-group {
+    margin-bottom: 20px;
+}
+
+.sign_in-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sign_in-container input[type="text"],
+.sign_in-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.sign_in-container button {
+    padding: 5px 0px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sign_in-container button:hover {
+    background-color: #0056b3;
+}

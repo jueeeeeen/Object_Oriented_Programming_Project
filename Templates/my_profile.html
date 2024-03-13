@@ -3,10 +3,11 @@
     <head>
         <title>WriteARead</title>
         <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
-        <link rel="stylesheet" type="text/css" href="/static/style.css">
         <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
-        <link rel="stylesheet" type="text/css" href="/static/my_page.css">
         <link rel="stylesheet" type="text/css" href="/static/search_page.css">
+        <link rel="stylesheet" type="text/css" href="/static/search_page.css">
+        <link rel="stylesheet" type="text/css" href="/static/my_profile.css">
+
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -17,7 +18,8 @@
 
         <script src="/scripts/search_bar.js"></script>
         <script src="/scripts/toggle_search.js"></script>
-        <script src="/scripts/my_page.js"></script>
+        <script src="/scripts/my_profile.js"></script>
+
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,57 +43,46 @@
             </div>
         </div>
         <br>
-
-        <div class="info_page">
-            <div class="cover_image">
-                <img src="../assets/background_cover_img/my_page_cover.png" alt="Book Cover">
+        
+        <div class="my_profile_info_page">
+            <div class="my_profile_btn">My Profile</div><br>
+            <div class="my_profile_profile_pic_container" id="my_profile_profile_pic_container">
+                <img class="my_profile_profile_pic" src="../assets/header_img/user_button_light.png" alt="profile_pic">
             </div>
-            <div class="profile_pic_container" id="profile_pic_container">
-                <img class="profile_pic" src="../assets/header_img/user_button_light.png" alt="profile_pic">
+            <div class="my_profile_name_container">
+                <div class="my_profile_display_name">
+                    <a id="my_profile_display_name">display_name</a><br>
+                </div>
             </div>
-            <div class="info_container">
-                <div class="display_name">
-                    <a id="my_page_display_name">{display_name}</a><br>
+            <div class="my_profile_user_info_container">
+                <div class="my_profile_info_key_container">
+                    <a class="my_profile_user_info_item">Username</a>
+                    <a class="my_profile_user_info_item">รหัสผ่าน</a>
                 </div>
-                <br>
-                <div class="stats_container">
-                    <div class="stat_item">
-                    <a id="my_page_writing_count">งานเขียน {writing_count} เรื่อง</a>
-                    </div>
-                    <div class="stat_item">
-                    <a id="my_page_book_on_shelf_count">เพิ่มเข้าชั้น {book_on_shelf_count} ครั้ง</a>
-                    </div>
-                    <div class="stat_item">
-                    <a id="my_page_followers">ติดตาม {followers} คน</a>
+                <div class="my_profile_info_value_container">
+                    <a id="my_profile_username" class="my_profile_user_info_item">username</a>
+                    <div class="my_profile_user_info_item">
+                        <a>********</a>
+                        <a id="my_profile_change_password_button" onclick="toggle_change_password()"">เปลี่ยนรหัสผ่าน</a>
                     </div>
                 </div>
-                <div class="stats_container">
-                    <div class="stat_item">
-                    <a id="my_page_read_count">อ่าน {read_count} ครั้ง</a>
-                    </div>
-                    <div class="stat_item">
-                    <a id="my_page_viewer_count">รี้ด {viewer_count} รีด</a>
-                    </div>
+            </div>
+            </div>
+            
+            <section id="my_profile_change_password" class="display_none">
+                <div class="dark_overlay" id="my_profile_dark_overlay" onclick="toggle_change_password_off()"></div>
+                <div  id="my_profile_change_password_box" class="change_password_box">
+                    <a>เปลี่ยนรหัสผ่าน</a>
+                    <form id="change_password_form">
+                        <input id="old_password" type="text" class="search_input" name="old_password" placeholder="รหัสผ่านเดิม" required>
+                        <input id="new_password" type="text" class="search_input" name="new_password" placeholder="รหัสผ่านใหม่" required>
+                        <button class="my_profile_confirm_button" type="submit">บันทึก</button>
+                    </form>
+                    <a class="display_none" id="response_change_password">เปลี่ยนรหัสผ่านแล้ว</a>
                 </div>
-                <br><br><br><br><br><br><br><br><br><br>
-                <div class="stats_container">
-                    <div class="stat_item">
-                    <a id="my_page_introduction">{introduction}</a>
-                    </div>
-                </div>
-            </div>  
+            </section>
         </div>
         <br>
-        <div class="my_page_view_types_container">
-            <div class="my_page_view_type_div">
-                <a class="my_page_view_type my_page_select_default" onclick="my_page_select_view_type(0)">งานเขียน</a>
-                <a class="my_page_view_type" onclick="my_page_select_view_type(1)">นามปากกา</a>
-                <hr class="lines">
-            </div>
-            <div class="my_page_view_container" id="my_page_show_result">
-            </div>
-        </div>
-        
         
         <hr>
         <footer class="footer">
@@ -115,6 +106,7 @@
             </div>
         </footer>
         <br>
-    
+
+
     </body>
 </html>

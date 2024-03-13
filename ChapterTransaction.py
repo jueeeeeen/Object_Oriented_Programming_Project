@@ -29,3 +29,4 @@ class ChapterTransaction:
     return {"chapter" : self.chapter.name,
             "price" : self.__price,
             "date_time" : self.date_time_str}
+    
