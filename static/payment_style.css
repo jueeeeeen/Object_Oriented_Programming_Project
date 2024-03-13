@@ -76,6 +76,7 @@ html, body {
 
 .payment_img {
     width: 200px;
+    border-radius: 8px;
 }
 
 .payment_button {
@@ -179,6 +180,12 @@ html, body {
     z-index: 12;
 }
 
+.info_box {
+    border-top: 1px solid rgba(128, 128, 128, 0.381);
+    /* border-bottom: 1px solid rgba(128, 128, 128, 0.381); */
+    margin-bottom: 40px;
+}
+
 .promotion_box {
     border-top: 1px solid rgba(128, 128, 128, 0.381);
     border-bottom: 1px solid rgba(128, 128, 128, 0.381);
@@ -186,6 +193,8 @@ html, body {
 }
 
 .promotion_code {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
     font-weight: 400;
     display: block;
     border: 1px solid #d7d6d6; 
@@ -194,6 +203,12 @@ html, body {
     width: 200px; 
     margin-left: 20px;
     margin-bottom: 35px;
+    outline: none;
+}
+
+.promotion_code:focus {
+    border: 2px solid rgb(0, 203, 195); 
+    /* border-color: rgb(0, 203, 195); */
 }
 
 .final_button {
@@ -218,6 +233,9 @@ html, body {
     border: 1px solid rgba(128, 128, 128, 0.692);
     border-radius: 50px;
     width: 100px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .submit_button {
@@ -232,10 +250,13 @@ html, body {
     border: 1px solid rgb(0, 203, 195);
     border-radius: 50px;
     width: 300px;
-    
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .bottom_footer {
+    margin: auto;
+    text-align: center;
     background-color: rgb(134, 140, 141);
 }
 
@@ -244,5 +265,17 @@ html, body {
     font-size: 16px;
     font-weight: 400;
     text-align: center;
+}
 
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #959494;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }

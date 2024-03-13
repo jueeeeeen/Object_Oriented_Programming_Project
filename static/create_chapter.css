@@ -1,0 +1,124 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+}
+
+.pangcreate_chap_label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 40px;
+}
+
+.pangfill_box1 {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    border: 1px solid #d7d6d6; 
+    background: #fff; 
+    padding: 10px 10px 10px 20px; 
+    width: 100px; 
+    margin-left: 40px;
+    margin-bottom: 35px;
+    outline: none;
+}
+
+.pangfill_box1:focus {
+    border: 2px solid rgb(0, 203, 195); 
+    /* border-color: rgb(0, 203, 195); */
+}
+
+.pangfill_box2 {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    border: 1px solid #d7d6d6; 
+    background: #fff; 
+    padding: 10px 10px 10px 20px; 
+    width: 500px; 
+    margin-left: 40px;
+    margin-bottom: 35px;
+    outline: none;
+}
+
+.pangfill_box2:focus {
+    border: 2px solid rgb(0, 203, 195); 
+    /* border-color: rgb(0, 203, 195); */
+}
+
+.pangcontent_box {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    border: 1px solid #d7d6d6; 
+    background: #fff; 
+    padding: 10px 10px 10px 20px; 
+    width: 500px; 
+    height: 400px;
+    margin-left: 40px;
+    margin-bottom: 35px;
+    outline: none;
+    text-align: start;
+}
+
+.pangcontent_box:focus {
+    border: 2px solid rgb(0, 203, 195); 
+}
+
+.pangprologue_box {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    border: 1px solid #d7d6d6; 
+    background: #fff; 
+    padding: 10px 10px 10px 20px; 
+    width: 350px; 
+    height: 150px;
+    margin-left: 20px;
+    margin-bottom: 35px;
+    outline: none;
+    text-align: start;
+}
+
+.pangprologue_box:focus {
+    border: 2px solid rgb(0, 203, 195); 
+}
+
+.pangfill_box3 {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    border: 1px solid #d7d6d6; 
+    background: #fff; 
+    padding: 10px 10px 10px 20px; 
+    width: 100px; 
+    margin-left: 40px;
+    margin-bottom: 35px;
+    outline: none;
+}
+
+.pangfill_box3:focus {
+    border: 2px solid rgb(0, 203, 195); 
+    /* border-color: rgb(0, 203, 195); */
+}
+
+.pangchap_coin_unit {
+    position: absolute;
+    left: 110px; 
+    /* top: 80px; */
+    bottom: 0px; 
+    z-index: 12;
+}
+
+.pangcheck_box {
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    margin-left: 20px;
+    font-style: normal;
+    font-weight: 400;
+}

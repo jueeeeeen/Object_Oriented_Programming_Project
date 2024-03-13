@@ -25,6 +25,7 @@ from Coin import GoldenCoin, SilverCoin
 from Comment import Comment
 
 from fastapi.middleware.cors import CORSMiddleware
+
 origins = [
      "http://localhost:5500",
      "localhost:5500",
@@ -76,12 +77,14 @@ write_a_read.add_writer(Mo)
 #----------------------------------create books----------------------------------
 # Book("name", writer, [tag_list], "publishing/hiding", age_restricted, "prologue", "dd/mm/yyyy"):
 
-shin_chan_prologue = "Shin Chan is a 50-year-old boy"
+shin_chan_prologue1 = "Shin Chan is a 50-year-old boy"
+shin_chan_prologue2 = "Not Shinosuke -> Shinnosuke"
 
-book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, shin_chan_prologue)
+
+book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, shin_chan_prologue1)
 Mo.add_writing_list(book1)
 
-book2 = Book("Shinosuke", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, shin_chan_prologue)
+book2 = Book("Shinosuke", "Mola", Mo, ["kids", "comedy","family"], "publishing", 7, shin_chan_prologue2)
 Mo.add_writing_list(book2)
 
 
@@ -89,6 +92,8 @@ Mo.add_writing_list(book2)
 #Chapter("number", "name", "context", "dd/mm/yyyy", price)
 
 book1.add_chapter_list(Chapter("Shin_chan", "1", "first_ch", "this is the first chapter of shincha", 184))
+book2.add_chapter_list(Chapter("Shin_chan", "1", "first", " the first chapter of Shinosuke", 184))
+
 
 #----------------------------------create promotions----------------------------------
 #BookPromotion("dd/mm/yyyy", discount, [book_list])

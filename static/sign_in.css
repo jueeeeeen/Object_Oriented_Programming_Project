@@ -1,3 +1,10 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "IBM Plex Sans Thai", sans-serif;
+    font-style: normal;
+}
+
 .sign_in-container {
     width: 300px;
     margin: 0 auto;
