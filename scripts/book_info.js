@@ -1,8 +1,9 @@
 // script.js
+// book_display_img();
 
 // Function to display book information and navigate
 function displayBookInfoAndNavigate(bookName) {
-    console.log("start");
+    console.log("start",bookName);
     fetch(`/book/${bookName}`)
         .then(response => {
             if (!response.ok) {
@@ -12,18 +13,23 @@ function displayBookInfoAndNavigate(bookName) {
         })
         .then(data => {
             sessionStorage.setItem('bookInfo', JSON.stringify(data));
-            // showComment(bookName)
-            // console.log("show comment")
-            // showChapter(bookName)
-            localStorage.setItem('book_name_last',bookName);
+            localStorage.setItem('book_name_last', bookName);
             console.log(localStorage.getItem('book_name_last'));
-            // console.log(bookName)
+            console.log("book_namee",bookName)
             window.location.href = "book_info.html";
         })
         .catch(error => {
             console.error('Error fetching book information:', error);
         });
 }
+
+// function book_display_img() {
+//     console.log("book-name_display",localStorage.getItem('book_name_last'))
+//     var book_name = localStorage.getItem('book_name_last');
+//     var book_img_element = `<img class="book_cover" src="assets/cover_img/${book_name}.png" alt="book_pic">`;
+//     $('#book_display_img').html(book_img_element);
+// }
+
 
 // Function to fetch and display comments
 function showComment(chapter_id) {
@@ -45,12 +51,13 @@ function showComment(chapter_id) {
         });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    const bookName = localStorage.getItem('book_name_last');
     const commentForm = document.getElementById('commentForm');
     const commentResponse = document.getElementById('comment_response');
 
     if (commentForm) {
-        commentForm.addEventListener('submit', function(event) {
+        commentForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const formData = new FormData(this);
@@ -65,24 +72,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: jsonDataString
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to submit comment');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Submitted comment data:", data);
-                if (commentResponse) {
-                    commentResponse.innerText = JSON.stringify(data);
-                }
-                showComment(jsonData.chapter_id);
-            })
-            .catch(error => {
-                console.error('Error submitting comment:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to submit comment');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Submitted comment data:", data);
+                    if (commentResponse) {
+                        commentResponse.innerText = JSON.stringify(data);
+                    }
+                    showComment(jsonData.chapter_id);
+                })
+                .catch(error => {
+                    console.error('Error submitting comment:', error);
+                });
         });
     }
+    showChapter(bookName);
+    showComment(bookName);
 
 });
 
@@ -103,7 +112,8 @@ function showChapter(book_name) {
             console.error('Error fetching chapters:', error);
         });
 }
-function back_to_book_info(){
+
+function back_to_book_info() {
     console.log("back to book")
     displayBookInfoAndNavigate(localStorage.getItem('book_name_last'))
 }

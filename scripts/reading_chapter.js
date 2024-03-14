@@ -67,20 +67,25 @@ function check_bought_chapter(username, chapter_id) {
 
 
 
-function pop_up_buy_chapter(data){
-    const pop_up_element = document.getElementById('buy_chapter_pop_up');
-    $('#buy_chapter_pop_up_box').remove();
-    var element = `<div class="buy_chapter_header">ซื้อตอน</div>
-                    <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
-                    <img src="../assets/writearead_img/close_button_light.png">
-                    </div>
-                    <hr class="lines"><br>
-                    <div class="pop_up_buy_chapter_name" id="buy_chapter_name">เรื่อง ${data.book_name}<br>ตอนที่ ${data.chapter_number}</div><br>
-                    <div onclick="buy_chapter()" class="buy_chapter_confirm_button" id="buy_chapter_button">ซื้อเลย ${data.cost} เหรียญ</div>`;
-    $('#buy_chapter_pop_up_box').append(element);
-    box.append('')
+function pop_up_buy_chapter(data) {
+    var pop_up_element = document.getElementById('buy_chapter_pop_up');
+    var pop_up_box = document.getElementById('buy_chapter_pop_up_box');
+
+    pop_up_box.innerHTML = ''; // Clear the content of the pop-up
+    var element = `
+        <div class="buy_chapter_header">ซื้อตอน</div>
+        <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+            <img src="../assets/writearead_img/close_button_light.png">
+        </div>
+        <hr class="lines"><br>
+        <div class="pop_up_buy_chapter_name" id="buy_chapter_name">เรื่อง ${data.name}<br>ตอนที่ ${data.chapter_number}</div><br>
+        <div onclick="buy_chapter()" class="buy_chapter_confirm_button" id="buy_chapter_button">ซื้อเลย ${data.cost} เหรียญ</div>
+    `;
+    pop_up_box.innerHTML = element;
+    // Show the pop-up
     pop_up_element.style.display = 'block';
 }
+
 
 function close_pop_up_buy_chapter(){
     const pop_up_element = document.getElementById('buy_chapter_pop_up');
@@ -89,8 +94,9 @@ function close_pop_up_buy_chapter(){
 
 function show_not_enough_coin(){
     coin_balance = localStorage.getItem('coin_balance')
-    const pop_up_element = document.getElementById('buy_chapter_pop_up');
-    $('#buy_chapter_pop_up_box').remove();
+    var pop_up_box = document.getElementById('buy_chapter_pop_up_box')
+    pop_up_box.innerHTML = ''; // Clear the content of the pop-up
+    
     var element = `<div class="buy_chapter_header">เติมคอยน์</div>
                     <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
                     <img src="../assets/writearead_img/close_button_light.png">
@@ -98,9 +104,10 @@ function show_not_enough_coin(){
                     <hr class="lines"><br>
                     <div class="pop_up_buy_chapter_name" id="buy_chapter_name">คุณมียอดคอยน์คงเหลือ <a style="color:var(--coin_color)""> ${coin_balance} coins</a><br>ไม่เพียงพอในการซื้อครั้งนี้</div><br>
                     <div onclick="go_to_buy_coin()" class="buy_chapter_confirm_button" id="buy_chapter_button">เติมคอยน์</div>`;
-    $('#buy_chapter_pop_up_box').append(element);
-    box.append('')
-    pop_up_element.style.display = 'block';
+
+    pop_up_box.append(element);
+    
+    // pop_up_element.style.display = 'block';
 }
 
 function show_purchased_successful(){
