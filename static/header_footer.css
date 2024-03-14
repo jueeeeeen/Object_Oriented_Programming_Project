@@ -73,9 +73,6 @@
     content: url('../assets/header_img/writing_button.png');
 }
 
-.user_icon:hover {
-    content: url('../assets/header_img/user_button.png');
-}
 
 .footer {
     background-color: #E6E6E6;
