@@ -25,9 +25,9 @@ function NavigateToChapterInfo(chapter_id) {
                 .then(is_chapter_bought => {
                     console.log(is_chapter_bought)
                     if ((data.cost && is_chapter_bought) || (data.cost == 0)){
-                        window.location.href = "reading_chapter.html"; // Redirecting to another page
+                        go_to_chapter(); // Redirecting to another page
                     } else {
-                        pop_up_buy_chapter(data.cost);
+                        pop_up_buy_chapter(data);
                     }
                 })
                 .catch(error => {
@@ -37,6 +37,10 @@ function NavigateToChapterInfo(chapter_id) {
         .catch(error => {
             console.error('Error fetching chapter information:', error);
         });
+}
+
+function go_to_chapter(){
+    window.location.href = "reading_chapter.html";
 }
 
 function check_bought_chapter(username, chapter_id) {
@@ -63,11 +67,18 @@ function check_bought_chapter(username, chapter_id) {
 
 
 
-function pop_up_buy_chapter(price){
+function pop_up_buy_chapter(data){
     const pop_up_element = document.getElementById('buy_chapter_pop_up');
-    const price_element = document.getElementById('buychapter')
-    price_element.textContent = price + ' เหรียญ'
-    price
+    $('#buy_chapter_pop_up_box').remove();
+    var element = `<div class="buy_chapter_header">ซื้อตอน</div>
+                    <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+                    <img src="../assets/writearead_img/close_button_light.png">
+                    </div>
+                    <hr class="lines"><br>
+                    <div class="pop_up_buy_chapter_name" id="buy_chapter_name">เรื่อง ${data.book_name}<br>ตอนที่ ${data.chapter_number}</div><br>
+                    <div onclick="buy_chapter()" class="buy_chapter_confirm_button" id="buy_chapter_button">ซื้อเลย ${data.cost} เหรียญ</div>`;
+    $('#buy_chapter_pop_up_box').append(element);
+    box.append('')
     pop_up_element.style.display = 'block';
 }
 
@@ -77,13 +88,34 @@ function close_pop_up_buy_chapter(){
 }
 
 function show_not_enough_coin(){
-    const response_element = document.getElementById('purchase_response');
-    response_element.textContent = 'เหรียญไม่พอ';
+    coin_balance = localStorage.getItem('coin_balance')
+    const pop_up_element = document.getElementById('buy_chapter_pop_up');
+    $('#buy_chapter_pop_up_box').remove();
+    var element = `<div class="buy_chapter_header">เติมคอยน์</div>
+                    <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+                    <img src="../assets/writearead_img/close_button_light.png">
+                    </div>
+                    <hr class="lines"><br>
+                    <div class="pop_up_buy_chapter_name" id="buy_chapter_name">คุณมียอดคอยน์คงเหลือ <a style="color:var(--coin_color)""> ${coin_balance} coins</a><br>ไม่เพียงพอในการซื้อครั้งนี้</div><br>
+                    <div onclick="go_to_buy_coin()" class="buy_chapter_confirm_button" id="buy_chapter_button">เติมคอยน์</div>`;
+    $('#buy_chapter_pop_up_box').append(element);
+    box.append('')
+    pop_up_element.style.display = 'block';
 }
 
 function show_purchased_successful(){
-    const response_element = document.getElementById('purchase_response');
-    response_element.textContent = 'ซื้อสำเร็จ';
+    const pop_up_element = document.getElementById('buy_chapter_pop_up');
+    $('#buy_chapter_pop_up_box').remove();
+    var element = `<div class="buy_chapter_header">ซื้อตอน</div>
+                    <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+                    <img src="../assets/writearead_img/close_button_light.png">
+                    </div>
+                    <hr class="lines"><br>
+                    <div class="pop_up_buy_chapter_name" id="buy_chapter_name"><a style="color:var(--main_color); font-size:16px"> ซื้อตอนสำเร็จ </a></div><br>
+                    <div onclick="go_to_chapter()" class="buy_chapter_confirm_button" style="background-color: var(--main_color_light);" id="buy_chapter_button">อ่านเลย</div>`;
+    $('#buy_chapter_pop_up_box').append(element);
+    box.append('')
+    pop_up_element.style.display = 'block'
 }
 
 function buy_chapter() {

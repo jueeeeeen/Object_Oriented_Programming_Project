@@ -1,10 +1,10 @@
-const payment_data = {};
+var payment_data = {};
 
 // localStorage
 // localStorage.getItem("login_username")
 
-payment_data.username = localStorage.getItem("login_username");
-// payment_data.username = "Mozaza";
+// payment_data.username = localStorage.getItem("login_username");
+payment_data.username = "Mozaza";
 
 document.getElementById('online_banking').addEventListener('click', function() {
     payment_data.payment_method = "OnlineBanking";
@@ -117,8 +117,8 @@ function pop_up_success_form() {
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';
-        window.location.href = '/Templates/transaction.html';
-      }, 3000);
+        window.location.href = '../Templates/transaction.html';
+    }, 3000);
 }
 
 

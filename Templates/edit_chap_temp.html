@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <title>Edit Chapter Info</title>
+    <link rel="stylesheet" type="text/css" href="/static/create_chapter.css">
+    <link rel="stylesheet" type="text/css" href="/static/payment_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+    
+    <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../scripts/edit_chap_temp.js"></script>
+    <script src="../scripts/reading_chapter.js"></script>
+    <script src="../scripts/pre_edit_book.js"></script>
+ 
+</head>
+
+<body>
+    <!-- header -->
+    <div class="header_flexbox_menu">
+        <div class="header_menu_item">
+            <a class="header_writing_type" href="#">นิยาย</a>
+            <a class="header_writing_type" href="#">แฟนฟิค</a>
+            <a class="header_writing_type" href="#">การ์ตูน</a>
+        </div>
+        <div class="header_menu_item">
+            <a href="homepage.html"><img src="assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
+        </div>
+        <div class="header_menu_item">
+            <a href="#" onclick="toggle_search()"> <img class="search_icon"
+                    src="assets/header_img/search_button_light.png" alt="Original Image"></a>
+            <a href="#"> <img class="pen_icon" src="assets/header_img/writing_button_light.png"
+                    alt="Original Image"></a>
+            <a href="#"> <img class="user_icon" src="assets/header_img/user_button_light.png" alt="Original Image"></a>
+        </div>
+    </div>
+
+    <h1 class="first_payment_title">รายตอน</h1>
+<!-- 
+    <div class=""> -->
+    <form id="editChapterForm">
+        <h1 class="pangcreate_chap_label">บทที่</h1>
+        <input class="pangfill_box1" type="number" id="chapter_number" name="chapter_number" placeholder="บทที่" required>
+        <h1 class="pangcreate_chap_label">ชื่อตอน</h1>
+        <input class="pangfill_box2" type="text" id="name" name="name" required>
+        <h1 class="pangcreate_chap_label">เนื้อหา</h1>
+        <textarea class="pangcontent_box" id="context" name="context" rows="4" cols="50" placeholder="เริ่มต้นเรื่องราวของคุณ" required></textarea>
+        <h1 class="pangcreate_chap_label">ราคา</h1>
+        <input type="hidden" id="chapter_id" name="chapter_id"> 
+    
+        <input class="pangfill_box3" type="number" id="cost" name="cost" placeholder="ราคา" value="0">
+        <div class="final_button" style="padding-bottom: 5px;" >
+            <button class="submit_button" type="submit">ยืนยัน</button> 
+        </div>
+    </form>
+    <div class="final_button" style="padding-top: 0;">
+        <button class="cancel_button" onclick="go_to_pre_edit_book()" type="submit">ยกเลิก</button>
+    </div>
+
+    <div class="flexbox-3">
+        <div class="item-3" style="text-align: center; margin-bottom: 3%; ">
+            <h1 id="response" class="info_title" style="color: rgb(0, 203, 195);"></h1>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer_item_container">
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="MyPage.html">My Page</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="search_page.html">search</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    
+</body>
+<!-- page/edit_chap_temp.html -->
+</html>

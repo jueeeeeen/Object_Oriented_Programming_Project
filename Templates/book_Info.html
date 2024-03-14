@@ -18,6 +18,8 @@
         rel="stylesheet">
     <script src="../scripts/book_info.js"></script>
     <script src="../scripts/reading_chapter.js"></script>
+    <script src="../scripts/change_page.js"></script>
+
 
 </head>
 
@@ -45,11 +47,13 @@
     <section id="buy_chapter_pop_up" class="display_none">
         <div class="book_info_dark_overlay" id="book_info_dark_overlay" onclick="toggle_change_password_off()"></div>
         <div  id="buy_chapter_pop_up_box" class="buy_chapter_pop_up_box">
-            <div class="buy_chapter_header">ซื้อตอน</div><hr class="lines"><br>
-            <div class="pop_up_buy_chapter_name" id="buy_chapter_name">เรื่อง ${book_name}<br>ตอนที่ ${chapter_number}</div><br>
-            <div onclick="buy_chapter()" class="buy_chapter_confirm_button" id="buy_chapter_button">ซื้อเลย ${cost} เหรียญ</div>
-            <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button"><img src="../assets/writearead_img/close_button_light.png"></button><div>
-            <a id="purchase_response"></a>
+            <div class="buy_chapter_header">ซื้อตอน</div>
+            <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+            <img src="../assets/writearead_img/close_button_light.png">
+            </div>
+            <hr class="lines"><br>
+            <div class="pop_up_buy_chapter_name" id="buy_chapter_name"><a style="color:var(--main_color); font-size:16px"> ซื้อตอนสำเร็จ </a></div><br>
+            <div onclick="go_to_chapter()" class="buy_chapter_confirm_button" style="background-color: var(--main_color_light);" id="buy_chapter_button">อ่านเลย</div>
         </div>
     </section>
 
@@ -254,6 +258,7 @@
                     // Check if chapterDataUse is not null and is an array
                     if (chapterDataUse && Array.isArray(chapterDataUse)) {
                         // Iterate over each comment data and create HTML elements
+                        // window.location,reload();
                         chapterDataUse.forEach(chapterData => {
                             console.log("chapterData", chapterData)
                             chaptersContainer.innerHTML += `

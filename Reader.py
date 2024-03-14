@@ -146,12 +146,12 @@ class Reader:
     def show_coin_transaction(self):
         show_list = []
         for coin_transaction in self.__coin_transaction_list:
-            payment_type = coin_transaction.payment.name
+            payment_type = coin_transaction.payment
             golden_amount = coin_transaction.golden_amount
             silver_amount = coin_transaction.silver_amount
             price = coin_transaction.price
             date_time = coin_transaction.date_time
-            show_list.append(f"{payment_type} +{golden_amount}_golden_coin +{silver_amount}_silver_coin -{price} baht at {date_time}")
+            show_list.append(f"{payment_type} {golden_amount}_golden_coin {silver_amount}_silver_coin -{price} baht at {date_time}")
         return show_list
     
     def show_chapter_transaction(self):

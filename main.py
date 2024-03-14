@@ -100,11 +100,10 @@ book2.add_chapter_list(Chapter("Shinosuke", "1", "first", " the first chapter of
 #CoinPromotion("dd/mm/yyyy", discount, "code")
 
 
-book_sale = BookPromotion("01/01/2021",50, [])
-write_a_read.add_promotion(book_sale)
-
-free_coin = CoinPromotion("01/01/2021",40, "chakeawaroi")
-write_a_read.add_promotion(free_coin)
+promotion_12_12 = CoinPromotion("01/01/2021", 40, "December")
+promotion_11_11 = CoinPromotion("01/01/2021", 20, "November")
+write_a_read.add_promotion(promotion_12_12)
+write_a_read.add_promotion(promotion_11_11)
 
 Mo.add_pseudonym("molala")
 Mo.add_pseudonym("testm")
@@ -117,8 +116,8 @@ write_a_read.create_comment("Shin_chan-1", "Mozaza", "55555")
 
 #----------------------------------create transactions----------------------------------
 
-Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", now))
-Mo.add_coin_transaction_list(CoinTransaction(TrueMoneyWallet("9876543210"), 500, "+500", "+50", now))
+Mo.add_coin_transaction_list(CoinTransaction("OnlineBanking", 500, "+500", "+50", now))
+Mo.add_coin_transaction_list(CoinTransaction("TrueMoneyWallet", 500, "+500", "+50", now))
 
 #----------------------------------add coin----------------------------------
 Mo.add_silver_coin(20)
@@ -219,8 +218,8 @@ def show_my_writing(username:str):
 
 @app.get("/get_coin_transaction/{username}", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):
-    user = write_a_read.get_user_by_username(username)
-    return user.show_coin_transaction()
+     user = write_a_read.get_user_by_username(username)
+     return user.show_coin_transaction()
 
 @app.get("/show_chapter_transaction/{username}", tags=['Chapter Transaction'])
 def ShowChapterTransaction(username:str):
@@ -298,15 +297,15 @@ def BuyChapter(dto : dto_buy_chapter):
 class dto_create_book(BaseModel):
      name:str
      writer_name:str
-     tag_list: str
+     genre: str
      prologue: str
      age_restricted: bool
      status: str 
+     pseudonym: str
      
 @app.post("/book", tags=['Book'])
 def CreateBook(dto : dto_create_book):
-     return write_a_read.create_book(dto.name, dto.writer_name, dto.tag_list, dto.status, dto.age_restricted, dto.prologue)
-
+     return write_a_read.create_book(dto.name, dto.pseudonym, dto.writer_name, dto.genre, dto.status, dto.age_restricted, dto.prologue)
 #..........................................................................................................
 
 class dto_create_chapter(BaseModel):

@@ -37,3 +37,7 @@ function go_to_transac(){
 function go_to_homepage(){
     window.location.href = 'homepage.html';
 }
+
+function go_to_create_book(){
+    window.location.href = "../Templates/create_book.html";
+}

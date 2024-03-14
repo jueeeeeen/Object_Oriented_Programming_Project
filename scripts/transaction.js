@@ -1,5 +1,5 @@
 
-const transaction_data = {};
+var transaction_data = {};
 
 // transaction_data.username = localStorage.getItem("login_username");
 transaction_data.username = 'Mozaza';

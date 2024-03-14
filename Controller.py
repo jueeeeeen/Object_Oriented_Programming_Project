@@ -359,7 +359,7 @@ class Controller:
     def show_coin(self, username):
         user = self.get_user_by_username(username)
         if self.if_user_not_found(user): return user
-        return {"Golden Coin" : user.golden_coin.balance, "Silver Coin" : user.silver_coin_balance}
+        return {"golden_coin" : user.golden_coin.balance, "silver_coin" : user.silver_coin_balance}
     
     def show_my_page(self, username):
         user = self.get_user_by_username(username)
@@ -424,8 +424,12 @@ class Controller:
         user = self.get_user_by_username(username)
         if self.if_user_not_found(user): return "username doesn't exist"
         if user.password == password:
-            return "log in successfully"
-        return "wrong password"
+            if(isinstance(user, Reader)):
+                return {"response" : "log in successfully", "role" : "reader"}
+            if(isinstance(user, Writer)):
+                return {"response" : "log in successfully", "role" : "writer"}
+            
+        return {"response" : "wrong password"}
     
     # ____________________________________Error____________________________________
     

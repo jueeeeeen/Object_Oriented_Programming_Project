@@ -17,7 +17,7 @@ function alert_success() {
 
     if(sign_up_data.password.length < 8) {
         alert('ตั้งรหัสมากกว่า 8 ตัวอักษรขึ้นไปจ้า!');
-        window.location.reload(); 
+        window.location.reload();
     }
     
     else {
@@ -41,7 +41,7 @@ function alert_success() {
             // console.log(data.message);
     
             if(data == "Sign Up Successful") {
-                window.location.href = 'sign_in.html';
+                window.location.href = '../Templates/sign_in.html';
                 alert('ลงทะเบียนสำเร็จ!');
         
             } else if(data == "username is already taken") {
@@ -51,7 +51,10 @@ function alert_success() {
                 alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
             }
     
-        })
+        }).catch((error) => {
+            console.error("Error:", error);
+        });
+        
     }
 
     

@@ -29,7 +29,6 @@ function show_my_profile(){
             .catch(error => {
                 console.error(error);
             });
-
 }
 
 function my_profile_display_img() {
