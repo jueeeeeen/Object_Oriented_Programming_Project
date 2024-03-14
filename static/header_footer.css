@@ -61,7 +61,8 @@
     display: inline-block;
     margin-left: 15px;
     margin-bottom: 0px;
-    text-decoration:none
+    text-decoration:none;
+    border-radius: 50%;
 }
 
 .search_icon:hover {

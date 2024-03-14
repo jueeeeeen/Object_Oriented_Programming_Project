@@ -9,23 +9,42 @@
     display: none;
 }
 
-.home_dd_item{
-    /* background-color: antiquewhite; */
-    margin-left: 17%;
-    margin-right: 5%;
-    font-size: 16px;
+.dd_profile_pic{
+    margin-right: 10px;
+    width: 60px;
+    border-radius: 50%;
 }
 
-.home_dd_display_name{
+.dd_item{
+    font-size: 16px;
+}
+.dd_coin_pic{
+    margin-right: 10px;
+    margin-bottom: -10px;
+    width:40px;
+}
+.dd_icon_pic{
+    margin-bottom: -5px;
+    width:25px;
+    margin-right: 10px;
+}
+.dd_profile_container{
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    display:flex;
+}
+
+.dd_display_name{
     font-size: 20px;
 }
 
-.home_dd_user_name{
+.dd_user_name{
     font-size: 16px;
     color: var(--gray);
 }
 
-.home_dd_lines{
+.dd_lines{
     display: block;
     margin: 0px;
     height:1px;
@@ -33,7 +52,7 @@
     background-color:var(--light_gray);
 }
 
-.home_dd_show_coin{
+.dd_show_coin{
     color: #FF8204;
     font-size: 24px;
 }
@@ -48,22 +67,24 @@
     justify-content: space-between;
     align-items: center;
 }
-.home_dd_top_up_btn{
+.dd_top_up_btn{
     font-size: 22px;
     padding-left:11px;
     padding-right:11px;
     border-radius: 5px;
     margin-left: 10px;
+    margin-right: 10px;
     color: white;
     background-color: var(--coin_color);
     cursor: pointer;
 }
 
-.home_dd_menu{
+.dd_menu{
     display: block;
     height: 40px;
     width: 100%;
     padding: 5px;
+    padding-left: 20Px;
     cursor: pointer;
     text-decoration:none;
     color: black;
@@ -73,6 +94,6 @@
     }
 }
 
-.home_dd_cursor_coin{
+.dd_cursor_coin{
     cursor: pointer;
 }

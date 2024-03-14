@@ -1,57 +1,81 @@
-const edit_chap_data = {};
-    // create
-    // book_name:str
-    // chapter_number:int
-    // name:str
-    // context: str
-    // cost : int
-
-    // edit
-    // chapter_id : str = None
-    //  name : str = None
-    //  context : str = None
-    //  cost : int = None
-
-// create_chap_data.book_name = localStorage.getItem('');
-// set ที่หน้า pre edit
-localStorage.getItem("book_name_last");
-localStorage.getItem("chapter_id_last");
-
-edit_chap_data.book_name = localStorage.getItem("book_name_last");
-edit_chap_data.chapter_id = localStorage.getItem("chapter_id_last");
-
-async function submit_edit_chap() {
-    create_chap_data.chapter_number = document.getElementById('chapter_number').value;
-    create_chap_data.name = document.getElementById('chapter_name').value;
-    create_chap_data.context = document.getElementById('context').value;
-    create_chap_data.cost = document.getElementById('cost').value;
-
-    axios.post("http://127.0.0.1:8000/chapter", {
-        "book_name": create_chap_data.book_name,
-        "chapter_number": create_chap_data.chapter_number,
-        "name": create_chap_data.name,
-        "context": create_chap_data.context,
-        "cost": create_chap_data.cost
-      })
-      .then((response) => {
-        console.log(response.data);
-
-        // const content = document.getElementById("content");
-        // content.innerHTML = `<p>${response.data}</p>`;
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
-
-    // window.location.href = '/page/writing';
-
-    // success_form.style.display = 'block';
-    // setTimeout(function () {
-    //     success_form.style.display = 'none';
-    //     window.location.href = '/page/transaction.html';
-    //   }, 3000);
+function displayChapterEditAndNavigate(chapter_id) {
+    localStorage.setItem('chapter_id_last', chapter_id)
+    window.location.href = "edit_chap_temp.html";
 }
 
-function cancel_button() {
-    window.location.reload(); 
+document.addEventListener('DOMContentLoaded', async function () {
+    const editChapterForm = document.getElementById('editChapterForm');
+    const chapterIdInput = document.getElementById('chapter_id');
+    const chapterNumberInput = document.getElementById('chapter_number');
+    const nameInput = document.getElementById('name');
+    const contextInput = document.getElementById('context');
+    const costInput = document.getElementById('cost');
+
+    try {
+        // Retrieve existing chapter information from the server
+        // const chapterId = 'Shin_chan-1'
+        const chapterId = localStorage.getItem('chapter_id_last'); 
+        console.log(chapterId);
+        const response = await fetch(`/chapter/info/${chapterId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch chapter information');
+        }
+        const chapterData = await response.json();
+        console.log("before chapterData: ", chapterData)
+        // Populate form fields with existing chapter information
+        chapterIdInput.value = chapterData.chapter_id;
+        nameInput.value = chapterData.name;
+        chapterNumberInput.value = chapterData.chapter_number
+        contextInput.value = chapterData.context;
+        costInput.value = chapterData.price;
+    } catch (error) {
+        console.error('Error fetching chapter information:', error);
+    }
+
+    if (editChapterForm) {
+        editChapterForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            try {
+                const formData = new FormData(this);
+                const jsonData = {};
+                formData.forEach((value, key) => {
+                    jsonData[key] = value;
+                });
+                console.log(jsonData);
+                console.log("start post method");
+                const response = await fetch('/edit_chapter', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to edit chapter');
+                }
+                const data = await response.json();
+                console.log("data after", data);
+                if (response) {
+                    console.log("data.value:", data.message)
+                    response.innerText = data.message;
+                }
+                go_to_pre_edit_book();
+            } catch (error) {
+                console.error('Error editing chapter:', error);
+            }
+        });
+    }
+});
+function go_to_pre_edit_book() {
+    const book_name = localStorage.getItem("book_name_last")
+    // const chapterId = "Shin_chan-1"
+    displayPreEditBookAndNavigate(book_name)
+}
+
+function go_to_chapter_info() {
+    // const chapterId = localStorage.getItem("chapter_name_last")
+    const chapterId = "Shin_chan-1"
+    NavigateToChapterInfo(chapterId)
 }

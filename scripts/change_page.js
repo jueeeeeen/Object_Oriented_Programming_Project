@@ -45,3 +45,8 @@ function go_to_create_book(){
 function go_to_create_chapter(){
     window.location.href = "../Templates/create_chapter.html";
 }
+
+function go_to_sign_in(){
+    localStorage.removeItem('login_username')
+    window.location.href = '../Templates/sign_in.html'
+}

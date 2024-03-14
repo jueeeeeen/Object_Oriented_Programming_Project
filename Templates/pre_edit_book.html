@@ -5,9 +5,11 @@
     <title>BookInfo</title>
     <!-- Include your CSS and other meta tags here -->
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
-    <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
+    <link rel="stylesheet" type="text/css" href="../static/payment_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/bookstyle.css">
+    <link rel="stylesheet" type="text/css" href="../static/main_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/header_footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/drop_down.css">
     <!--fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +29,18 @@
 <body>
 
     <div id="book-info"></div>
-    <!--หัวกระดาษ-->
+    <section id="searchBar">
+        <div id="dark_overlay" onclick="toggle_search_off()"></div>
+        <div  id="search_header">
+            <div class="search_item">
+                <form id="searchForm">
+                    <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
+                    <a href="#" onclick="toggle_search_off()"> <img class="close_search" src="../assets/header_img/close_search.png" alt=Original Image"></a>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <div class="header_flexbox_menu">
         <div class="header_menu_item">
             <a class="header_writing_type" href="#">นิยาย</a>
@@ -35,16 +48,54 @@
             <a class="header_writing_type" href="#">การ์ตูน</a>
         </div>
         <div class="header_menu_item">
-            <a href="homepage.html"><img src="assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
+            <a href="../Templates/homepage.html"><img src="../assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
         </div>
         <div class="header_menu_item">
-            <a href="#" onclick="toggle_search()"> <img class="search_icon"
-                    src="assets/header_img/search_button_light.png" alt="Original Image"></a>
-            <a href="#"> <img class="pen_icon" src="assets/header_img/writing_button_light.png"
-                    alt="Original Image"></a>
-            <a href="#"> <img class="user_icon" src="assets/header_img/user_button_light.png" alt="Original Image"></a>
+            <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button_light.png" alt="Original Image"></a>
+            <a href="#" onclick="go_to_my_writing()"> <img class="pen_icon" src="../assets/header_img/writing_button_light.png" alt=Original Image"></a>
+            <a href="#" onclick="toggle_user_icon_drop_down(), replace_dd_info()"> <img class="user_icon" id="header_profile_pic" src="../assets/header_img/user_button_light.png" alt="Original Image" onerror="this.onerror=null;this.src='../assets/header_img/user_button_light.png';" ></a>
         </div>
     </div>
+<br><br><br>
+
+<section id="home_dd_container">
+    <div>
+        <div class="dd_profile_container home_dd_cursor_coin" onclick="go_to_my_page()">
+            <div>
+                <img class="dd_profile_pic" id="dd_profile_pic" src="../assets/header_img/user_button_light.png">
+            </div>
+            <div>
+                <a class="dd_display_name" id="dd_display_name">{display_name}</a> <br>
+                <a class="dd_user_name" id="dd_username">{username}</a>
+            </div>
+        </div>
+        <hr class="dd_lines">
+        <div class="dd_item space dd_cursor_coin">
+            <div style="margin-left: 15px;">
+                <div class="coin_color" id="dd_golden_coin"><img class="dd_coin_pic" src="../assets/writearead_img/golden_coin.png">{golden_coin}</div>
+                <div style="color: var(--gray);" id="dd_silver_coin"><img class="dd_coin_pic" src="../assets/writearead_img/silver_coin.png">{silver_coin}</div>
+                <div id="dd_total_coin">รวม {total_coin} คอยน์์</div>
+            </div>
+            <div>
+                <a onclick="go_to_buy_coin()" class="dd_top_up_btn">+</a>
+            </div>
+        </div>
+        <hr class="dd_lines">
+        <div class="dd_item">
+            <div onclick="go_to_my_writing()" class="dd_menu"><img class="dd_icon_pic" src="../assets/writearead_img/my_writing.png">My Writing</div>
+            <div onclick="go_to_my_page()" class="dd_menu"><img class="dd_icon_pic" src="../assets/writearead_img/my_page.png">My Page</div>
+            <div onclick="go_to_my_profile()" class="dd_menu"><img class="dd_icon_pic" src="../assets/writearead_img/my_profile.png">My Profile</div>
+        </div>
+        <hr class="dd_lines">
+        <div class="dd_item">
+            <div onclick="go_to_transac()" class="dd_menu"><img class="dd_icon_pic" src="../assets/writearead_img/transaction.png">ประวัติการสั่งซื้อ</div>
+        </div>
+        <hr class="dd_lines">
+        <div class="dd_item">
+            <div onclick="go_to_sign_in()" class="dd_menu"><img class="dd_icon_pic" src="../assets/writearead_img/sign_out.png">ออกจากระบบ</div>
+        </div>
+    </div>
+</section>
 
     <!--book info-->
     <div class="book_flexbox">
@@ -123,40 +174,27 @@
                 <p class="info_text chapter_content" style="color: rgb(63, 185, 170);">บทที่</p>
                 <p class="info_text text-3 chapter_content">ชื่อตอน</p>
                 <p class="info_text chapter_content" style="margin: auto;">ราคา</p>
-                <img class="watch_icon chapter_content" src="assets/book_img/eye.png" alt="watched" />
+                <img class="watch_icon chapter_content" src="../assets/book_img/eye.png" alt="watched" />
                 <p class="info_text chapter_content" style="margin: auto;">แก้ไข</p>
             </div>
             <div id="chaptersContainer" class="chapter_grid" style="grid-template-rows: 50px 50px 50px;"></div>
         </div>
     </div>
 
-    <!-- footer -->
     <footer class="footer">
-        <div class="footer_item_container">
-            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
-        </div>
-        <div class="footer_item_container">
-            <a class="footer_menu_text" href="payment.html">Payment</a>
-        </div>
-        <div class="footer_item_container">
-            <a class="footer_menu_text" href="MyPage.html">My Page</a>
-        </div>
-        <div class="footer_item_container">
-            <a class="footer_menu_text" href="search_page.html">search</a>
-        </div>
-        <div class="footer_item_container">
-            <a class="footer_menu_text" href="payment.html">Payment</a>
-        </div>
-        <div class="footer_item_container">
-            <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
-        </div>
-    </footer>
-    <br>
+        <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+        <a class="footer_menu_text" href="../Templates/my_page.html">My Page</a><br>
+        <a class="footer_menu_text" href="../Templates/my_profile.html">My Profile</a><br>
+        <a class="footer_menu_text" href="../Templates/payment.html">Buy coin</a><br>
+        <a class="footer_menu_text" href="../Templates/transaction.html">Transaction</a><br>
+        <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+</footer>
+
 
     <script>
         const book_naame = localStorage.getItem('book_name_edit_last')
         console.log(book_naame)
-        document.getElementById('book_cover_img').src = `assets/covers_img/${book_naame}.png`;
+        document.getElementById('book_cover_img').src = `../assets/covers_img/${book_naame}.png`;
         console.log("bookname", localStorage.getItem('book_name_edit_last'))
         console.log("username", localStorage.getItem('login_username'))
         // Retrieve book information from sessionStorage
@@ -218,7 +256,14 @@
         }
 
     </script>
+    <script>
+    var username = localStorage.getItem('login_username');
+    var header_profile_pic = document.getElementById('header_profile_pic');
+    header_profile_pic.src = `../assets/profile_img/${username}.png`;
+</script>
+<script src="../scripts/search_bar.js"></script>
+<script src="../scripts/change_page.js"></script>
+<script src="../scripts/dropdown_info.js"></script>
 </body>
-<!-- ${chapterData.name}+"-"+${chapterData.chapter_number} -->
 
 </html>

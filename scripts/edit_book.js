@@ -92,6 +92,5 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 function go_to_pre_edit_book() {
     const book_name = localStorage.getItem("book_name_last")
-    // const chapterId = "Shin_chan-1"
     displayPreEditBookAndNavigate(book_name)
 }

@@ -12,6 +12,7 @@ html, body {
     border: 50px solid white;
     border-radius: 5px;
     background-color: white;
+    
 }
 
 .sign_in-container .box {
@@ -29,6 +30,7 @@ html, body {
 }
 
 .sign_in-container label {
+    text-align: center;
     display: block;
     margin-bottom: 5px;
 }
