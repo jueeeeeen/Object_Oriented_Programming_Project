@@ -5,7 +5,7 @@
     <title>BookInfo</title>
     <!-- Include your CSS and other meta tags here -->
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/mystyle.css">
     <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
     <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
     <link rel="stylesheet" type="text/css" href="/static/chapter_pop_up.css">
@@ -45,10 +45,11 @@
     <section id="buy_chapter_pop_up" class="display_none">
         <div class="book_info_dark_overlay" id="book_info_dark_overlay" onclick="toggle_change_password_off()"></div>
         <div  id="buy_chapter_pop_up_box" class="buy_chapter_pop_up_box">
-            <a>ต้องการซื้อตอนนี้หรือไม่</a>
-            <div class="pop_up_chapter_price">99 เหรียญ</div>
-            <button onclick="buy_chapter()" class="buy_chapter_confirm_button">ซื้อ</button>
-            <button onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">ยกเลิก</button>
+            <div class="buy_chapter_header">ซื้อตอน</div><hr class="lines"><br>
+            <div class="pop_up_buy_chapter_name" id="buy_chapter_name">เรื่อง ${book_name}<br>ตอนที่ ${chapter_number}</div><br>
+            <div onclick="buy_chapter()" class="buy_chapter_confirm_button" id="buy_chapter_button">ซื้อเลย ${cost} เหรียญ</div>
+            <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button"><img src="../assets/writearead_img/close_button_light.png"></button><div>
+            <a id="purchase_response"></a>
         </div>
     </section>
 

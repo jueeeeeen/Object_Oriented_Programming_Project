@@ -1,6 +1,6 @@
 search();
 
-var received_search_str = localStorage.getItem('search_str_from_home');
+var received_search_str = sessionStorage.getItem('search_str_from_home');
 //  `<div class="search_result_container">
 //                         <div class="image-container">
 //                             <img src="../assets/covers_img/${book_name}.png" alt="../assets/covers_img/temp_cover.jpg">
@@ -94,7 +94,6 @@ function search_by_string(search_str){
             })
             .then(resp => resp.json())
             .then(data => {
-                console.log(search_str);
                 const search_input = document.getElementById("searchInputPage")
                 search_input.value = search_str;
                 current_data = data;
@@ -104,7 +103,7 @@ function search_by_string(search_str){
             .catch(error => {
                 console.error(error);
             });
-}
+        }
 
 function display_books(){
     if (current_data.book.length == 0) {

@@ -1,42 +1,55 @@
-var role = '';
 
+var sign_up_data = {}
 
 document.getElementById('role').addEventListener('change', function() {
-    role = this.value;
+    sign_up_data.role = this.value;
 });
 
 
-async function alert_success() {
-    var username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const birth_date = document.getElementById('birth_date').value;
+function alert_success() {
+    sign_up_data.username = document.getElementById('username').value;
+    sign_up_data.password = document.getElementById('password').value;
+    sign_up_data.birth_date = document.getElementById('birth_date').value;
 
-    if(password.length < 8) {
+    if((sign_up_data.username == "") || (sign_up_data.password == "") || (sign_up_data.birth_date == "") || (sign_up_data.role == "")) {
+        alert('กรอกข้อมูลไม่ครบจ้าพี่');
+    }
+
+    if(sign_up_data.password.length < 8) {
         alert('ตั้งรหัสมากกว่า 8 ตัวอักษรขึ้นไปจ้า!');
         window.location.reload(); 
     }
     
     else {
         
-        axios.post("http://127.0.0.1:8000/sign_up", {
-            "username": username,
-            "password": password,
-            "birth_date": birth_date,
-            "role": role
+        const jsonDataString = JSON.stringify(sign_up_data);
+        fetch(`/sign_up`, {
+
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+
+            body: jsonDataString
         })
         .then((response) => {
-        console.log(response.data);
+            if (!response.ok) {
+                throw new Error('Failed to submit comment');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // console.log(data.message);
+    
+            if(data == "Sign Up Successful") {
+                window.location.href = 'sign_in.html';
+                alert('ลงทะเบียนสำเร็จ!');
         
-        if(response.data == "Sign Up Successful") {
-            window.location.href = 'sign_in.html';
-            alert('ลงทะเบียนสำเร็จ!');
-    
-        } else if(response.data == "username is already taken") {
-            alert('ชื่อนี้ถูกใช้แล้ว');
-    
-        } else {
-            alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
-        }
+            } else if(data == "username is already taken") {
+                alert('ชื่อนี้ถูกใช้แล้ว');
+        
+            } else {
+                alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+            }
     
         })
     }

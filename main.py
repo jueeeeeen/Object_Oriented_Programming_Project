@@ -92,7 +92,7 @@ Mo.add_writing_list(book2)
 #Chapter("number", "name", "context", "dd/mm/yyyy", price)
 
 book1.add_chapter_list(Chapter("Shin_chan", "1", "first_ch", "this is the first chapter of shincha", 184))
-book2.add_chapter_list(Chapter("Shin_chan", "1", "first", " the first chapter of Shinosuke", 184))
+book2.add_chapter_list(Chapter("Shinosuke", "1", "first", " the first chapter of Shinosuke", 184))
 
 
 #----------------------------------create promotions----------------------------------
@@ -134,19 +134,23 @@ Mo.add_book_shelf_list(book2)
 # ____________________________________FastAPI___________________________________
 # _________________________________________________ GET _________________________________________________
 
-# @app.get("/")
-# def FirstPage(req: Request):
-#      return template.TemplateResponse(name="homepage.html", context={"request":req})
+@app.get("/")
+def FirstPage(req: Request):
+     return templates.TemplateResponse(name="sign_in.html", context={"request":req})
+
+# @app.get('/', response_class=HTMLResponse)
+# def main(request: Request):
+#      return templates.TemplateResponse('sign_in.html', {'request': request})
 
 @app.get("/show_all_book")
 def get_all_book():
      return write_a_read.show_all_book_list()
 
-@app.get("/", response_class=HTMLResponse)
-async def read_items(request: Request):
-     with open("Templates/homepage.html") as f:
-          html_content = f.read()
-     return HTMLResponse(content=html_content, status_code=200)
+# @app.get("/", response_class=HTMLResponse)
+# async def read_items(request: Request):
+#      with open("Templates/homepage.html") as f:
+#           html_content = f.read()
+#      return HTMLResponse(content=html_content, status_code=200)
 
 @app.get("/book/{book_name}")
 async def get_book_info(book_name: str):
@@ -239,10 +243,6 @@ def SignIN(username:str, password:str):
 @app.get("/search_all/{search_str}", tags=['search bar'])
 def search_all(search_str:str):
      return write_a_read.search_all_list(search_str)
-
-@app.get('/', response_class=HTMLResponse)
-def main(request: Request):
-     return templates.TemplateResponse('homepage.html', {'request': request})
 
 @app.get("/get_coin_transaction", tags=['Coin Transaction'])
 def get_coin_transaction(username:str):

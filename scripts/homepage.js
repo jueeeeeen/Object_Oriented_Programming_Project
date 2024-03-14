@@ -1,6 +1,5 @@
 let toggle_dd_status = false;
 
-show_book_from_all();
 
 function toggle_user_icon_drop_down(){
     toggle_search_off();
@@ -37,25 +36,4 @@ function go_to_transac(){
 
 function go_to_homepage(){
     window.location.href = 'homepage.html';
-}
-
-function show_book_from_all(){
-    document.addEventListener('DOMContentLoaded', (event) => {
-        document.getElementById("searchFormPage").addEventListener("submit", function (e) {
-            e.preventDefault(); // Cancel the default action
-            var search_str = document.getElementById('searchInputPage').value;
-            fetch('/search_all/' + search_str, {
-                method: 'GET',
-            })
-            .then(resp => resp.json())
-            .then(data => {
-                current_data = data;
-                $('#search_result_page').empty();
-                show_type(data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        });
-    });
 }
