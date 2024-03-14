@@ -1,7 +1,7 @@
 let current_data;
 
-// username = localStorage.getItem('login_username');
-const username = "Mozaza"
+username = localStorage.getItem('login_username');
+// const username = "Mozaza"
 
 show_my_profile();
 

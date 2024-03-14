@@ -36,10 +36,14 @@ class Book:
     @property
     def writer(self):
         return self.__writer
-
-    @property
+    
+    @property    
     def genre(self):
-        return self.__genre
+        return self.__genre  
+    
+    @genre.setter
+    def genre(self, new_genre):
+        self.__genre = new_genre
         
     @property
     def age_restricted(self):
@@ -156,9 +160,9 @@ class Book:
     def show_book_info(self):
         return {"name" : self.__name,
                 "pseudonym" : self.__pseudonym,
-                "genre" : self.genre,
-                "status" : self.status,
-                "prologue" : self.prologue,
+                "genre" : self.__genre,
+                "status" : self.__status,
+                "prologue" : self.__prologue,
                 "age_retricted" : self.show_age_restricted(),
                 "chapter_count" : self.chapter_count,
                 "comments" : self.show_comment_list()}

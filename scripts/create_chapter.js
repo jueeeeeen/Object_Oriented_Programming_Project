@@ -35,7 +35,7 @@ async function submit_create_chap() {
         console.error("Error:", error);
     });
 
-    // window.location.href = '/page/writing';
+    window.location.href = '../Templates/my_writing.html';
 
     // success_form.style.display = 'block';
     // setTimeout(function () {

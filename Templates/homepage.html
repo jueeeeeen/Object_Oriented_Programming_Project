@@ -22,6 +22,7 @@
         <script src="/scripts/change_page.js"></script>
         <script src="/scripts/book_info.js"></script>
         <script src="/scripts/show_all_book.js"></script>
+        <script src="../scripts/dropdown_info.js"></script>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +53,7 @@
             <div class="header_menu_item">
                 <a href="#" onclick="toggle_search()"> <img class="search_icon" src="../assets/header_img/search_button_light.png" alt="Original Image"></a>
                 <a href="#" onclick="go_to_my_writing()"> <img class="pen_icon" src="../assets/header_img/writing_button_light.png" alt=Original Image"></a>
-                <a href="#" onclick="toggle_user_icon_drop_down()"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
+                <a href="#" onclick="toggle_user_icon_drop_down(), replace_dd_info()"> <img class="user_icon" src="../assets/header_img/user_button_light.png" alt=Original Image"></a>
             </div>
         </div>
     <br><br><br>
@@ -63,13 +64,13 @@
                 <a class="home_dd_user_name" id="dd_username">{username}</a>
             </div>
             <hr class="home_dd_lines">
-            <div onclick="go_to_my_buy_coin()" class="home_dd_item space home_dd_cursor_coin">
+            <div class="home_dd_item space home_dd_cursor_coin">
                 <div class="">
                     <div class="coin_color" id="dd_golden_coin">Golden coin : {golden_coin}</div>
                     <div style="color: var(--gray);" id="dd_silver_coin">Silver coin : {silver_coin}</div>
                 </div>
                 <div>
-                    <a class="home_dd_top_up_btn">+</a>
+                    <a onclick="go_to_buy_coin()" class="home_dd_top_up_btn">+</a>
                 </div>
             </div>
             <hr class="home_dd_lines">

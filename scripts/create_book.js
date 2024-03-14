@@ -75,7 +75,7 @@ function submit_create_book() {
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';
-        window.location.href = '../Templates/my_writing.html';
+        window.location.href = '../Templates/pre_edit_chapter.html';
       }, 3000);
 }
 

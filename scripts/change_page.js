@@ -41,3 +41,7 @@ function go_to_homepage(){
 function go_to_create_book(){
     window.location.href = "../Templates/create_book.html";
 }
+
+function go_to_create_chapter(){
+    window.location.href = "../Templates/create_chapter.html";
+}

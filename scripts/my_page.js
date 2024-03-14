@@ -3,8 +3,8 @@ let current_data;
 let search_type = 0;
 
 
-// const username = localStorage.getItem('login_username');
-const username = "Mozaza";
+const username = localStorage.getItem('login_username');
+// const username = "Mozaza";
 
 show_my_page();
 

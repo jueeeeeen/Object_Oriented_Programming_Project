@@ -20,12 +20,11 @@
     <script src="../scripts/reading_chapter.js"></script>
     <script src="../scripts/edit_book.js"></script>
     <script src="../scripts/edit_chap_temp.js"></script>
+    <script src="../scripts/pre_edit_book.js"></script>
+    <script src="../scripts/change_page.js"></script>
 </head>
 
 <body>
-    <!-- <script> setTimeout(function(){
-        window.location.reload();
-    }, 1000); </script> -->
 
     <div id="book-info"></div>
     <!--หัวกระดาษ-->
@@ -117,7 +116,7 @@
             <div style="display: flex;">
                 <a class="info_title" style="width: 100%; vertical-align: middle; margin: 0;">ตอนทั้งหมด</a>
                 <a style="text-align: right; width: 100%;">
-                    <button class="new_chapter_button" id="addChapterButton">เพิ่มตอนใหม่</button>
+                    <button class="new_chapter_button" onclick="go_to_create_chapter()" id="addChapterButton">เพิ่มตอนใหม่</button>
                 </a>
             </div>
             <div class="chapter_grid" style="grid-template-rows: 50px;">

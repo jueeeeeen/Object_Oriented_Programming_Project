@@ -1,8 +1,8 @@
 
 var transaction_data = {};
 
-// transaction_data.username = localStorage.getItem("login_username");
-transaction_data.username = 'Mozaza';
+transaction_data.username = localStorage.getItem("login_username");
+// transaction_data.username = 'Mozaza';
 
 document.getElementById('transaction_type').addEventListener('change', function() {
     const transaction_type = this.value;
@@ -24,7 +24,7 @@ const img_not_found = document.getElementById('not_found');
 
 function show_coin_transaction() {
     const input = transaction_data.username;
-
+    console.log(input)
     fetch(`/get_coin_transaction/${input}`)
     
     .then(response => {
@@ -82,14 +82,14 @@ function show_chapter_transaction() {
     console.log(data)
 
     const chapter_transaction = data
-    const content = document.getElementById('return_coin_transaction');
+    const content = document.getElementById('return_chapter_transaction');
     content.innerHTML = '';
 
 
     if(chapter_transaction && chapter_transaction.length > 0) {
         for(let i = 0; i < chapter_transaction.length; i++) {
             console.log(chapter_transaction[i]);
-            content.innerHTML += `<div><p> ${coin_transaction[i]} </p></div>`;
+            content.innerHTML += `<div><p> ${chapter_transaction[i]} </p></div>`;
             coin_transaction_box.style.display = 'none';
             chap_transaction_box.style.display = 'block';
             img_not_found.style.display = 'none';

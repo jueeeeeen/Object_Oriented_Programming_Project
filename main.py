@@ -81,10 +81,10 @@ shin_chan_prologue1 = "Shin Chan is a 50-year-old boy"
 shin_chan_prologue2 = "Not Shinosuke -> Shinnosuke"
 
 
-book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", 7, shin_chan_prologue1)
+book1 = Book("Shin_chan", "Mola", Mo, ["kids", "comedy","crime"], "publishing", True, shin_chan_prologue1)
 Mo.add_writing_list(book1)
 
-book2 = Book("Shinosuke", "Mola", Mo, ["kids", "comedy","family"], "publishing", 7, shin_chan_prologue2)
+book2 = Book("Shinosuke", "Mola", Mo, ["kids", "comedy","family"], "publishing", False, shin_chan_prologue2)
 Mo.add_writing_list(book2)
 
 
@@ -195,7 +195,7 @@ def searchBook(book_name:str):
 def SearchUser(username:str):
      return {"user": write_a_read.search_user(username)}
 
-@app.get("/coin", tags=['coin'])
+@app.get("/coin/{username}", tags=['coin'])
 def MyCoin(username:str):
      return write_a_read.show_coin(username)
 
@@ -388,15 +388,14 @@ def ChangeDisplayName(dto : dto_change_display_name):
 class dto_edit_book(BaseModel):
      old_name : str = None
      new_name : str = None
-     add_tag_list: list = None
-     delete_tag_list: list = None
+     new_genre: str = None
      prologue: str = None
      age_restricted: bool = None
      status: str = None
      
 @app.put("/edit_book", tags=['Book'])
 def EditBookInfo(dto : dto_edit_book):
-     book =  write_a_read.edit_book_info(dto.old_name,dto.new_name,dto.add_tag_list,dto.delete_tag_list,dto.status,dto.age_restricted,dto.prologue)
+     book =  write_a_read.edit_book_info(dto.old_name, dto.new_name, dto.new_genre, dto.status, dto.age_restricted, dto.prologue)
      if isinstance(book,Book):
           return book
      else:
@@ -444,8 +443,7 @@ def EditChapterInfo(dto : dto_edit_chapter):
 # print("----------Edit everything-----------")
 # print(write_a_read.edit_book_info("SAO", "Shinnosuke", "lala", ["kids", "comedy"], [], "hiding", False, "edited"))
 # print("----------Edit tags-----------")
-# print(write_a_read.edit_book_info("Shinnosuke", "Shinnosuke", "lala", ["family"], ["romance"], "hiding", False, "edited"))
-
+print(write_a_read.edit_book_info("Shinosuke", "Shinnosuke", "familyromance", "hiding", False, "edited"))
 # print("_______________________________________________Creat Chapter_______________________________________________")
 # print(write_a_read.create_chapter("Shin_chan", "10", "second", "hihi", 50))
 

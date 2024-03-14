@@ -1,5 +1,5 @@
-// const username = localStorage.getItem('login_username');
-const username = "Mozaza";
+const username = localStorage.getItem('login_username');
+// const username = "Mozaza";
 
 show_my_writing();
 
@@ -90,11 +90,5 @@ function display_writing_result(result){
         <p class="my_writing_book_description">${genre}</p>
     </div>
 </div>`;
-
-    var verti = `<div class="homepage_book_item">
-    <div class="homepage_cover_container"><img src="../assets/covers_img/${book_name}.png"></div>
-    <a class="homepage_book_title" onclick="displayBookInfoAndNavigate('${book_name}')">${book_name}</a>
-    <a class="homepage_book_pseudonym">${pseudonym}</a>
-</div>`
     $('#my_writing_show_result').append(element);
 }

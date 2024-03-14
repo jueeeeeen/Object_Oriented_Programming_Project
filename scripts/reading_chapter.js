@@ -1,5 +1,5 @@
 
-const username = "Pangrum";
+const username = localStorage.getItem('login_username');
 var data_chapter_id;
 
 let current_chapter_id;
@@ -82,7 +82,6 @@ function pop_up_buy_chapter(data) {
         <div onclick="buy_chapter()" class="buy_chapter_confirm_button" id="buy_chapter_button">ซื้อเลย ${data.cost} เหรียญ</div>
     `;
     pop_up_box.innerHTML = element;
-    // Show the pop-up
     pop_up_element.style.display = 'block';
 }
 
@@ -92,38 +91,58 @@ function close_pop_up_buy_chapter(){
     pop_up_element.style.display = 'none';
 }
 
-function show_not_enough_coin(){
-    coin_balance = localStorage.getItem('coin_balance')
-    var pop_up_box = document.getElementById('buy_chapter_pop_up_box')
-    pop_up_box.innerHTML = ''; // Clear the content of the pop-up
-    
-    var element = `<div class="buy_chapter_header">เติมคอยน์</div>
-                    <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
-                    <img src="../assets/writearead_img/close_button_light.png">
-                    </div>
-                    <hr class="lines"><br>
-                    <div class="pop_up_buy_chapter_name" id="buy_chapter_name">คุณมียอดคอยน์คงเหลือ <a style="color:var(--coin_color)""> ${coin_balance} coins</a><br>ไม่เพียงพอในการซื้อครั้งนี้</div><br>
-                    <div onclick="go_to_buy_coin()" class="buy_chapter_confirm_button" id="buy_chapter_button">เติมคอยน์</div>`;
+function show_not_enough_coin() {
+    get_coin_balance()
+        .then(coinData => {
+            var coin_balance = coinData.silver_coin + coinData.golden_coin;
 
-    pop_up_box.append(element);
-    
-    // pop_up_element.style.display = 'block';
+            var pop_up_box = document.getElementById('buy_chapter_pop_up_box');
+            pop_up_box.innerHTML = ''; // Clear the content of the pop-up
+
+            var element = `
+                <div class="buy_chapter_header">เติมคอยน์</div>
+                <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+                    <img src="../assets/writearead_img/close_button_light.png">
+                </div>
+                <hr class="lines"><br>
+                <div class="pop_up_buy_chapter_name" id="buy_chapter_name">
+                    คุณมียอดคอยน์คงเหลือ <a style="color:var(--coin_color)">${coin_balance} coins</a><br>
+                    ไม่เพียงพอในการซื้อครั้งนี้
+                </div><br>
+                <div onclick="go_to_buy_coin()" class="buy_chapter_confirm_button" id="buy_chapter_button">เติมคอยน์</div>
+            `;
+
+            pop_up_box.innerHTML = element;
+        })
+        .catch(error => {
+            console.error('Error getting coin balance:', error);
+        });
 }
 
-function show_purchased_successful(){
-    const pop_up_element = document.getElementById('buy_chapter_pop_up');
-    $('#buy_chapter_pop_up_box').remove();
-    var element = `<div class="buy_chapter_header">ซื้อตอน</div>
-                    <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
+function show_purchased_successful() {
+    get_coin_balance()
+        .then(coinData => {
+            var coin_balance = coinData.silver_coin + coinData.golden_coin;
+
+            var pop_up_box = document.getElementById('buy_chapter_pop_up_box');
+            pop_up_box.innerHTML = `
+                <div class="buy_chapter_header">ซื้อตอน</div>
+                <div onclick="close_pop_up_buy_chapter()" class="buy_chapter_cancel_button">
                     <img src="../assets/writearead_img/close_button_light.png">
-                    </div>
-                    <hr class="lines"><br>
-                    <div class="pop_up_buy_chapter_name" id="buy_chapter_name"><a style="color:var(--main_color); font-size:16px"> ซื้อตอนสำเร็จ </a></div><br>
-                    <div onclick="go_to_chapter()" class="buy_chapter_confirm_button" style="background-color: var(--main_color_light);" id="buy_chapter_button">อ่านเลย</div>`;
-    $('#buy_chapter_pop_up_box').append(element);
-    box.append('')
-    pop_up_element.style.display = 'block'
+                </div>
+                <hr class="lines"><br>
+                <div class="pop_up_buy_chapter_name" id="buy_chapter_name">
+                    <a style="color:var(--main_color); font-size:16px"> ซื้อตอนสำเร็จ </a><br>
+                    ยอดคงเหลือ <a style="color:var(--coin_color)">${coin_balance} coins</a>
+                </div><br>
+                <div onclick="go_to_chapter()" class="buy_chapter_confirm_button" style="background-color: var(--main_color_light);" id="buy_chapter_button">อ่านเลย</div>
+            `;
+        })
+        .catch(error => {
+            console.error('Error showing purchased successful:', error);
+        });
 }
+
 
 function buy_chapter() {
     const jsonData = {
@@ -146,18 +165,34 @@ function buy_chapter() {
     })
     .then(data => {
         console.log(data);
-        if (data === 'Done') {
+        if (data == 'Done') {
             show_purchased_successful();
-        } else {
+        } else{
             show_not_enough_coin();
         }
     })
     .catch(error => {
         console.error('Error', error);
     })
-    .finally(() => {
-        setTimeout(() => {
-            close_pop_up_buy_chapter();
-        }, 3000); // Adjust timeout as needed
+}
+
+function get_coin_balance(){
+    return fetch(`/coin/${username}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data;
+    })
+    .catch(error => {
+        console.error('Error', error);
+        throw error;
     });
 }

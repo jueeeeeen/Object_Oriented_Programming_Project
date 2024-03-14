@@ -1,10 +1,9 @@
 var payment_data = {};
 
 // localStorage
-// localStorage.getItem("login_username")
+payment_data.username = localStorage.getItem("login_username");
+// payment_data.username = "Mozaza";
 
-// payment_data.username = localStorage.getItem("login_username");
-payment_data.username = "Mozaza";
 
 document.getElementById('online_banking').addEventListener('click', function() {
     payment_data.payment_method = "OnlineBanking";
@@ -85,7 +84,8 @@ function pop_up_info_form() {
 function pop_up_success_form() {
     payment_data.code = document.getElementById('promotion_code').value;
     payment_data.payment_info = document.getElementById('payment_info').value;
-    
+    console.log(payment_data)
+
     const jsonDataString = JSON.stringify(payment_data)
     fetch(`/buy_coin`, {
 
