@@ -78,14 +78,11 @@ class Controller:
     
     def get_chapter_by_chapter_id_or_book(self, chapter_id):
         if "-" in chapter_id:
-            for book in self.all_book_list:
-                for chapter in book.chapter_list:
-                    if chapter.chapter_id == chapter_id:
-                        return chapter
+            return self.get_chapter_by_chapter_id(chapter_id)
         elif isinstance(self.get_book_by_name(chapter_id),Book):
             return self.get_book_by_name(chapter_id)
         else:
-            return {"message":"Chapter Not Found"}
+            return {"message":"Chapter/Book Not Found"}
         
     
     def get_book_by_chapter_id(self, chapter_id):
@@ -200,24 +197,23 @@ class Controller:
         
     # ____________________________________Financials___________________________________
         
-    def buy_coin(self, username, payment, code, golden_amount):
+    def buy_coin(self, username, payment_method, payment_info, code, golden_amount):
+        payment = self.create_payment_method(payment_method, payment_info)
         price = golden_amount
         silver_amount = int(golden_amount * 10 / 100)
-        
         user = self.get_user_by_username(username)
-        print(username)
-        coin_promotion = self.search_coin_promotion(code) #redeem code?
+        coin_promotion = self.search_coin_promotion(code)
         
         if(code != None and coin_promotion != None):
             print("Applying code")
-            price = (100 - coin_promotion.discount) / 100 * price #ลดราคา
-            
+            price = (100 - coin_promotion.discount) / 100 * price #ลดราคา 
         elif(coin_promotion != None):
                 return "Your code is expired or not exist"
         else:
             print("Not applying any code")
             
         self.add_coin_to_user(user, payment, golden_amount, silver_amount, price)
+        return "Purchase successful, THANK YOU"
 
     def add_coin_to_user(self, user, payment, golden_amount, silver_amount, price):
         payment.buy_coin(price)
@@ -269,8 +265,7 @@ class Controller:
         if isinstance(writer,Writer) and not isinstance(book,Book):
             new_book = Book(name, pseudonym, writer, tag_list, status,age_restricted, prologue)
             writer.add_writing_list(new_book)
-            return {"create book successfully" : new_book.show_book_info()}
-            #pint returns new_book
+            return {"create book successfully" : new_book.show_book_info(writer, self.__report_type_list)}
         return "please try again"
     
     #return reasons in detail, ไม่ควรสร้าง chapter ที่ n ได้ถ้ายังไม่มี n-1
@@ -284,17 +279,20 @@ class Controller:
             return "please try again"
         
     def create_comment(self, chapter_id, username, context):
+        print(chapter_id,username,context)
         chapter = self.get_chapter_by_chapter_id(chapter_id)
         user = self.get_user_by_username(username)
-        if not isinstance(chapter, Chapter): return {"Comment": "please try again"}
-        new_comment = Comment(chapter, user, context)
-        book = self.get_book_by_chapter_id(chapter_id)
-        book.add_comment_list(new_comment)
-        chapter.add_comment(new_comment)
-        return {"Comment": "create comment success"}
+        if isinstance(chapter, Chapter) and isinstance(user, Reader):
+            new_comment = Comment(chapter, user, context)
+            book = self.get_book_by_chapter_id(chapter_id)
+            book.add_comment_list(new_comment)
+            chapter.add_comment(new_comment)
+            print("comment create")
+            return new_comment.show_comment()
+        else:
+            print("No comment create")
+            return {"Comment": "please try again"}
         
-    # อันนี้ไว้ทำไรอะ
-    # รับ username มาด้วยดีมั้ย แล้วเพิ่มpaymentmethodไว้ในuserแต่ละคน  
     def create_payment_method(self, payment_method_name, payment_info):
         if payment_method_name == self.__payment_list[0]:
             return OnlineBanking(payment_info)
@@ -314,14 +312,18 @@ class Controller:
     def create_report(self,book_name, username, report_type, context):
         user = self.get_user_by_username(username)
         book = self.get_book_by_name(book_name)
-        # print(book,user)
-        if isinstance(book,Book) and (isinstance(user,Reader) or isinstance(user,Writer)) and report_type in self.report_type_list:
+        if isinstance(book,Book) and isinstance(user,Reader) and report_type in self.report_type_list:
             new_report = Report(book,user,report_type, context)
             book.add_report_list(new_report)
-            # print("new_report: ",new_report.book,new_report.user,new_report.report_type)
-            return new_report
+            return {"massage":"report successfully"}
         else:
-            return {"report": "please try again"}
+            return {"massage" : "! Cannot create report !"}
+        
+    def add_book_list(self,username,book_name):
+        print("add book controller",book_name)
+        user = self.get_user_by_username(username)
+        book = self.get_book_by_name(book_name)
+        return user.add_book_shelf_list(book)
         
     # ____________________________________Edit / Change___________________________________
             
@@ -329,20 +331,23 @@ class Controller:
         book = self.get_book_by_name(old_name)
         writer = self.get_user_by_username(writer_name)
         #เขียนดักไม่ให้ช้ำ
-        if writer == book.writer:
-            if new_name:
-                book.name = new_name
-            #เขียนดักให้เพิ่ม pseudonym ก่อนถึงจะใช้ได้ หรือ เพิ่ม pseudonym เข้าลิสต์หลังใช้ new_pseudonym
-            if genre:
-                book.genre = genre
-            if status:
-                book.status = status
-            if age_restricted != book.age_restricted:
-                book.age_restricted = age_restricted
-            if prologue:
-                book.prologue = prologue
-            book.date_time = datetime.now() #last edit
-            return {"Book updated" : book.show_book_info(writer)}
+        if isinstance(book,Book):
+            if writer == book.writer:
+                if new_name:
+                    book.name = new_name
+                #เขียนดักให้เพิ่ม pseudonym ก่อนถึงจะใช้ได้ หรือ เพิ่ม pseudonym เข้าลิสต์หลังใช้ new_pseudonym
+                if genre:
+                    book.genre = genre
+                if status:
+                    book.status = status
+                if age_restricted != book.age_restricted:
+                    book.age_restricted = age_restricted
+                if prologue:
+                    book.prologue = prologue
+                book.date_time = datetime.now() #last edit
+                return {"Book updated" : book.show_book_info(writer)}
+        else:
+            {"error" : "Book not found"}
             
     def edit_chapter_info(self,chapter_id, name, context, cost):
         chapter = self.get_chapter_by_chapter_id(chapter_id)
@@ -373,6 +378,10 @@ class Controller:
         user = self.get_user_by_username(username)
         user.display_name = new_display_name
         return "display name has been changed"
+    
+    def edit_introducton(self, username, new_introduction):
+        user = self.get_user_by_username(username)
+        user.edit_introduction(new_introduction)
     
     # ____________________________________Show / View____________________________________
     
@@ -444,6 +453,43 @@ class Controller:
         book = self.get_book_by_name(book_name)
         return book.show_report_list()
     
+    def show_chapter_transaction(self, username):
+        user = self.get_user_by_username(username)
+        return user.show_chapter_transaction()
+    
+    def get_coin_transation(self, username):
+        user = self.get_user_by_username(username)
+        return user.show_coin_transaction()
+    
+    def get_silver_coin_list(self, username):
+        user = self.get_user_by_username(username)
+        return user.show_silver_coin_list()
+    
+    def show_book_shelf(self,username):
+        user = self.get_user_by_username(username)
+        return user.show_book_shelf(self.__report_type_list)
+    
+    def show_chapter_info(self,chapter_id):
+        chapter = self.get_chapter_by_chapter_id_or_book(chapter_id)
+        if isinstance(chapter, Chapter):
+            return chapter.show_chapter_info()
+        else:
+            raise {"message" : "chapter not found"}
+    
+    def show_comment_list(self,chapter_id):
+        chapter_or_book = self.get_chapter_by_chapter_id_or_book(chapter_id)
+        if isinstance(chapter_or_book,Chapter) or isinstance(chapter_or_book,Book):
+            return chapter_or_book.show_comment_list()
+        else:
+            return chapter_or_book
+        
+    def show_chapter_list_in_book(self,book_name):
+        book = self.get_book_by_name(book_name)
+        if isinstance(book,Book):
+            return book.show_chapter_list()
+        else:
+            return {"message" : "Wrong book name"}
+
     # ____________________________________others___________________________________    
     
     def sign_in(self, username, password):

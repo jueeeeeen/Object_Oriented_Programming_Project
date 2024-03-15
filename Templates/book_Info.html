@@ -110,8 +110,9 @@
     <!--book info-->
     <div class="book_flexbox">
         <div class="book_item">
-            <img class="book_cover" id="book_cover_img" alt="book_cover" />
+            <img class="book_cover" id="book_cover_img" alt="book_cover">
         </div>
+
         <div class="book_info_flexbox">
             <div class="book_info_item">
                 <div class="text-0">
@@ -133,6 +134,9 @@
                     <a id="prologueInfo"></a>
                 </div>
             </div>
+            <div class="book_info_item" style="bottom: 0; right: 0; height: 210px; width: 200px; display: flex;"></div>
+            <a style="text-decoration: none; color:beige" href="report_page.html"> <img class="home_icon" style="text-align: right; width: 30px;" src="../assets/writearead_img/report_icon.png" alt="Original Image">รายงานงานเขียนนี้</a>
+
         </div>
     </div>
 
@@ -141,6 +145,7 @@
         <div class="item-3">
             <div class="info_title">Prologue</div>
             <a id="prologueDisplay"></a>
+
         </div>
     </div>
     <div class="flexbox-3">
@@ -236,11 +241,10 @@
                                 <div class="item-3">
                                     <div class="comment-context-text">${commentData.context}</div>
                                     <div class="comment-info-flexbox">
-                                        <div class="comment-username-text" style="text-align: left; width:50%;">
+                                        <div class="comment-username-text" style="text-align: left; width:100%;">
                                             <a class="comment-username-text">${commentData.chapter}</a>
                                         </div>
-                                        <div class="comment-username-text" style="text-align: right; width:50%;">
-                                            <a href="report_page.html"> <img class="home_icon" style="text-align: right;" src="../assets/book_img/report_icon.png" alt="Original Image"></a>
+                                        <div class="comment-username-text" style="text-align: right; width:100%;">
                                             <br>
                                             <a class="comment-username-text">${commentData.user}</a>
                                             <br>
