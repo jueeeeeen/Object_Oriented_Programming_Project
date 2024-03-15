@@ -59,7 +59,7 @@ function show_my_page(){
 
 function display_img() {    
     // Create the HTML string for the profile image
-    var profile_img_element = `<img class="profile_pic" src="../assets/profile_img/${username}.png" alt="profile_pic" onerror="this.onerror=null;this.src='../assets/covers_img/temp_cover.jpg';" 
+    var profile_img_element = `<img class="profile_pic" src="../assets/profile_img/${username}.png" alt="profile_pic" onerror="this.onerror=null;this.src='../assets/header_img/user_button_light.png';" 
     alt="../assets/header_img/user_button_light.png">`;
 
     // Replace the content of the existing container with the new HTML

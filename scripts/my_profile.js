@@ -34,8 +34,9 @@ function show_my_profile(){
 function my_profile_display_img() {
     console.log(current_data);
     var username = current_data.username;
-    var profile_img_element = `<img class="my_profile_profile_pic" src="../assets/profile_img/${username}.png" alt="profile_pic" onerror="this.onerror=null;this.src='../assets/covers_img/temp_cover.jpg';" 
+    var profile_img_element = `<img class="my_profile_profile_pic" src="../assets/profile_img/${username}.png" alt="profile_pic" onerror="this.onerror=null;this.src='../assets/header_img/user_button_light.png';" 
     alt="../assets/header_img/user_button_light.png">`
+
     $('#my_profile_profile_pic_container').html(profile_img_element);
 }
 

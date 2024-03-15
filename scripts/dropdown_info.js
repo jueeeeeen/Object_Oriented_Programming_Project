@@ -1,6 +1,3 @@
-
-var username = localStorage.getItem('login_username')
-
 function get_user_info() {
     return Promise.all([get_coin_balance(), get_my_profile()])
         .then(([coinData, profileData]) => {
@@ -27,6 +24,7 @@ function get_user_info() {
 
 
 function get_my_profile() {
+    var username = localStorage.getItem('login_username');
     return fetch('/my_profile/' + username, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -45,6 +43,7 @@ function get_my_profile() {
 
 
 function get_coin_balance(){
+    var username = localStorage.getItem('login_username');
     return fetch(`/coin/${username}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

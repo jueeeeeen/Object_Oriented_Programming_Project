@@ -23,7 +23,9 @@
     <script src="../scripts/edit_book.js"></script>
     <script src="../scripts/edit_chap_temp.js"></script>
     <script src="../scripts/pre_edit_book.js"></script>
+    <script src="../scripts/search_bar.js"></script>
     <script src="../scripts/change_page.js"></script>
+    <script src="../scripts/dropdown_info.js"></script>
 </head>
 
 <body>
@@ -257,13 +259,9 @@
 
     </script>
     <script>
-    var username = localStorage.getItem('login_username');
-    var header_profile_pic = document.getElementById('header_profile_pic');
-    header_profile_pic.src = `../assets/profile_img/${username}.png`;
-</script>
-<script src="../scripts/search_bar.js"></script>
-<script src="../scripts/change_page.js"></script>
-<script src="../scripts/dropdown_info.js"></script>
+        var header_profile_pic = document.getElementById('header_profile_pic');
+        header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
+    </script>
 </body>
 
 </html>

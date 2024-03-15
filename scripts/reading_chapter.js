@@ -1,5 +1,6 @@
 
 const username = localStorage.getItem('login_username');
+console.log(username);
 var data_chapter_id;
 
 let current_chapter_id;
@@ -157,14 +158,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (commentForm) {
         commentForm.addEventListener('submit', function (event) {
             event.preventDefault();
-
+            
             const formData = new FormData(this);
             const jsonData = {};
             formData.forEach((value, key) => { jsonData[key] = value });
-            const jsonDataString = JSON.stringify(jsonData);
-
             jsonData.chapter_id = localStorage.getItem('chapter_id_read_last')
             jsonData.username = localStorage.getItem('username')
+            const jsonDataString = JSON.stringify(jsonData);
+
+            
 
             console.log("new comment : ",jsonData)
             fetch(`/comment/${jsonData.chapter_id}`, {

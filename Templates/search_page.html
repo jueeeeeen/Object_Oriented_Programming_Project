@@ -139,9 +139,8 @@
             <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
     </footer>
     <script>
-        var username = localStorage.getItem('login_username');
         var header_profile_pic = document.getElementById('header_profile_pic');
-        header_profile_pic.src = `../assets/profile_img/${username}.png`;
+        header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
     </script>
     <script src="../scripts/search_bar.js"></script>
     <script src="../scripts/change_page.js"></script>

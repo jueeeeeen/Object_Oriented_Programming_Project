@@ -434,9 +434,11 @@ class Controller:
         chapter = self.get_chapter_by_chapter_id(chapter_id)
         return chapter.show_chapter_info()
     
-    def view_book(self, book_name):
+    def view_book(self, book_name, writer_name):
         book = self.get_book_by_name(book_name)
-        return book.show_book_info()
+        writer = self.get_user_by_username(writer_name)
+        if isinstance(book,Book):
+            return book.show_book_info(writer, self.__report_type_list)
     
     def show_all_report(self,book_name):
         book = self.get_book_by_name(book_name)
@@ -454,12 +456,3 @@ class Controller:
                 return {"response" : "log in successfully", "role" : "writer"}
             
         return {"response" : "wrong password"}
-    
-    def counting_report(self, book_name):
-        book = self.get_book_by_name(book_name)
-        for report_type in self.__report_type_list:
-            if book.counting_report_from_type(report_type) >= 10:
-                #send to web master
-                book.status = "hiding"
-                return f"this book has been reported 10 times in {report_type}"
-        return "this book has been reported less than 10 times"

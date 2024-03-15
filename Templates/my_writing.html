@@ -15,11 +15,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-
+        
+        <script src="../scripts/search_bar.js"></script>
+        <script src="../scripts/change_page.js"></script>
+        <script src="../scripts/dropdown_info.js"></script>
         <script src="../scripts/my_writing.js"></script>
-
-
-
+        <script src="../scripts/book_info.js"></script>
+        <script src="../scripts/pre_edit_book.js"></script>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -97,7 +100,7 @@
         
         <div class="my_writing_info_page">
             <div class="my_writing_btn">Writing</div><br>
-            <button class="my_writing_add_writing_btn" onclick="go_to_create_book()" id="addWritingTask">เพิ่มงานเขียน</button>
+            <button class="my_writing_add_writing_btn" onclick="check_writer()" id="addWritingTask">เพิ่มงานเขียน</button>
         </div>
         <br><br>
             <div class="my_writing_view_types_container" id="my_writing_show_result"></div>
@@ -130,18 +133,8 @@
                 <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
         </footer>
         <script>
-            var username = localStorage.getItem('login_username');
             var header_profile_pic = document.getElementById('header_profile_pic');
-            header_profile_pic.src = `../assets/profile_img/${username}.png`;
+            header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
         </script>
-        <script src="../scripts/search_bar.js"></script>
-        <script src="../scripts/change_page.js"></script>
-        <script src="../scripts/dropdown_info.js"></script>
-        <script src="../scripts/search_bar.js"></script>
-        
-        <script src="../scripts/book_info.js"></script>
-        <script src="../scripts/pre_edit_book.js"></script>
-        <script src="../scripts/change_page.js"></script>
-
     </body>
 </html>

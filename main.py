@@ -23,6 +23,7 @@ from CoinTransaction import CoinTransaction
 from Promotion import BookPromotion, CoinPromotion, Promotion
 from Coin import GoldenCoin, SilverCoin
 from Comment import Comment
+from Report import Report
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -139,30 +140,15 @@ Mo.add_book_shelf_list(book2)
 def FirstPage(req: Request):
      return templates.TemplateResponse(name="sign_in.html", context={"request":req})
 
-# @app.get('/', response_class=HTMLResponse)
-# def main(request: Request):
-#      return templates.TemplateResponse('sign_in.html', {'request': request})
-
 @app.get("/show_all_book")
 def get_all_book():
      return write_a_read.show_all_book_list()
 
-# @app.get("/", response_class=HTMLResponse)
-# async def read_items(request: Request):
-#      with open("Templates/homepage.html") as f:
-#           html_content = f.read()
-#      return HTMLResponse(content=html_content, status_code=200)
-
 @app.get("/book/{book_name}")
-async def get_book_info(book_name: str):
-     book = write_a_read.get_book_by_name(book_name)
-     print(book)
-     if isinstance(book,Book):
-          return {"name":book.name, "pseudonym":book.pseudonym, "genre":book.genre, "status":book.status, \
-               "age_restricted":book.age_restricted, "prologue":book.prologue, "date_time":book.date_time_str,\
-               "writer_name":book.writer.username}
-     else:
-          return {"message": "Book not found"}
+async def get_book_info(book_name: str, writer_name: str):
+     return write_a_read.view_book(book_name, writer_name)
+
+print(write_a_read.view_book("Shin_chan", "Pangrum"))
      
 @app.get("/chapter/comment/{chapter_id}", tags=['chapter'])
 def show_comment_list(chapter_id:str):
@@ -493,4 +479,17 @@ def EditChapterInfo(dto : dto_edit_chapter):
 # print("_______________________________________________Buy Coin_______________________________________________")
 # print(write_a_read.buy_coin("Mozaza", OnlineBanking, "chakeawaroi", 100))
 
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kid kids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kid kid')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kid ks')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kidsda')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old man kids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','old maid kids')
 
+write_a_read.create_report('Shin_chan','Mozaza','violence','old n kid kids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','o man kid sdvdsvkids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','oldman ksdvdvdewid kids')
+write_a_read.create_report('Shin_chan','Mozaza','violence','oldman ksdvdvdewidvsdd kids')
+print("book_info:",write_a_read.view_book("Shin_chan","Pangrum"))

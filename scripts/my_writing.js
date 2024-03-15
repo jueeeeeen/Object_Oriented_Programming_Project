@@ -1,8 +1,8 @@
-const username = localStorage.getItem('login_username');
 
 show_my_writing();
 
 function check_writer(){
+    const username = localStorage.getItem('login_username');
     fetch(`/check_writer/${username}`)
         .then(response => {
             if (!response.ok) {
@@ -14,7 +14,7 @@ function check_writer(){
             console.log(data)
             console.log("data.message: ",data.role);
             if (data.role == "writer"){
-                go_to_my_writing();
+                go_to_create_book();
             }
             else if (data.role == "reader"){
                 console.log("navigate_to_not_writer_page");
@@ -46,6 +46,7 @@ const show_book_html = `<div class="search_result_container">
 
 
 function show_my_writing(){
+    const username = localStorage.getItem('login_username');
             fetch('/my_writing/' + username, {
                 method: 'GET',
             })
@@ -59,12 +60,12 @@ function show_my_writing(){
             });
 }
 
-//รอเปลี่ยนเป็น API ที่ถูกต้อง
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('addChapterButton').addEventListener('click', function() {
         window.location.href = "create_chapter.html"; 
     });
-
+    
     function displayPreEditChapterAndNavigate(bookName) {
         console.log("start");
 

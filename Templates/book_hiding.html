@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="/static/payment_style.css">
-        <link rel="stylesheet" href="/static/create_chapter.css">
-        <link rel="stylesheet" type="text/css" href="../static/main_style.css">
-        <link rel="stylesheet" type="text/css" href="../static/header_footer.css">
-        <link rel="stylesheet" type="text/css" href="../static/drop_down.css">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-        
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Create Chapter</title>
+<head>
+    <title>WriteARead</title>
+    <link rel="stylesheet" type="text/css" href="../static/payment_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/bookstyle.css">
+    <link rel="stylesheet" type="text/css" href="../static/header_footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/main_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/drop_down.css">
 
-    </head>
-    <body>
-        
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="../scripts/search_bar.js"></script>
+    <script src="../scripts/change_page.js"></script>
+    <script src="../scripts/dropdown_info.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
         <section id="searchBar">
             <div id="dark_overlay" onclick="toggle_search_off()"></div>
             <div  id="search_header">
@@ -86,68 +97,26 @@
         </div>
     </section>
 
-        <h1 class="first_payment_title">รายตอน</h1>
-
-        <div class="">
-            <h1 class="pangcreate_chap_label">บทที่</h1>
-            <form>
-                <input class="pangfill_box1" type="number" id="chapter_number" name="chapter_number" placeholder="บทที่" required>
-            </form>
+    <div class="flexbox-3">
+        <div class="item-3" style="text-align: center; margin-bottom: 3%; background-color: white;">
+            <h1 class="info_title" style="color: rgb(220, 87, 21);">! Book is hiding !</h1>
+            <button class="submit_button" onclick="go_to_homepage()">Homepage</button>
         </div>
+    </div>
 
-        <div class="">
-            <h1 class="pangcreate_chap_label">ชื่อตอน</h1>
-            <form>
-                <input class="pangfill_box2" type="text" id="chapter_name" name="chapter_name" placeholder="(ตัวอย่าง การผจญภัยครั้งใหม่)" required>
-            </form>
-        </div>
+    <footer class="footer">
+        <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+        <a class="footer_menu_text" href="../Templates/my_page.html">My Page</a><br>
+        <a class="footer_menu_text" href="../Templates/my_profile.html">My Profile</a><br>
+        <a class="footer_menu_text" href="../Templates/payment.html">Buy coin</a><br>
+        <a class="footer_menu_text" href="../Templates/transaction.html">Transaction</a><br>
+        <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        var header_profile_pic = document.getElementById('header_profile_pic');
+        header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
+    </script>
+</body>
 
-        <div class="">
-            <h1 class="pangcreate_chap_label">เนื้อหา</h1>
-            <form>
-                <textarea class="pangcontent_box" id="context" name="context" rows="4" cols="50" placeholder="เริ่มต้นเรื่องราวของคุณ" required></textarea>
-            </form>
-        </div>
-
-        <div class="">
-            <h1 class="pangcreate_chap_label">ราคา</h1>
-            <form>
-                <input class="pangfill_box3" type="number" id="cost" name="cost" placeholder="ราคา" value="0">
-                <!-- <p class="pangchap_coin_unit">เหรียญ</p> -->
-            </form>
-        </div>
-
-
-
-        <div class="final_button">
-            <button class="cancel_button" onclick="cancel_button()" type="submit">ยกเลิก</button>
-            <button class="submit_button" onclick="submit_create_chap()" type="submit">ยืนยัน</button> 
-        </div>
-
-        <!-- pop up2 -->
-        <div class="popup" id="success_form">
-            <form class="info_form_container">
-                <div id="content"></div>
-            </form>
-        </div>
-        
-        <hr>
-        <footer class="footer">
-                <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
-                <a class="footer_menu_text" href="../Templates/my_page.html">My Page</a><br>
-                <a class="footer_menu_text" href="../Templates/my_profile.html">My Profile</a><br>
-                <a class="footer_menu_text" href="../Templates/payment.html">Buy coin</a><br>
-                <a class="footer_menu_text" href="../Templates/transaction.html">Transaction</a><br>
-                <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
-        </footer>
-        <script>
-            var header_profile_pic = document.getElementById('header_profile_pic');
-            header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
-        </script>
-        <script src="../scripts/search_bar.js"></script>
-        <script src="../scripts/change_page.js"></script>
-        <script src="../scripts/dropdown_info.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="/scripts/create_chapter.js"></script>
-    </body>
 </html>

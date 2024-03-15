@@ -18,6 +18,10 @@
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 
         
+        <script src="../scripts/search_bar.js"></script>
+        <script src="../scripts/change_page.js"></script>
+        <script src="../scripts/dropdown_info.js"></script>
+        <script src="../scripts/my_page.js"></script>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -131,7 +135,7 @@
                     <a id="my_page_introduction">{introduction}</a>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
         <br>
         <div class="my_page_view_types_container">
@@ -153,16 +157,10 @@
             <a class="footer_menu_text" href="../Templates/transaction.html">Transaction</a><br>
             <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
     </footer>
-    
     <script>
-        var username = localStorage.getItem('login_username');
         var header_profile_pic = document.getElementById('header_profile_pic');
-        header_profile_pic.src = `../assets/profile_img/${username}.png`;
+        header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
     </script>
-    <script src="../scripts/my_page.js"></script>
-    <script src="../scripts/search_bar.js"></script>
-    <script src="../scripts/change_page.js"></script>
-    <script src="../scripts/dropdown_info.js"></script>
     
     </body>
 </html>

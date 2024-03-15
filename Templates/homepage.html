@@ -13,6 +13,13 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+        <script src="../scripts/search_bar.js"></script>
+        <script src="../scripts/banner_slide.js"></script>
+        <script src="../scripts/change_page.js"></script>
+        <script src="../scripts/book_info.js"></script>
+        <script src="../scripts/show_all_book.js"></script>
+        <script src="../scripts/dropdown_info.js"></script>
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -118,51 +125,11 @@
         </div>
 
         <hr>
-            <a class="tag_title">Love Novel</a><br><br>
-            <a class="subtag_title">นิยายรัก</a>
+        <br>
+            <a class="tag_title">Novel</a><br><br>
+            <a class="subtag_title">นิยาย</a>
 
-            <div class="home_page_book_flexbox" id="home_page_book_flexbox">
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title"  onclick="displayBookInfoAndNavigate('Shin_chan')">Shin_chan</a>
-                    <a class="homepage_book_pseudonym">djdajkdld</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title"  onclick="displayBookInfoAndNavigate('Shin_chan')">Shin_chan</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title">ปีที่แล้วเธอกับฉันเราพลัดหลงกัน</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title">พี่ครับนมผมไหล ref:เพื่อนในกลุ่ม</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title">test book name if too longgggggggggggg</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title">book name</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title">book name</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-                <div class="homepage_book_item">
-                    <div class="homepage_cover_container"><img src="../assets/covers_img/Shin_chan.png"></div>
-                    <a class="homepage_book_title">book name</a>
-                    <a class="homepage_book_pseudonym">pseudonym</a>
-                </div>
-            </div>
+            <div class="home_page_book_flexbox" id="home_page_book_flexbox"></div>
             <br>
 
         
@@ -176,15 +143,9 @@
             <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
     </footer>
         <script>
-            var username = localStorage.getItem('login_username');
             var header_profile_pic = document.getElementById('header_profile_pic');
-            header_profile_pic.src = `../assets/profile_img/${username}.png`;
+            header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
         </script>
-        <script src="../scripts/search_bar.js"></script>
-        <script src="../scripts/banner_slide.js"></script>
-        <script src="../scripts/change_page.js"></script>
-        <script src="../scripts/book_info.js"></script>
-        <script src="../scripts/show_all_book.js"></script>
-        <script src="../scripts/dropdown_info.js"></script>
+        
     </body>
 </html>
