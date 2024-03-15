@@ -345,7 +345,7 @@ class Controller:
                 if prologue:
                     book.prologue = prologue
                 book.date_time = datetime.now() #last edit
-                return {"Book updated" : book.show_book_info(writer)}
+                return {"Book updated" : book.show_book_info(writer, self.__report_type_list)}
         else:
             {"error" : "Book not found"}
             

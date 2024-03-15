@@ -1,6 +1,9 @@
+const writer_name = localStorage.getItem('login_username');
+
+
 function displayBookEditAndNavigate(bookName) {
     console.log("start");
-    fetch(`/book/${bookName}`)
+    fetch(`/book/${bookName}?writer_name=${writer_name}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to fetch book information');
@@ -29,11 +32,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     const old_prologue = document.getElementById('old_prologue');
     const old_date_time = document.getElementById('old_date_time');
 
-
     try {
-        const book_old_name = localStorage.getItem('book_name_edit_last')
-        console.log(book_old_name)
-        const response = await fetch(`/book/${book_old_name}`);
+        const book_old_name = localStorage.getItem('book_name_edit_last');
+        console.log(book_old_name);
+        const response = await fetch(`/book/${book_old_name}?writer_name=${writer_name}`);
         if (!response.ok) {
             throw new Error('Failed to fetch book information');
         }
@@ -64,8 +66,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     jsonData[key] = value;
                 });
                 
-                console.log("start fetch book edit", jsonData.old_name)
-                jsonData.writer_name = this.localStorage.getItem('login_username');
+                console.log("start fetch book edit", jsonData.old_name);
+                jsonData.writer_name = writer_name;
 
                 const response = await fetch(`/edit_book`, { 
                     method: 'PUT',
@@ -92,6 +94,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 function go_to_pre_edit_book() {
-    const book_name = localStorage.getItem("book_name_last")
+    const book_name = localStorage.getItem("book_name_edit_last")
     displayPreEditBookAndNavigate(book_name)
 }

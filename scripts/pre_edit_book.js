@@ -1,12 +1,9 @@
-// script.js
-// book_display_img();
-// Function to display book information and navigate
-
 function displayPreEditBookAndNavigate(bookName) {
+    const writer_name = localStorage.getItem('login_username');
     console.log("start edit book");
     console.log("bookName : ",bookName)
-    fetch(`/book/${bookName}`)
-        .then(response => {
+    fetch(`/book/${bookName}?writer_name=${writer_name}`)
+            .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to fetch book information');
             }
@@ -16,7 +13,7 @@ function displayPreEditBookAndNavigate(bookName) {
             sessionStorage.setItem('bookInfo', JSON.stringify(data));
             localStorage.setItem('book_name_edit_last', bookName);
             console.log(localStorage.getItem('book_name_edit_last'));
-            console.log("book_namee",bookName)
+            console.log("book_namee",bookName);
             window.location.href = "pre_edit_book.html";
         })
         .catch(error => {
