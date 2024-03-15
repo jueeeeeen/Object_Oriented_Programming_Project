@@ -39,7 +39,6 @@ function showComment(chapter_id) {
         })
         .then(data => {
             console.log(`Received comments for chapter ${chapter_id}:`, data);
-            // Store the comment data in sessionStorage
             sessionStorage.setItem('commentData', JSON.stringify(data));
         })
         .catch(error => {
@@ -67,10 +66,9 @@ function showChapter(book_name) {
 
 
 const username = localStorage.getItem('login_username');
-console.log(username);
+// console.log(username);
 var data_chapter_id;
 
-let current_chapter_id;
 
 function NavigateToChapterInfo(chapter_id) {
     console.log("start");
@@ -79,16 +77,14 @@ function NavigateToChapterInfo(chapter_id) {
             if (!response.ok) {
                 throw new Error('Failed to fetch chapter information');
             }
-            console.log("receive response");
+            console.log(response);
             return response.json();
         })
         .then(data => {
             sessionStorage.setItem('chapterInfo', JSON.stringify(data)); // Storing chapter info
+            localStorage.setItem('current_chapter_id', chapter_id)
+            console.log(chapter_id)
 
-            current_chapter_id = chapter_id;
-            console.log(current_chapter_id)
-
-            // const username = localStorage.getItem('login_username');
             check_bought_chapter(username, chapter_id)
                 .then(is_chapter_bought => {
                     console.log(is_chapter_bought)
@@ -129,7 +125,7 @@ function check_bought_chapter(username, chapter_id) {
     })
     .catch(error => {
         console.error('Error', error);
-        throw error; // Propagate the error to be caught in NavigateToChapterInfo
+        throw error;
     });
 }
 
@@ -212,8 +208,8 @@ function show_purchased_successful() {
 }
 
 function back_to_book_info() {
-    console.log("back to book")
-    displayBookInfoAndNavigate(localStorage.getItem('book_name_last'))
+    console.log("back to book");
+    displayBookInfoAndNavigate(localStorage.getItem('book_name_last'));
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -229,13 +225,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const formData = new FormData(this);
             const jsonData = {};
             formData.forEach((value, key) => { jsonData[key] = value });
-            jsonData.chapter_id = localStorage.getItem('chapter_id_read_last')
-            jsonData.username = localStorage.getItem('username')
+            jsonData.chapter_id = localStorage.getItem('current_chapter_id');
+            jsonData.username = username;
             const jsonDataString = JSON.stringify(jsonData);
 
             
 
-            console.log("new comment : ",jsonData)
+            console.log("new comment : ",jsonData);
             fetch(`/comment/${jsonData.chapter_id}`, {
                 method: 'POST',
                 headers: {
@@ -270,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function buy_chapter() {
     const jsonData = {
         username: username,
-        chapter_id: current_chapter_id
+        chapter_id: localStorage.getItem('current_chapter_id')
     };
 
     const jsonDataString = JSON.stringify(jsonData);

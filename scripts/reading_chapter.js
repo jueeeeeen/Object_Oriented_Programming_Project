@@ -1,6 +1,3 @@
-
-const username = localStorage.getItem('login_username');
-console.log(username);
 var data_chapter_id;
 
 let current_chapter_id;
@@ -12,19 +9,20 @@ function NavigateToChapterInfo(chapter_id) {
             if (!response.ok) {
                 throw new Error('Failed to fetch chapter information');
             }
-            console.log("receive response");
+            // console.log("receive response");
             return response.json();
         })
         .then(data => {
-            sessionStorage.setItem('chapterInfo', JSON.stringify(data)); // Storing chapter info
+            // console.log("chapter data");
+            sessionStorage.setItem('chapterInfo', JSON.stringify(data));
 
             current_chapter_id = chapter_id;
-            console.log(current_chapter_id)
+            // console.log("chapter_id :" ,current_chapter_id)
 
-            // const username = localStorage.getItem('login_username');
+            const username = localStorage.getItem('login_username');
             check_bought_chapter(username, chapter_id)
                 .then(is_chapter_bought => {
-                    console.log(is_chapter_bought)
+                    // console.log(is_chapter_bought)
                     if ((data.cost && is_chapter_bought) || (data.cost == 0)){
                         go_to_chapter(); // Redirecting to another page
                     } else {
@@ -57,7 +55,7 @@ function check_bought_chapter(username, chapter_id) {
         return response.json();
     })
     .then(data => {
-        console.log({data});
+        // console.log({data});
         return data;
     })
     .catch(error => {
@@ -145,7 +143,7 @@ function show_purchased_successful() {
 }
 
 function back_to_book_info() {
-    console.log("back to book")
+    // console.log("back to book")
     displayBookInfoAndNavigate(localStorage.getItem('book_name_last'))
 }
 
@@ -168,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             
 
-            console.log("new comment : ",jsonData)
+            // console.log("new comment : ",jsonData)
             fetch(`/comment/${jsonData.chapter_id}`, {
                 method: 'POST',
                 headers: {
@@ -183,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Submitted comment data:", data);
+                    // console.log("Submitted comment data:", data);
                     if (commentResponse) {
                         commentResponse.innerText = JSON.stringify(data);
                     }
@@ -201,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function buy_chapter() {
+    var username = localStorage.getItem('login_username')
     const jsonData = {
         username: username,
         chapter_id: current_chapter_id
@@ -220,7 +219,7 @@ function buy_chapter() {
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data == 'Done') {
             show_purchased_successful();
         } else{
@@ -233,6 +232,7 @@ function buy_chapter() {
 }
 
 function get_coin_balance(){
+    var username = localStorage.getItem('login_username');
     return fetch(`/coin/${username}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -244,7 +244,7 @@ function get_coin_balance(){
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        // console.log(data);
         return data;
     })
     .catch(error => {

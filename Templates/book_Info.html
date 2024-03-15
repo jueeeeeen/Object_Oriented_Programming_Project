@@ -19,10 +19,7 @@
     <script src="../scripts/dropdown_info.js"></script>    
     <script src="../scripts/search_bar.js"></script>
     <script src="../scripts/change_page.js"></script>
-    
-    
-    
-    
+ 
 </head>
 
 <body>
@@ -129,11 +126,11 @@
                     <a id="pseudonymInfo"></a>
                 </div>
             </div>
-            <div class="book_info_item">
+            <!-- <div class="book_info_item">
                 <div class="book_title">
                     <a id="prologueInfo"></a>
                 </div>
-            </div>
+            </div> -->
             <div class="book_info_item" style="bottom: 0; right: 0; height: 210px; width: 200px; display: flex;"></div>
             <a style="text-decoration: none; color:beige" href="report_page.html"> <img class="home_icon" style="text-align: right; width: 30px;" src="../assets/writearead_img/report_icon.png" alt="Original Image">รายงานงานเขียนนี้</a>
 
@@ -219,7 +216,7 @@
                     // Display book information in the HTML page
                     document.getElementById('genre').textContent = genre || '';
                     document.getElementById('bookName').textContent = name || '';
-                    document.getElementById('prologueInfo').textContent = prologue || '';
+                    // document.getElementById('prologueInfo').textContent = prologue || '';
                     document.getElementById('prologueDisplay').textContent = prologue || '';
                     document.getElementById('writer_username').textContent = writer_name || '';
                     document.getElementById('date_time').textContent = date_time || '';
@@ -297,9 +294,5 @@
         }
 
     </script>
-    
 </body>
-
-<!-- ${chapterData.name}+"-"+${chapterData.chapter_number} -->
-
 </html>

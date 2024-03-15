@@ -436,7 +436,7 @@ class Controller:
         if self.if_user_not_found(user): return user
         reading_list = []
         for book in user.writing_list:
-            reading_list.append(book.show_book_info())
+            reading_list.append(book.show_book_info(user, self.__report_type_list))
         return reading_list
     
     def view_chapter(self, chapter_id):

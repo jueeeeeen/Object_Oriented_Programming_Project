@@ -18,12 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <script src="../scripts/book_info.js"></script>
-    <script src="../scripts/reading_chapter.js"></script>
-    <script src="../scripts/search_bar.js"></script>
-    <script src="../scripts/change_page.js"></script>
-    <script src="../scripts/dropdown_info.js"></script>
+    
     
 </head>
 
@@ -165,9 +160,7 @@
         var header_profile_pic = document.getElementById('header_profile_pic');
         header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
     </script>
-    <script src="../scripts/search_bar.js"></script>
-    <script src="../scripts/change_page.js"></script>
-    <script src="../scripts/dropdown_info.js"></script>
+    
 
     <script>
         var book_name = localStorage.getItem('book_name_last');
@@ -242,13 +235,11 @@
             console.error('chapterInfoString is null or undefined.');
         }
     </script>
-    <script>
-        var header_profile_pic = document.getElementById('header_profile_pic');
-        header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
-    </script>
-    
-    
-
+        <script src="../scripts/book_info.js"></script>
+        <script src="../scripts/reading_chapter.js"></script>
+        <script src="../scripts/search_bar.js"></script>
+        <script src="../scripts/change_page.js"></script>
+        <script src="../scripts/dropdown_info.js"></script>
 </body>
 
 </html>

@@ -170,6 +170,8 @@ class Book:
                     "age_retricted" : self.show_age_restricted(),
                     "chapter_count" : self.chapter_count,
                     "comments" : self.show_comment_list(),
+                    "writer_name": self.__writer.username,
+                    "date_time": self.date_time_str,
                     "message" : "This book is publishing or You are a writer" }
         else:
             return {"message": "This book is not publishing"}

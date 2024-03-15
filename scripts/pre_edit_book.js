@@ -3,7 +3,7 @@
 // Function to display book information and navigate
 
 function displayPreEditBookAndNavigate(bookName) {
-    console.log("start");
+    console.log("start edit book");
     console.log("bookName : ",bookName)
     fetch(`/book/${bookName}`)
         .then(response => {

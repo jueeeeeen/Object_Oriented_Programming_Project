@@ -19,7 +19,7 @@
 }
 
 .homepage_book_title{
-    display:block;
+    display:flex;
     margin-left: 8px;
     margin-right: 8px;
     line-height: 1.2;
