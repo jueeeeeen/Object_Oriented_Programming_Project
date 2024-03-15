@@ -1,7 +1,36 @@
 const username = localStorage.getItem('login_username');
-// const username = "Mozaza";
 
 show_my_writing();
+
+function check_writer(){
+    fetch(`/check_writer/${username}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch check writer ');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data)
+            console.log("data.message: ",data.role);
+            if (data.role == "writer"){
+                go_to_my_writing();
+            }
+            else if (data.role == "reader"){
+                console.log("navigate_to_not_writer_page");
+                navigate_to_not_writer_page();
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching check writer :', error);
+        });
+}
+function navigate_to_not_writer_page(){
+    console.log("go to not_writer.html");
+    window.location.href = "not_writer.html";
+}
+
+
 
 const not_found_html = '<a class="not_found">ไม่พบข้อมูล</a>'
 const show_book_html = `<div class="search_result_container">

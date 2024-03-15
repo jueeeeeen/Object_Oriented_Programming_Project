@@ -50,3 +50,10 @@ class Report:
 
     def delete(self):
         self.__report_to.delete_report(self)
+        
+    def show_report(self):
+        return {"book_name" : self.book.name,
+                "user" : self.user.username,
+                "report_type" : self.report_type,
+                "date_time" : self.date_time,
+                "context" : self.context}

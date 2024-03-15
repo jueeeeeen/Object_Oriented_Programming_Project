@@ -143,6 +143,60 @@ function show_purchased_successful() {
         });
 }
 
+function back_to_book_info() {
+    console.log("back to book")
+    displayBookInfoAndNavigate(localStorage.getItem('book_name_last'))
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    
+    const bookName = localStorage.getItem('book_name_last');
+    const commentForm = document.getElementById('commentForm');
+    const commentResponse = document.getElementById('comment_response');
+
+    if (commentForm) {
+        commentForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const jsonData = {};
+            formData.forEach((value, key) => { jsonData[key] = value });
+            const jsonDataString = JSON.stringify(jsonData);
+
+            jsonData.chapter_id = localStorage.getItem('chapter_id_read_last')
+            jsonData.username = localStorage.getItem('username')
+
+            console.log("new comment : ",jsonData)
+            fetch(`/comment/${jsonData.chapter_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonDataString
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to submit comment');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Submitted comment data:", data);
+                    if (commentResponse) {
+                        commentResponse.innerText = JSON.stringify(data);
+                    }
+                    showComment(jsonData.chapter_id);
+                })
+                .catch(error => {
+                    console.error('Error submitting comment:', error);
+                });
+        });
+    }
+    showChapter(bookName);
+    showComment(bookName);
+
+});
+
 
 function buy_chapter() {
     const jsonData = {

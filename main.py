@@ -26,6 +26,8 @@ from Comment import Comment
 
 from fastapi.middleware.cors import CORSMiddleware
 
+import Database
+
 origins = [
      "http://localhost:5500",
      "localhost:5500",
@@ -154,6 +156,7 @@ def get_all_book():
 @app.get("/book/{book_name}")
 async def get_book_info(book_name: str):
      book = write_a_read.get_book_by_name(book_name)
+     print(book)
      if isinstance(book,Book):
           return {"name":book.name, "pseudonym":book.pseudonym, "genre":book.genre, "status":book.status, \
                "age_restricted":book.age_restricted, "prologue":book.prologue, "date_time":book.date_time_str,\
@@ -248,15 +251,37 @@ def get_coin_transaction(username:str):
      user = write_a_read.get_user_by_username(username)
      return {"Coin_Transaction" : user.show_coin_transaction()}
 
-class dto_check_bought_chapter(BaseModel):
-     username:str
-     chapter_id:str
-
 @app.get("/check_bought_chapter/{username}", tags=['check'])
 def check_bought_chapter(username:str, chapter_id:str):
      return write_a_read.check_bought_chapter(username, chapter_id)
 
+@app.get("/report/{book_name}" )
+def allReport(book_name:str):
+     return write_a_read.show_all_report(book_name)
+
+@app.get("/check_writer/{username}")
+def checkWriter(username:str):
+     print(write_a_read.check_user_role(username))
+     return {"role": write_a_read.check_user_role(username)}
+
+
 # _________________________________________________ POST _________________________________________________
+
+class dto_create_report(BaseModel):
+     book_name:str
+     username:str
+     report_type:str
+     context: str
+     
+@app.post("/report/{book_name}", tags=['report'])
+def CreateReport(dto : dto_create_report):
+     report = write_a_read.create_report(dto.book_name, dto.username, dto.report_type, dto.context)
+     if isinstance(report,Report):
+          return {"massage":"report successfully"}
+     else :
+          return {"massage" : "! Cannot create report !"}
+     
+#..........................................................................................................
 
 class dto_sign_up(BaseModel):
      username:str
@@ -387,6 +412,7 @@ def ChangeDisplayName(dto : dto_change_display_name):
 
 class dto_edit_book(BaseModel):
      old_name : str = None
+     writer_name : str = None
      new_name : str = None
      new_genre: str = None
      prologue: str = None
@@ -395,7 +421,7 @@ class dto_edit_book(BaseModel):
      
 @app.put("/edit_book", tags=['Book'])
 def EditBookInfo(dto : dto_edit_book):
-     book =  write_a_read.edit_book_info(dto.old_name, dto.new_name, dto.new_genre, dto.status, dto.age_restricted, dto.prologue)
+     book =  write_a_read.edit_book_info(dto.old_name, dto.writer_name, dto.new_name, dto.new_genre, dto.status, dto.age_restricted, dto.prologue)
      if isinstance(book,Book):
           return book
      else:
@@ -443,7 +469,7 @@ def EditChapterInfo(dto : dto_edit_chapter):
 # print("----------Edit everything-----------")
 # print(write_a_read.edit_book_info("SAO", "Shinnosuke", "lala", ["kids", "comedy"], [], "hiding", False, "edited"))
 # print("----------Edit tags-----------")
-print(write_a_read.edit_book_info("Shinosuke", "Shinnosuke", "familyromance", "hiding", False, "edited"))
+# print(write_a_read.edit_book_info("Shinosuke", "Shinnosuke", "familyromance", "hiding", False, "edited"))
 # print("_______________________________________________Creat Chapter_______________________________________________")
 # print(write_a_read.create_chapter("Shin_chan", "10", "second", "hihi", 50))
 

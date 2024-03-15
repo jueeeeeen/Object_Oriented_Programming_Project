@@ -132,14 +132,14 @@ class Book:
             if tag in self.__tag:
                 self.__tag.remove(tag)
 
-    # def counting_report_from_type(self):
-    #     report_count=0
-    #     for report in self.__report_list:
-    #         for report_type in write_a_read.report_type_list:
-    #             if report_count == 10:
-    #                 break
-    #             if report.report_type == report_type:
-    #                 report_count+=1
+    def counting_report_from_type(self,report_type_to_count):
+        report_count=0
+        for report in self.__report_list:
+            if report_count == 10:
+                break
+            if report.report_type == report_type_to_count:
+                report_count+=1
+
 
     def delete_report(self, report):
         if report in self.report_list:
@@ -178,3 +178,9 @@ class Book:
         for chapter in self.__chapter_list:
             chapter_list.append(chapter.show_chapter_briefly())
         return chapter_list
+    
+    def show_report_list(self):
+        report_list = []
+        for report in self.__report_list:
+            report_list.append(report.show_report())
+        return report_list

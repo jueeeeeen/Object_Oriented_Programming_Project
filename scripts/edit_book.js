@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
                 
                 console.log("start fetch book edit", jsonData.old_name)
-                
+                jsonData.writer_name = this.localStorage.getItem('login_username');
+
                 const response = await fetch(`/edit_book`, { 
                     method: 'PUT',
                     headers: {

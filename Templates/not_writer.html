@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WriteARead</title>
+    <link rel="stylesheet" type="text/css" href="/static/payment_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
+    <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="/scripts/search_bar.js"></script>
+    <script src="/scripts/banner_slide.js"></script>
+    <script src="/scripts/toggle_search.js"></script>
+    <script src="/scripts/search_page.js"></script>
+    <!-- <script src="/scripts/sending_page.js"></script> -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+    <div class="header_flexbox_menu">
+        <div class="header_menu_item">
+            <a class="header_writing_type" href="#">นิยาย</a>
+            <a class="header_writing_type" href="#">แฟนฟิค</a>
+            <a class="header_writing_type" href="#">การ์ตูน</a>
+        </div>
+        <div class="header_menu_item">
+            <a href="homepage.html"><img src="/assets/writearead_img/WriteARead_white.png" class="WriteARead_image"></a>
+        </div>
+        <div class="header_menu_item">
+            <a href="#" onclick="toggle_search()"> <img class="search_icon"
+                    src="assets/header_img/search_button_light.png" alt="Original Image"></a>
+            <a href="#"> <img class="pen_icon" src="assets/header_img/writing_button_light.png"
+                    alt="Original Image"></a>
+            <a href="#"> <img class="user_icon" src="assets/header_img/user_button_light.png" alt="Original Image"></a>
+        </div>
+    </div>
+
+    <div class="flexbox-3">
+        <div class="item-3" style="text-align: center; margin-bottom: 3%; background-color: white;">
+            <h1 class="info_title" style="color: rgb(220, 87, 21);">! YOU ARE NOT WRITER !</h1>
+            <button class="submit_button" onclick="go_to_home_page()">Homepage</button>
+        </div>
+    </div>
+<!-- 
+    <div class="flexbox-3">
+        <div class="item-3" style="text-align: center; margin: 0; background-color: white;">
+            <div>
+                <button class="submit_button" onclick="go_to_home_page()">Homepage</button>
+            </div>
+        </div>
+    </div> -->
+
+    <footer class="footer">
+        <div class="footer_item_container">
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="MyPage.html">My Page</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="search_page.html">search</a>
+        </div>
+        <div class="footer_item_container">
+            <a class="footer_menu_text" href="payment.html">Payment</a>
+        </div>
+        <div class="footer_item_container">
+            <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+        </div>
+    </footer>
+    <br>
+    <script>
+        function go_to_home_page() {
+            window.location.href = "homepage.html";
+        }
+    </script>
+</body>
+
+</html>

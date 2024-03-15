@@ -172,52 +172,6 @@
         </div>
     </div>
 
-    <!-- show chapter -->
-    <!-- <div class="flexbox-3" style="display: flex; justify-content: center;">
-        <div class="item-3" >
-            <a class="submit_button" onclick="showChapter('Shin_chan')">see Chapter</a>
-        </div>
-    </div> -->
-    <!-- <div class="flexbox-3">
-        <div class="item-3">
-            <div id="chaptersContainer"></div>
-        </div>
-    </div> -->
-
-
-    <!-- add comment -->
-
-    <div class="flexbox-3">
-        <div class="item-3">
-            <div class="search_item">
-                <form id="commentForm">
-                    <h1 class="info_title">Chapter no :</h1>
-                    <select id="chapter_id" name="chapter_id" class="input_box" style="width: 25%;">
-                        <option value="Shin_chan-1" class="input_box">Chapter 1</option>
-                        <option value="Shin_chan-2" class="input_box">Chapter 2</option>
-                    </select><br><br>
-
-                    <h1 class="info_title">Your Username : </h1>
-                    <input type="text" class="input_box" id="username" style="width: 40%;" name="username"
-                        placeholder="username" required><br><br>
-
-                    <h1 class="info_title">Your Comment : </h1>
-                    <textarea id="context" class="input_box" name="context" style="width: 40%;" rows="4" cols="50"
-                        placeholder="context" required></textarea><br><br>
-
-                    <button type="submit" class="submit_button">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- show comment -->
-    <!-- <div class="flexbox-3" style="display: flex; justify-content: center;">
-        <div class="item-3" >
-            <a showComment('Shin_chan')"></a>
-        </div>
-    </div> -->
     <div id="commentsContainer"></div>
 
 
@@ -279,9 +233,18 @@
                             <div class="flexbox-3">
                                 <div class="item-3">
                                     <div class="comment-context-text">${commentData.context}</div>
-                                    <div class="comment-username-text">${commentData.user}</div>
-                                    <div class="comment-date-text">${commentData.date_time}</div>
-                                    <div class="comment-chapter-text">${commentData.chapter}</div>
+                                    <div class="comment-info-flexbox">
+                                        <div class="comment-username-text" style="text-align: left; width:50%;">
+                                            <a class="comment-username-text">${commentData.chapter}</a>
+                                        </div>
+                                        <div class="comment-username-text" style="text-align: right; width:50%;">
+                                            <a href="report_page.html"> <img class="home_icon" style="text-align: right;" src="../assets/book_img/report_icon.png" alt="Original Image"></a>
+                                            <br>
+                                            <a class="comment-username-text">${commentData.user}</a>
+                                            <br>
+                                            <a class="comment-date-text">${commentData.date_time}</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             `;
