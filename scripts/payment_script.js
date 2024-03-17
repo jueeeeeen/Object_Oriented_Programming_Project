@@ -1,9 +1,10 @@
-var payment_data = {};
+const payment_data = {};
 
 // localStorage
+// localStorage.getItem("login_username")
+
 payment_data.username = localStorage.getItem("login_username");
 // payment_data.username = "Mozaza";
-
 
 document.getElementById('online_banking').addEventListener('click', function() {
     payment_data.payment_method = "OnlineBanking";
@@ -66,8 +67,7 @@ document.getElementById('coin_box_click_500').addEventListener('click', function
 });
 
 document.getElementById('coin_box_click_costom').addEventListener('click', function() {
-    payment_data.golden_coin_amount = document.getElementById('golden_coin_amount').value;
-    console.log(payment_data.golden_coin_amount);
+    payment_data.golden_coin_amount = "costom";
 });
 
 info_form = document.getElementById('info_form');
@@ -84,8 +84,12 @@ function pop_up_info_form() {
 function pop_up_success_form() {
     payment_data.code = document.getElementById('promotion_code').value;
     payment_data.payment_info = document.getElementById('payment_info').value;
-    console.log(payment_data)
 
+    if(payment_data.golden_coin_amount == "costom") {
+        payment_data.golden_coin_amount = document.getElementById('golden_coin_amount').value;
+        console.log(payment_data.golden_coin_amount);
+    }
+    
     const jsonDataString = JSON.stringify(payment_data)
     fetch(`/buy_coin`, {
 
@@ -117,8 +121,8 @@ function pop_up_success_form() {
     success_form.style.display = 'block';
     setTimeout(function () {
         success_form.style.display = 'none';
-        window.location.href = '../Templates/transaction.html';
-    }, 3000);
+        window.location.href = 'transaction.html';
+      }, 3000);
 }
 
 

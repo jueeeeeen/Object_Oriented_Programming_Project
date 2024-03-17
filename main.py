@@ -1,56 +1,41 @@
-from typing import Union, Optional, Annotated
+from typing import Optional
 import uvicorn
-from fastapi import FastAPI, Query, Request, HTTPException
+from fastapi import FastAPI, Query, Request
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
-from pydantic import BaseModel, ValidationError
-from fastapi import HTTPException, Depends
-from fastapi.security import OAuth2PasswordBearer
-import requests
-import json
+from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
-from starlette.responses import FileResponse
-from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 
-from datetime import datetime, timedelta
+from datetime import datetime 
 from Controller import Controller
 from Reader import Reader, Writer
 from Book import Book
-from Chapter import Chapter
-from Payment import PaymentMethod, OnlineBanking, TrueMoneyWallet
+from Payment import OnlineBanking, TrueMoneyWallet
 from CoinTransaction import CoinTransaction
-from Promotion import BookPromotion, CoinPromotion, Promotion
-from Coin import GoldenCoin, SilverCoin
-from Comment import Comment
-from Report import Report
-# import database
-# from database import write_a_read
+from Promotion import CoinPromotion
 
-from fastapi.middleware.cors import CORSMiddleware
 
-import Database
 
-origins = [
-     "http://localhost:5500",
-     "localhost:5500",
-     "http://127.0.0.1:5500",
-     "127.0.0.1:5500/",
-     "http://localhost:8000",
-     "localhost:8000",
-     "http://127.0.0.1:8000",
-     "127.0.0.1:8000/"
-]
+# origins = [
+#      "http://localhost:5500",
+#      "localhost:5500",
+#      "http://127.0.0.1:5500",
+#      "127.0.0.1:5500/",
+#      "http://localhost:8000",
+#      "localhost:8000",
+#      "http://127.0.0.1:8000",
+#      "127.0.0.1:8000/"
+# ]
 
 
 app = FastAPI()
-app.add_middleware(
-     CORSMiddleware,
-     allow_origins=origins,
-     allow_credentials=True,
-     allow_methods=["*"],
-     allow_headers=["*"]
-)
+# app.add_middleware(
+#      CORSMiddleware,
+#      allow_origins=origins,
+#      allow_credentials=True,
+#      allow_methods=["*"],
+#      allow_headers=["*"]
+# )
 
 templates = Jinja2Templates(directory="Templates")
 app.mount("/Templates", StaticFiles(directory="Templates"), name="templates")
@@ -62,11 +47,7 @@ app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 write_a_read = Controller()
 
 if __name__ == "__main__":
-     uvicorn.run("main:app", host="127.0.0.1", port=5500, log_level="info")
-
-now = datetime.now()
-
-#uvicorn main:app --reload
+     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
 
 #user
 Mo = Writer("Mozaza", "12345678", "12/05/2000")
@@ -87,45 +68,45 @@ orv_prologue = "A novel called Three Ways to Survive in a Ruined World (written 
 naruto_prologue = "A powerful fox known as the Nine-Tails attacks Konoha, the hidden leaf village in the Land of Fire, one of the Five Great Shinobi Countries in the Ninja World. In response, the leader of Konoha and the Fourth Hokage, Minato Namikaze, at the cost of his life, seals the fox inside the body of his newborn son, Naruto Uzumaki, making him a host of the beast."
 
 #book
-write_a_read.create_book("Shin_chan", "Mola", "Mozaza", "adventure", "publishing", False, shin_chan_prologue) #1
-write_a_read.create_book("Shinosuke", "Mola", "Mozaza", "comedy", "publishing", True, shin_chan_prologue) #2
+write_a_read.create_book("Shin chan", "Mola", "Mozaza", "adventure", "publishing", False, shin_chan_prologue) #1
+write_a_read.create_book("Shinnosuke", "Mola", "Mozaza", "comedy", "publishing", True, shin_chan_prologue) #2
 write_a_read.create_book("Doraemon", "Jina", "Jinzaza", "comedy", "publishing", False, doraemon_prologue) #3
-write_a_read.create_book("Doraemon_Special", "Jina", "Jinzaza", "adventure", "publishing", False, doraemon_prologue) #4
-write_a_read.create_book("Sailor_moon", "Jinny", "Jinzaza", "fantasy", "publishing", True, sailor_moon_prologue) #5
-write_a_read.create_book("Sailor_moon_Special", "Jinny", "Jinzaza", "fantasy", "publishing", False, sailor_moon_prologue) #6
-write_a_read.create_book("Omniscient_readers", "MolaMola", "Mozaza", "sci-fi", "publishing", True, orv_prologue) #7
-write_a_read.create_book("Omniscient_readers_Special", "MolaMola", "Mozaza", "sci-fi", "publishing", False, orv_prologue) #8
+write_a_read.create_book("Doraemon Special", "Jina", "Jinzaza", "adventure", "publishing", False, doraemon_prologue) #4
+write_a_read.create_book("Sailor moon", "Jinny", "Jinzaza", "fantasy", "publishing", True, sailor_moon_prologue) #5
+write_a_read.create_book("Sailor moon Special", "Jinny", "Jinzaza", "fantasy", "publishing", False, sailor_moon_prologue) #6
+write_a_read.create_book("Omniscient readers viewpoint", "MolaMola", "Mozaza", "sci-fi", "publishing", True, orv_prologue) #7
+write_a_read.create_book("Omniscient readers viewpoint Special", "MolaMola", "Mozaza", "sci-fi", "publishing", False, orv_prologue) #8
 write_a_read.create_book("Naruto", "Moeiei", "Mozaza", "adventure", "publishing", False, naruto_prologue) #9
-write_a_read.create_book("Naruto_Special", "Moeiei", "Mozaza", "adventure", "publishing", False, naruto_prologue) #10
+write_a_read.create_book("Naruto Special", "Moeiei", "Mozaza", "adventure", "publishing", False, naruto_prologue) #10
+
+shin_chan_chapter_1 = "While playing at the local park, Shinnosuke & his 4 friends Kazama, Nene, Masao & Bo encounter an woman named Tamiko, who claims to be Shinnosuke's would-be-wife from future. She states that in 20 years into the future Shinnosuke had been converted into a stone statue by Tamiko's father, but before being converted into stone, Shinnosuke asked Tamiko to bring his 5 year old self. Tamiko takes the five 5-year old children into the future via a time machine in order to save the adult Shinnosuke. After reaching the future, Tamiko is ambushed by the men employed by his father Masuzo Kaneari, who took her back to her house. The children seek refuge at the Shinnosuke's house. Here they meet Shinnosuke's parents Hiroshi & Misae.\n To Be continue...\n please buy next chapter"
 
 # chap
-write_a_read.create_chapter("Shin_chan", "1", "Shin_chan_first_ch", "this is the first chapter of shincha", 184)
-write_a_read.create_chapter("Shin_chan", "2", "Shin_chan_second_ch", "this is the second chapter of shincha", 200)
-write_a_read.create_chapter("Shin_chan", "3", "Shin_chan_third_ch", "this is the third chapter of shincha", 300)
-write_a_read.create_chapter("Shinosuke", "1", "Shinosuke_first_ch", "this is the first chapter of shincha", 184)
-write_a_read.create_chapter("Doraemon", "1", "Doraemon_first_ch", "this is the first chapter of Doraemon", 0)
-write_a_read.create_chapter("Doraemon_Special", "1", "Doraemon_Special_first_ch", "this is the first chapter of Doraemon_Special", 500)
-write_a_read.create_chapter("Doraemon_Special", "2", "Doraemon_Special_second_ch", "this is the second chapter of Doraemon_Special", 500)
-write_a_read.create_chapter("Sailor_moon", "1", "Sailor_moon_first_ch", "this is the first chapter of Sailor_moon", 0)
-write_a_read.create_chapter("Sailor_moon_Special", "1", "Sailor_moon_Special_first_ch", "this is the first chapter of Sailor_moon_Special", 40)
-write_a_read.create_chapter("Omniscient_readers", "1", "Omniscient_readers_first_ch", "this is the first chapter of Omniscient_readers", 0)
-write_a_read.create_chapter("Omniscient_readers_Special", "1", "Omniscient_readers_Special_first_ch", "this is the first chapter of Omniscient_readers_Special", 750)
-write_a_read.create_chapter("Naruto", "1", "Naruto_first_ch", "this is the first chapter of Naruto", 0)
-write_a_read.create_chapter("Naruto_Special", "1", "Naruto_Special_first_ch", "this is the first chapter of Naruto_Special", 800)
+write_a_read.create_chapter("Shin chan", "1", "Shin chan first ch", shin_chan_chapter_1, 184)
+write_a_read.create_chapter("Shin chan", "2", "Shin chan second ch", "this is the second chapter of shincha", 200)
+write_a_read.create_chapter("Shin chan", "3", "Shin chan third ch", "this is the third chapter of shincha", 300)
+write_a_read.create_chapter("Shinnosuke", "1", "Shinnosuke first ch", "this is the first chapter of shincha", 184)
+write_a_read.create_chapter("Doraemon", "1", "Doraemon first ch", "this is the first chapter of Doraemon", 0)
+write_a_read.create_chapter("Doraemon Special", "1", "Doraemon Special first ch", "this is the first chapter of Doraemon Special", 500)
+write_a_read.create_chapter("Doraemon Special", "2", "Doraemon Special second ch", "this is the second chapter of Doraemon Special", 500)
+write_a_read.create_chapter("Sailor moon", "1", "Sailor moon first ch", "this is the first chapter of Sailor moon", 0)
+write_a_read.create_chapter("Sailor moon Special", "1", "Sailor moon Special first ch", "this is the first chapter of Sailor moon Special", 40)
+write_a_read.create_chapter("Omniscient readers viewpoint", "1", "Omniscient readers first ch", "this is the first chapter of Omniscient readers", 0)
+write_a_read.create_chapter("Omniscient readers viewpoint Special", "1", "Omniscient readers Special first ch", "this is the first chapter of Omniscient readers Special", 750)
+write_a_read.create_chapter("Naruto", "1", "Naruto first ch", "this is the first chapter of Naruto", 0)
+write_a_read.create_chapter("Naruto Special", "1", "Naruto Special first ch", "this is the first chapter of Naruto Special", 800)
 
-write_a_read.create_comment("Shin_chan-1", "Pangzaza", "wow very fun! I love your writing.")
-write_a_read.create_comment("Shin_chan-1", "Pintzaza", "I love your writing. Saranghae Mola!!!")
-write_a_read.create_comment("Shinosuke-1", "Pangzaza", "why so expensive. :(")
+write_a_read.create_comment("Shin chan-1", "Pangzaza", "wow very fun! I love your writing.")
+write_a_read.create_comment("Shin chan-1", "Pintzaza", "I love your writing. Saranghae Mola!!!")
+write_a_read.create_comment("Shinnosuke-1", "Pangzaza", "why so expensive. :(")
 
+write_a_read.buy_coin("Mozaza","OnlineBanking","1",None, 999999999999)
 
 #promotion
 promotion_11_11 = CoinPromotion("15/03/2024", 10, "November")
 promotion_12_12 = CoinPromotion("15/03/2024", 20, "December")
 write_a_read.add_promotion(promotion_11_11)
 write_a_read.add_promotion(promotion_12_12)
-
-book_for_promotion = Book("Promotoin", "Molapro", "Mozaza", "promo_only", "publishing", False, "Promotoin testttttttt")
-write_a_read.add_promotion(BookPromotion("15/03/2024", 10, [book_for_promotion]))
 
 #add coin transac
 Mo.add_coin_transaction_list(CoinTransaction(OnlineBanking("0123456789"), 500, "+500", "+50", "20/02/2024, 15:23:10"))
@@ -231,7 +212,7 @@ class dto_create_report(BaseModel):
      context: str
      
 @app.post("/report/{book_name}", tags=['report'])
-def CreateReport(dto : dto_create_report):
+def create_report(dto : dto_create_report):
      return write_a_read.create_report(dto.book_name, dto.username, dto.report_type, dto.context)
      
 #..........................................................................................................
@@ -292,7 +273,7 @@ class dto_create_comment(BaseModel):
      context : str
      
 @app.post("/comment/{chapter_id}", tags=['Comment'])
-def CreateComment(dto: dto_create_comment):
+def create_comment(dto: dto_create_comment):
      return write_a_read.create_comment(dto.chapter_id, dto.username, dto.context)
      
 #..........................................................................................................
@@ -352,7 +333,7 @@ class dto_add_book_shelf(BaseModel):
      book_name :str
 
 @app.put("/book_shelf/add")
-def AddBookShelf(dto : dto_add_book_shelf):
+def add_book_shelf(dto : dto_add_book_shelf):
      return {"book shelf" : write_a_read.add_book_list(dto.username, dto.book_name)}
      
 #........................................................................................................................
@@ -386,3 +367,7 @@ class dto_edit_introduction(BaseModel):
 @app.put("/my_page/edit_introduction", tags=["My Page"])
 def edit_introduction(dto : dto_edit_introduction):
      return write_a_read.edit_introduction(dto.username, dto.text)
+
+@app.delete('/report/delete/', tags=['Report'])
+async def delete_report(book_name: str, report_type : str):
+   return write_a_read.delete_report(book_name,report_type)

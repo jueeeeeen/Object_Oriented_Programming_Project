@@ -2,23 +2,24 @@
 <html lang="en">
 
 <head>
-    
-    <title>Edit Chapter Info</title>
+
+    <title>Edit Book Info</title>
     <link rel="stylesheet" type="text/css" href="/static/create_chapter.css">
     <link rel="stylesheet" type="text/css" href="/static/payment_style.css">
     <link rel="stylesheet" type="text/css" href="/static/header_footer.css">
-    <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
-    <link rel="stylesheet" type="text/css" href="../static/drop_down.css">
     <link rel="stylesheet" type="text/css" href="../static/main_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/drop_down.css">
+    <link rel="stylesheet" type="text/css" href="/static/bookstyle.css">
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -93,22 +94,35 @@
     </div>
 </section>
 
-    <h1 class="first_payment_title">รายตอน</h1>
-<!-- 
-    <div class=""> -->
-    <form id="editChapterForm">
-        <h1 class="pangcreate_chap_label">บทที่</h1>
-        <input class="pangfill_box1" type="number" id="chapter_number" name="chapter_number" placeholder="บทที่" required>
-        <h1 class="pangcreate_chap_label">ชื่อตอน</h1>
-        <input class="pangfill_box2" type="text" id="name" name="name" required>
-        <h1 class="pangcreate_chap_label">เนื้อหา</h1>
-        <textarea class="pangcontent_box" id="context" name="context" rows="4" cols="50" placeholder="เริ่มต้นเรื่องราวของคุณ" required></textarea>
-        <h1 class="pangcreate_chap_label">ราคา</h1>
-        <input type="hidden" id="chapter_id" name="chapter_id"> 
-    
-        <input class="pangfill_box3" type="number" id="cost" name="cost" placeholder="ราคา" value="0">
-        <div class="final_button" style="padding-bottom: 5px;" >
-            <button class="submit_button" type="submit">ยืนยัน</button> 
+    <h1 class="first_payment_title">แก้ไขข้อมูลหนังสือ</h1>
+    <!-- old_name : str = None
+     new_name : str = None
+     new_genre: str = None
+     prologue: str = None
+     age_restricted: bool = None
+     status: str = None -->
+    <form id="editBookForm">
+        <input type="hidden" id="old_name" name="old_name">
+        <h1 class="pangcreate_chap_label">Name</h1>
+        <input class="pangfill_box1" type="text" id="old_name_input" name="new_name" placeholder="ชื่อเรื่อง">
+        <h1 class="pangcreate_chap_label">Genre :</h1>
+        <input class="pangfill_box2" type="text" id="old_genre" name="new_genre">
+        <input type="hidden" id="old_pseudonym" name="old_pseudonym">
+        <h1 class="pangcreate_chap_label">prologue</h1>
+        <textarea class="pangcontent_box" id="old_prologue" name="prologue" rows="4" cols="50"
+            placeholder="เริ่มต้นเรื่องราวของคุณ"></textarea>
+        <h1 class="pangcreate_chap_label">age_restricted</h1>
+        <select id="old_age_restricted" name="age_restricted" class="pangfill_box2">
+            <option value="True" class="input_box">Yes</option>
+            <option value="False" class="input_box">No</option>
+        </select>
+        <h1 class="pangcreate_chap_label">Status</h1>
+        <select id="old_status" name="status" class="pangfill_box2">
+            <option value="publishing" class="input_box">Publish</option>
+            <option value="hiding" class="input_box">Hidden</option>
+        </select>
+        <div class="final_button" style="padding-bottom: 5px;">
+            <button class="submit_button" type="submit">ยืนยัน</button>
         </div>
     </form>
     <div class="final_button" style="padding-top: 0;">
@@ -121,25 +135,26 @@
         </div>
     </div>
 
+    <hr>
     <footer class="footer">
-        <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
-        <a class="footer_menu_text" href="../Templates/my_page.html">My Page</a><br>
-        <a class="footer_menu_text" href="../Templates/my_profile.html">My Profile</a><br>
-        <a class="footer_menu_text" href="../Templates/payment.html">Buy coin</a><br>
-        <a class="footer_menu_text" href="../Templates/transaction.html">Transaction</a><br>
-        <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
-</footer>
-<script>
-    var header_profile_pic = document.getElementById('header_profile_pic');
-    header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
-</script>
-<script src="../scripts/search_bar.js"></script>
-<script src="../scripts/change_page.js"></script>
-<script src="../scripts/dropdown_info.js"></script>
-
-    <script src="../scripts/edit_chapter.js"></script>
-    <script src="../scripts/reading_chapter.js"></script>
+            <a class="footer_home_button" href="https://www.readawrite.com/">ReadAWrite</a>
+            <a class="footer_menu_text" href="../Templates/my_page.html">My Page</a><br>
+            <a class="footer_menu_text" href="../Templates/my_profile.html">My Profile</a><br>
+            <a class="footer_menu_text" href="../Templates/payment.html">Buy coin</a><br>
+            <a class="footer_menu_text" href="../Templates/transaction.html">Transaction</a><br>
+            <p class="footer_menu_text">© 2024 - 2024 Teletubbies Book Center | All Rights Reserved.</p>
+    </footer>
+    <script>
+        var header_profile_pic = document.getElementById('header_profile_pic');
+        header_profile_pic.src = `../assets/profile_img/${localStorage.getItem('login_username')}.png`;
+    </script>
+    <script src="../scripts/search_bar.js"></script>
+    <script src="../scripts/change_page.js"></script>
+    <script>
+        const book_name = localStorage.getItem('book_name_last')
+    </script>
     <script src="../scripts/pre_edit_book.js"></script>
-    
+    <script src="../scripts/dropdown_info.js"></script>
 </body>
+
 </html>

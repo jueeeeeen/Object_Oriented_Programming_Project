@@ -2,7 +2,6 @@
 var transaction_data = {};
 
 transaction_data.username = localStorage.getItem("login_username");
-// transaction_data.username = 'Mozaza';
 
 document.getElementById('transaction_type').addEventListener('change', function() {
     const transaction_type = this.value;
@@ -67,9 +66,8 @@ function show_coin_transaction() {
 }
 
 function show_chapter_transaction() {
-    const input = "Mozaza";
-
-    fetch(`/show_chapter_transaction/Mozaza`)
+    const input = transaction_data.username;
+    fetch(`/show_chapter_transaction/${input}`)
     
     .then(response => {
         if (!response.ok) {

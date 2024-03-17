@@ -1,6 +1,10 @@
 function displayBookInfoAndNavigate(bookName) {
     console.log("start", bookName);
-    const writer_name = localStorage.getItem("login_username")
+    const writer_name = localStorage.getItem("login_username");
+    localStorage.removeItem('book_name_last');
+    localStorage.removeItem('current_chapter_id');
+    showChapter(bookName);
+    showComment(bookName);
     fetch(`/book/${bookName}?writer_name=${writer_name}`)
         .then(response => {
             if (!response.ok) {
@@ -72,6 +76,8 @@ var data_chapter_id;
 
 function NavigateToChapterInfo(chapter_id) {
     console.log("start");
+    localStorage.removeItem('current_chapter_id');
+    showComment(chapter_id);
     fetch(`/chapter/info/${chapter_id}`)
         .then(response => {
             if (!response.ok) {
@@ -213,8 +219,6 @@ function back_to_book_info() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    
-    const bookName = localStorage.getItem('book_name_last');
     const commentForm = document.getElementById('commentForm');
     const commentResponse = document.getElementById('comment_response');
 
@@ -228,8 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
             jsonData.chapter_id = localStorage.getItem('current_chapter_id');
             jsonData.username = username;
             const jsonDataString = JSON.stringify(jsonData);
-
-            
 
             console.log("new comment : ",jsonData);
             fetch(`/comment/${jsonData.chapter_id}`, {
@@ -257,8 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
-    showChapter(bookName);
-    showComment(bookName);
+    showComment(jsonData.chapter_id);
 
 });
 

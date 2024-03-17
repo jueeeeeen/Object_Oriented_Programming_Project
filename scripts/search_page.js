@@ -26,9 +26,8 @@ function display_result(result){
     var genre = result.genre;
     var element = `<div class="search_result_container">
     <div class="image-container" onclick="displayBookInfoAndNavigate('${book_name}')">
-        <img src="../assets/covers_img/${book_name}.png" 
-            onerror="this.onerror=null;this.src='../assets/covers_img/temp_cover.jpg';" 
-            alt="../assets/covers_img/temp_cover.jpg">
+    <img src="../assets/covers_img/${book_name}.png" 
+    onerror="this.onerror=null;this.src='../assets/covers_img/no_cover.png';">
     </div>
     <div class="book_content_container" onclick="displayBookInfoAndNavigate('${book_name}')"><br>
         <p class="book_title">${book_name}</p>

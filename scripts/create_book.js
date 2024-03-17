@@ -10,8 +10,8 @@ const create_book_data = {};
 // create_chap_data.book_name = localStorage.getItem('');
 // localStorage.getItem("login_username");
 
-// create_book_data.writer_name = localStorage.getItem("login_username");
-create_book_data.writer_name = "Mozaza";
+create_book_data.writer_name = localStorage.getItem("login_username");
+// create_book_data.writer_name = "Mozaza";
 
 create_book_data.name = document.getElementById('book_name').value;
 create_book_data.pseudonym = document.getElementById('pseudonym').value;

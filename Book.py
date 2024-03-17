@@ -73,7 +73,6 @@ class Book:
     def date_time(self):
         return self.__date_time
     
-    #ตรงนี้แปลกๆ ไม่ควรเป็น property งี้
     @date_time.setter
     def date_time(self, now):
         self.__date_time = datetime.now()
@@ -106,34 +105,19 @@ class Book:
         if isinstance(comment, Comment):
             self.__comment_list.append(comment)
             
-    ###
     def add_report_list(self, report):
         if isinstance(report, Report):
             self.__report_list.append(report)
             
     def add_report_list(self, report):
-        self.report_list.append(report)
-        self.counting_date_time = datetime.now()
+        self.__report_list.append(report)
     
-    #if add to list = -> +=
-    def add_tag(self, tag_list):
-        self.__tag += tag_list
-        
-    #อันนี้งงมาก
-    def delete_tag(self, tag_list):
-        new_tag_list = []
-        for tag in self.__tag:
-            if tag not in tag_list: #เพิ่มแท็กที่ไม่อยู่ใน tag_list จาก tagเดิม
-                new_tag_list.append(tag)
-        self.__tag = new_tag_list
-        
-    def delete_tag_jin(self, tag_list):
-        for tag in tag_list:
-            if tag in self.__tag:
-                self.__tag.remove(tag)
+    def delete_report(self, report_type):
+        for report in self.report_list:
+            if report_type == report.report_type:
+                self.__report_list.remove(report)
 
     def counting_report(self,report_type_list):
-        # count_report_list =[]
         for report_type in report_type_list:
             report_count = 0
             for report in self.__report_list:
@@ -142,22 +126,17 @@ class Book:
                 elif report.report_type == report_type:
                     report_count += 1
                     print("report_count",report_count)
-
-
-    def delete_report(self, report):
-        if report in self.report_list:
-            self.report_list.remove(report)
+    
+    def show_age_restricted(self):
+        if self.__age_restricted:
+            return "yes"
+        return "no"
     
     def is_chapter_valid(self,chapter_number):
         for chapter in self.chapter_list:
             if chapter.chapter_number == chapter_number:
                 return False
         return True
-    
-    def show_age_restricted(self):
-        if self.__age_restricted:
-            return "/"
-        return "X"
     
     def show_book_info(self,writer,report_type_list):
         self.counting_report(report_type_list)
@@ -167,8 +146,10 @@ class Book:
                     "genre" : self.__genre,
                     "status" : self.__status,
                     "prologue" : self.prologue,
-                    "age_retricted" : self.show_age_restricted(),
+                    "age_restricted" : self.show_age_restricted(),
                     "chapter_count" : self.chapter_count,
+                    "reports" : self.show_report_list(),
+                    "chapter" : self.show_chapter_list(),
                     "comments" : self.show_comment_list(),
                     "writer_name": self.__writer.username,
                     "date_time": self.date_time_str,
@@ -185,7 +166,7 @@ class Book:
     def show_chapter_list(self):
         chapter_list = []
         for chapter in self.__chapter_list:
-            chapter_list.append(chapter.show_chapter_briefly())
+            chapter_list.append(chapter.show_chapter_info())
         return chapter_list
     
     def show_report_list(self):

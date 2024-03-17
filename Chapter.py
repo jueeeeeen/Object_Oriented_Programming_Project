@@ -34,11 +34,7 @@ class Chapter:
     @publish_date_time.setter
     def publish_date_time (self, now):
         self.__publish_date_time = datetime.now()
-    
-    @property
-    def publish_date_time_str(self):
-        return self.__publish_date_time.strftime("%x %X")
-    
+
     @property
     def cost(self):
         return self.__cost
@@ -68,6 +64,8 @@ class Chapter:
                 "context" : self.__context,
                 "chapter_id": self.__chapter_id,
                 "cost": self.__cost,
+                "price" : self.__cost,
+                "viewer":self.__viewer_count,
                 "date_time" : self.__publish_date_time.strftime("%x %X")}
     
     def show_comment_list(self):
@@ -76,10 +74,3 @@ class Chapter:
             comment_list.append(comment.show_comment())
         return comment_list
     
-    def show_chapter_briefly(self):
-        return {"chapter_number" : self.__chapter_number,
-                "name" : self.__name,
-                "price" : self.__cost,
-                "viewer":self.__viewer_count,
-                "chapter_id": self.__chapter_id,
-                "date_time" : self.__publish_date_time.strftime("%x %X")}

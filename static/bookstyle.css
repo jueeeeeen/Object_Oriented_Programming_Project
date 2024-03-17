@@ -7,7 +7,7 @@ body {
 }
 
 .book_flexbox {
-    background-color: rgb(9, 7, 7);
+    background-color: rgb(0, 0, 0);
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
@@ -93,7 +93,7 @@ body {
 
 
 .book_cover {
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     width: 100%;
     cursor: pointer;
     border-radius: 15px;

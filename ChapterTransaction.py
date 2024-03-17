@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 class ChapterTransaction:
   def __init__(self,chapter, price):
@@ -20,10 +20,10 @@ class ChapterTransaction:
 
   @property
   def date_time_str(self):
-    return self.__date_time.strftime("%d/%m/%Y, %H:%M:%S")
+    return self.__date_time.strftime("%x %X")
 
   def chapter_transaction(self):
-    return f"chapter : {self.chapter.name} | price : {self.__price} | date_time : {self.date_time_str}"
+    return f"chapter : {self.chapter.name} | price : {self.__price} | date time : {self.date_time_str}"
 
   def chapter_transaction_json(self):
     return {"chapter" : self.chapter.name,

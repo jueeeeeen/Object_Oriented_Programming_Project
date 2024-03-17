@@ -111,8 +111,7 @@ function display_writing_result(result){
     var element = `<div class="my_writing_writing_container">
     <div class="my_writing_image_container" onclick="displayPreEditBookAndNavigate('${book_name}')">
         <img src="../assets/covers_img/${book_name}.png" 
-            onerror="this.onerror=null;this.src='../assets/covers_img/temp_cover.jpg';" 
-            alt="../assets/covers_img/temp_cover.jpg">
+            onerror="this.onerror=null;this.src='../assets/covers_img/no_cover.png';">
     </div>
     <div class="my_writing_book_content_container"><br>
         <p class="my_writing_book_title" onclick="displayPreEditBookAndNavigate('${book_name}')">${book_name}</p>

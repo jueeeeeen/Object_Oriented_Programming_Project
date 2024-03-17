@@ -18,11 +18,8 @@
         rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../scripts/book_info.js"></script>
-    <script src="../scripts/reading_chapter.js"></script>
-    <script src="../scripts/edit_book.js"></script>
-    <script src="../scripts/edit_chap_temp.js"></script>
     <script src="../scripts/pre_edit_book.js"></script>
+    <script src="../scripts/reading_chapter.js"></script>
     <script src="../scripts/search_bar.js"></script>
     <script src="../scripts/change_page.js"></script>
     <script src="../scripts/dropdown_info.js"></script>
@@ -58,8 +55,6 @@
             <a href="#" onclick="toggle_user_icon_drop_down(), replace_dd_info()"> <img class="user_icon" id="header_profile_pic" src="../assets/header_img/user_button_light.png" alt="Original Image" onerror="this.onerror=null;this.src='../assets/header_img/user_button_light.png';" ></a>
         </div>
     </div>
-<br><br><br>
-
 <section id="home_dd_container">
     <div>
         <div class="dd_profile_container home_dd_cursor_coin" onclick="go_to_my_page()">
@@ -102,7 +97,7 @@
     <!--book info-->
     <div class="book_flexbox">
         <div class="book_item">
-            <img class="book_cover" id="book_cover_img" src="" alt="book_pic">
+            <img class="book_cover" id="book_cover_img" src="../assets/covers_img/no_cover.png" onerror="this.onerror=null;this.src='../assets/covers_img/no_cover.png';" alt="book_cover">
         </div>
         <div class="book_info_flexbox">
             <div class="book_info_item">
@@ -130,6 +125,18 @@
             <a id="prologueDisplay"></a>
         </div>
     </div>
+
+    <div class="flexbox-3">
+        <div class="item-3">
+            <div class="info_title">Others</div>
+            <a>Status : </a>
+            <a id="status"></a>
+            <br>
+            <a>Age Restricted : </a>
+            <a id="age_restricted"></a>
+        </div>
+    </div>
+
     <div class="flexbox-3">
         <div class="item-3">
             <div class="info_title">Writer information</div>
@@ -153,7 +160,7 @@
     <div class="flexbox-3">
         <div class="item-3" style="text-align: center;">
             <div>
-                <button class="submit_button" onclick="displayBookEditAndNavigate(book_naame)">แก้ไขข้อมูลหนังสือ</button>
+                <button class="submit_button" onclick="displayBookEditAndNavigate()">แก้ไขข้อมูลหนังสือ</button>
             </div>
         </div>
     </div>
@@ -189,12 +196,9 @@
 
 
     <script>
-        const book_naame = localStorage.getItem('book_name_edit_last')
-        console.log(book_naame)
-        document.getElementById('book_cover_img').src = `../assets/covers_img/${book_naame}.png`;
-        console.log("bookname", localStorage.getItem('book_name_edit_last'))
+        const book_name_1 = localStorage.getItem('book_name_edit_last')
+        document.getElementById('book_cover_img').src = `../assets/covers_img/${book_name_1}.png`;
         console.log("username", localStorage.getItem('login_username'))
-        // Retrieve book information from sessionStorage
         const bookInfoString = sessionStorage.getItem('bookInfo');
         console.log("bookInfoString", bookInfoString)
         if (bookInfoString) {
@@ -203,9 +207,11 @@
                 console.log("bookInfo", bookInfo);
 
                 if (bookInfo) {
-                    const { genre, name, pseudonym, prologue, writer_name, date_time } = bookInfo;
-
+                    const { genre, name, pseudonym, prologue, writer_name, date_time, status, age_restricted } = bookInfo;
+                    
                     // Display book information in the HTML page
+                    document.getElementById('status').textContent = status || '';
+                    document.getElementById('age_restricted').textContent = age_restricted || '';
                     document.getElementById('genre').textContent = genre || '';
                     document.getElementById('bookName').textContent = name || '';
                     // document.getElementById('prologueInfo').textContent = prologue || '';
@@ -252,6 +258,7 @@
             console.error('bookInfo is null or undefined.');
         }
 
+        
     </script>
     <script>
         var header_profile_pic = document.getElementById('header_profile_pic');

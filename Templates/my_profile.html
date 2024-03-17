@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="../static/header_footer.css">
         <link rel="stylesheet" type="text/css" href="../static/search_page.css">
         <link rel="stylesheet" type="text/css" href="../static/my_profile.css">
+        <link rel="stylesheet" type="text/css" href="../static/payment_style.css">
         <link rel="stylesheet" type="text/css" href="../static/main_style.css">
         <link rel="stylesheet" type="text/css" href="../static/drop_down.css">
 
@@ -113,7 +114,7 @@
                     <a id="my_profile_username" class="my_profile_user_info_item">username</a>
                     <div class="my_profile_user_info_item">
                         <a>********</a>
-                        <a id="my_profile_change_password_button" onclick="toggle_change_password()"">เปลี่ยนรหัสผ่าน</a>
+                        <a id="my_profile_change_password_button" class="cancel_button" style=" font-family: var(--main_font); width: 75px; font-size: 12px; color: black;" onclick="toggle_change_password()">เปลี่ยนรหัสผ่าน</a>
                     </div>
                 </div>
             </div>
@@ -121,12 +122,14 @@
             
             <section id="my_profile_change_password" class="display_none">
                 <div class="dark_overlay" id="my_profile_dark_overlay" onclick="toggle_change_password_off()"></div>
-                <div  id="my_profile_change_password_box" class="change_password_box">
-                    <a>เปลี่ยนรหัสผ่าน</a>
+                <div  id="my_profile_change_password_box" class="change_password_box" >
+                    <a style="margin: 30px;" >เปลี่ยนรหัสผ่าน</a>
                     <form id="change_password_form">
-                        <input id="old_password" type="text" class="search_input" name="old_password" placeholder="รหัสผ่านเดิม" required>
-                        <input id="new_password" type="text" class="search_input" name="new_password" placeholder="รหัสผ่านใหม่" required>
-                        <button class="my_profile_confirm_button" type="submit">บันทึก</button>
+                        <input id="old_password" style="font-family: var(--main_font);" type="text" class="search_input" name="old_password" placeholder="รหัสผ่านเดิม" required>
+                        <br><br>
+                        <input id="new_password" style="font-family: var(--main_font);" type="text" class="search_input" name="new_password" placeholder="รหัสผ่านใหม่" required>
+                        <br><br>
+                        <button class="submit_button" style="width: 100px; font-size: 20px;" type="submit">บันทึก</button>
                     </form>
                     <a class="display_none" id="response_change_password">เปลี่ยนรหัสผ่านแล้ว</a>
                 </div>

@@ -15,7 +15,6 @@ class Reader:
         self.__golden_coin = GoldenCoin(0)
         self.__silver_coin_list = []
         self.__book_shelf_list = []
-        self.__recent_read_chapter_list = []
         self.__chapter_transaction_list = []
         self.__coin_transaction_list = []
         self.__follower_list = []
@@ -24,10 +23,6 @@ class Reader:
     @property
     def username(self):
         return self.__username
-    
-    @username.setter
-    def username(self,username):
-        self.__username = username
 
     @property
     def display_name(self):
@@ -75,14 +70,6 @@ class Reader:
     @property
     def silver_coin_list(self):
         return self.__silver_coin_list
-    
-    @property
-    def recent_read_chapter_list(self):
-        return self.__recent_read_chapter_list
-    
-    def add_recent_read_chapter_list(self,chapter):
-        if isinstance(chapter, Chapter):
-            self.__recent_read_chapter_list.append(chapter)
     
     @property
     def book_shelf_list(self):
@@ -133,6 +120,7 @@ class Reader:
                 self.__silver_coin_list.remove(silver_coin)
 
     def deduct_coin(self, total_amount):
+        price = total_amount
         silver_coin_deducted = 0
         golden_coin_deducted = 0
         for silver_coin in self.__silver_coin_list:
@@ -144,8 +132,8 @@ class Reader:
                 break
         if total_amount != 0:
             golden_coin_deducted = self.golden_coin.deduct_golden_coin(total_amount)
-            
-        self.add_coin_transaction_list(CoinTransaction(None, None, -1*golden_coin_deducted, -1*(silver_coin_deducted), datetime.now()))
+                        
+        self.add_coin_transaction_list(CoinTransaction("buy chapter", price, -1*golden_coin_deducted, -1*(silver_coin_deducted), datetime.now().strftime("%x %X")))
         return "Done"
         
     def show_coin_transaction(self):
@@ -156,7 +144,18 @@ class Reader:
             silver_amount = coin_transaction.silver_amount
             price = coin_transaction.price
             date_time = coin_transaction.date_time
-            show_list.append(f"{payment_type} {golden_amount}_golden_coin {silver_amount}_silver_coin -{price} baht at {date_time}")
+            
+            if(isinstance(payment_type, str)):
+                if(silver_amount == '0'):
+                    show_list.append(f"{payment_type} | golden coin : {golden_amount} | date time : {date_time}")
+                elif(golden_amount == '0'):
+                    show_list.append(f"{payment_type} | silver coin : {silver_amount} | date time : {date_time}")
+                else:
+                    show_list.append(f"{payment_type} | golden coin : {golden_amount} | silver coin : {silver_amount} | date time : {date_time}")
+            else:    
+                payment_type = coin_transaction.payment.name
+                show_list.append(f"{payment_type} | price : {price} | golden coin : {golden_amount} | silver coin : {silver_amount} | date time : {date_time}")
+            
         return show_list
     
     def show_chapter_transaction(self):
@@ -166,7 +165,6 @@ class Reader:
         return show_list
     
     def show_silver_coin_list(self):
-        # self.remove_silver_coin()
         silver_coin_dict = {}
         for silver_coin in self.__silver_coin_list:
             if not silver_coin_dict.get(silver_coin.exp_date_time_str):
@@ -246,17 +244,12 @@ class Writer(Reader):
                 comment_list.append(comment.show_comment())
         return comment_list
     
-    def show_writing_name_list(self):
+    def show_writing_list(self):
         writing_name_list = []
         for book in self.__writing_list:
             book_dict = {"book_name" : book.name,
-                                "pseudonym": book.pseudonym,
-                                "genre" : book.genre}
+                        "pseudonym": book.pseudonym,
+                        "genre" : book.genre}
             writing_name_list.append(book_dict)
         return writing_name_list
     
-    def check_repeated_pseudonym(self, new_pseudonym):
-        for pseudonym in self.__pseudonym_list:
-            if pseudonym.lower() == new_pseudonym.lower():
-                return True
-        return False

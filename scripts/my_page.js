@@ -96,13 +96,12 @@ function display_writing_result(result){
     var pseudonym = result.pseudonym;
     var genre = result.genre;
     var element = `<div class="search_result_container">
-    <div class="image-container">
+    <div class="image-container" onclick="displayPreEditBookAndNavigate('${book_name}')">
         <img src="../assets/covers_img/${book_name}.png" 
-            onerror="this.onerror=null;this.src='../assets/covers_img/temp_cover.jpg';" 
-            alt="../assets/covers_img/temp_cover.jpg">
+            onerror="this.src='../assets/covers_img/no_cover.png';">
     </div>
     <div class="book_content_container"><br>
-        <p class="book_title">${book_name}</p>
+        <p class="book_title" onclick="displayPreEditBookAndNavigate('${book_name}')">${book_name}</p>
         <p class="book_description">${pseudonym}</p>
         <p class="book_description">${genre}</p>
     </div>

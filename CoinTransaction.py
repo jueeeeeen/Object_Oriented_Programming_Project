@@ -28,6 +28,3 @@ class CoinTransaction:
     def date_time(self):
         return self.__date_time
     
-    @property
-    def date_time_str(self):
-        return self.__date_time.strftime("%x %X")

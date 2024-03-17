@@ -31,7 +31,7 @@
             <div class="search_item">
                 <form id="searchForm">
                     <input id="search_str" name="search_str" type="text" class="search_input" placeholder="ค้นหา" required>
-                    <a href="#" onclick="toggle_search_off()"> <img class="close_search" src="../assets/header_img/close_search.png" alt=Original Image"></a>
+                    <a href="#" onclick="toggle_search_off()"> <img src="../assets/covers_img/${book_name}.png" ></a>
                 </form>
             </div>
         </div>
@@ -107,7 +107,7 @@
     <!--book info-->
     <div class="book_flexbox">
         <div class="book_item">
-            <img class="book_cover" id="book_cover_img" alt="book_cover">
+            <img class="book_cover" id="book_cover_img" src="../assets/covers_img/no_cover.png" onerror="this.onerror=null;this.src='../assets/covers_img/no_cover.png';" alt="book_cover">
         </div>
 
         <div class="book_info_flexbox">
@@ -126,11 +126,6 @@
                     <a id="pseudonymInfo"></a>
                 </div>
             </div>
-            <!-- <div class="book_info_item">
-                <div class="book_title">
-                    <a id="prologueInfo"></a>
-                </div>
-            </div> -->
             <div class="book_info_item" style="bottom: 0; right: 0; height: 210px; width: 200px; display: flex;"></div>
             <a style="text-decoration: none; color:beige" href="report_page.html"> <img class="home_icon" style="text-align: right; width: 30px;" src="../assets/writearead_img/report_icon.png" alt="Original Image">รายงานงานเขียนนี้</a>
 

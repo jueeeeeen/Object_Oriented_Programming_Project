@@ -1,4 +1,4 @@
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 
 class GoldenCoin:
     def __init__(self,balance):
@@ -17,7 +17,7 @@ class GoldenCoin:
         return amount
 
     def add_golden_coin(self,amount):
-        self.balance += amount
+        self.__balance += amount
 
 class SilverCoin(GoldenCoin):
     def __init__(self, balance):
@@ -27,10 +27,6 @@ class SilverCoin(GoldenCoin):
     @property
     def exp_date_time(self):
         return self.__exp_date_time
-    
-    @property
-    def exp_date_time_str(self):
-        return self.__exp_date_time.strftime("%x")
 
     def deduct_silver_coin(self, amount):
         silver_coin_amount = self.balance

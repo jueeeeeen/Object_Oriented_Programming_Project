@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content:flex-start;
+    justify-content: flex-start;
     align-items:center;
     margin-left: 10%;
     margin-right: 10%;
@@ -11,7 +11,7 @@
 .homepage_book_item{
     display: block;
     box-sizing: border-box;
-    width: 15.85%;
+    width: 15.5%;
     text-align: left;
     padding: 3px;
     margin: 6px;
@@ -19,20 +19,18 @@
 }
 
 .homepage_book_title{
-    display:flex;
-    margin-left: 8px;
-    margin-right: 8px;
+    display:block;
     line-height: 1.2;
     font-size: 18px;
     font-weight: 500;
     width:100%;
     height:60px;
     cursor: pointer;
+    word-wrap: break-word;
     &:hover{
         color: var(--main_color)
     }
 }
-
 
 .homepage_book_pseudonym{
     display: block;
@@ -49,9 +47,12 @@
 }
 
 .homepage_cover_container img{
-        background-color: black;
-        width: 90%;
-        height: 100%;
-        cursor: pointer;
-        border-radius: 15px;
+    width: 90%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.homepage_book_info {
+    max-width: 100%;
 }
